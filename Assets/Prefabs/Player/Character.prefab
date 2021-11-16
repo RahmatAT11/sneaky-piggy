@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2820906729948963424}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 2235274385242159930}
   m_Father: {fileID: 0}
@@ -117,11 +117,11 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0, y: -0.004402995}
+  m_Size: {x: 1, y: 1.9911945}
   m_Direction: 0
 --- !u!114 &7344144453426615436
 MonoBehaviour:
@@ -145,6 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2235274385242159930}
   - component: {fileID: 8633088649060518587}
+  - component: {fileID: 371910228945382461}
   m_Layer: 0
   m_Name: Direction
   m_TagString: Untagged
@@ -217,3 +218,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &371910228945382461
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7847536788523509165}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.013766545, y: -0.9636612}
+  m_Size: {x: 1.8535283, y: 1.9911947}
+  m_Direction: 0

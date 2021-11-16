@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BaseCharController : MonoBehaviour
 {
+    protected Rigidbody2D Rigidbody2D;
+
+    [Header("Movement")]
     protected float MovementSpeed = 10.0f;
     protected Vector3 MovementDirection;
-
-    protected Rigidbody2D Rigidbody2D;
-    
     protected bool isSprinting;
     public bool IsSprinting
     {
