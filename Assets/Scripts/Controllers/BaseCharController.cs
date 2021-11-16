@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BaseCharController : MonoBehaviour
 {
-    protected float MovementSpeed = 10.0f;
+    protected float MovementSpeed = 7.0f;
     protected Vector3 MovementDirection;
 
     protected Rigidbody2D Rigidbody2D;
@@ -19,7 +19,7 @@ public class BaseCharController : MonoBehaviour
             isSprinting = value;
         }
     }
-    private float _sprintSpeedMultiplier = 1.7f;
+    protected float _sprintSpeedMultiplier = 1.5f;
 
     protected virtual void Walking()
     {

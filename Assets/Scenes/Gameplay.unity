@@ -179,6 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcPath:
+  - {fileID: 1928039156}
+  - {fileID: 1390846227}
   - {fileID: 1558595123}
   - {fileID: 878467562}
   - {fileID: 942934222}
@@ -189,8 +191,6 @@ MonoBehaviour:
   - {fileID: 653281210}
   - {fileID: 260748906}
   - {fileID: 1157401147}
-  - {fileID: 1928039156}
-  - {fileID: 1390846227}
 --- !u!1 &260748905
 GameObject:
   m_ObjectHideFlags: 0
