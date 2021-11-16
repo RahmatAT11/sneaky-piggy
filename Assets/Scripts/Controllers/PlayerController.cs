@@ -12,21 +12,18 @@ public class PlayerController : BaseCharController
 
     private void Update()
     {
+        ProcessInput();
+    }
+
+    private void ProcessInput()
+    {
         /*float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");*/
 
         float xAxis = _joystick.InputHorizontal();
         float yAxis = _joystick.InputVertical();
-        
+
         MovementDirection.Set(xAxis, yAxis, 0f);
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            isSprinting = true;
-            return;
-        }
-
-        isSprinting = false;
     }
 
     private void FixedUpdate()
