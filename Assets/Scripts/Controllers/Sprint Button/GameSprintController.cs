@@ -29,7 +29,6 @@ public class GameSprintController : MonoBehaviour, IPointerDownHandler, IPointer
         if (_playerController.IsSprinting && _isSprintAllowed)
         {
             _sprintTimeCounter -= Time.deltaTime;
-            Debug.Log(_sprintTimeCounter);
         }
 
         if (_sprintTimeCounter < 0 && _isSprintAllowed)
@@ -42,13 +41,11 @@ public class GameSprintController : MonoBehaviour, IPointerDownHandler, IPointer
 
     private IEnumerator WaitForNextSprint()
     {
-        Debug.Log("Start");
         _isSprintAllowed = false;
         GetComponent<Image>().color = _unactiveSprint;
         yield return new WaitForSeconds(sprintTimeDuration);
         GetComponent<Image>().color = _activeSprint;
         _isSprintAllowed = true;
-        Debug.Log("Finish");
     }
 
     public void OnPointerDown(PointerEventData eventData)
