@@ -4,23 +4,23 @@ using UnityEngine.UI;
 public class PlayerController : BaseCharController
 {
     [Header("Treasure Magnetic")]
-    GameObject treasureMagnetic;
-    Text treasureInfo;
-    int treasureNumber;
+    private GameObject _treasureMagnetic;
+    private Text _treasureInfo;
+    private int _treasureNumber;
 
     [Header("Collected UI")]
     public Image filledCollectedUI;
-    float treasureCount;
-    GameObject Treasure;
+    private float _treasureCount;
+    private GameObject _treasure;
 
     private void Start()
     {
-        treasureMagnetic = GameObject.Find("Treasure Magnetic");
-        treasureInfo = GameObject.Find("Treasure Info").GetComponent<Text>();
+        _treasureMagnetic = GameObject.Find("Treasure Magnetic");
+        _treasureInfo = GameObject.Find("Treasure Info").GetComponent<Text>();
         filledCollectedUI = GameObject.Find("CollectedFill").GetComponent<Image>();
-        Treasure = GameObject.Find("Treasures");
+        _treasure = GameObject.Find("Treasures");
 
-        treasureCount = Treasure.transform.childCount;
+        _treasureCount = _treasure.transform.childCount;
         filledCollectedUI.fillAmount = 0;
     }
     
@@ -57,10 +57,10 @@ public class PlayerController : BaseCharController
     }
     void TreasureMagneticPick()
     {
-        treasureInfo.text = treasureNumber.ToString();
-        filledCollectedUI.fillAmount = treasureNumber * (1 / treasureCount);
+        _treasureInfo.text = _treasureNumber.ToString();
+        filledCollectedUI.fillAmount = _treasureNumber * (1 / _treasureCount);
 
-        treasureMagnetic.transform.position = new Vector2(transform.position.x, transform.position.y);
+        _treasureMagnetic.transform.position = new Vector2(transform.position.x, transform.position.y);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -68,7 +68,7 @@ public class PlayerController : BaseCharController
         if (col.gameObject.tag.Equals ("Treasure"))
         {
             Destroy(col.gameObject);
-            treasureNumber += 1;
+            _treasureNumber += 1;
         }
     }
 }
