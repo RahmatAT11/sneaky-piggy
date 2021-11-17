@@ -2,14 +2,10 @@ using UnityEngine;
 
 public class BaseCharController : MonoBehaviour
 {
-<<<<<<< HEAD
     protected Rigidbody2D Rigidbody2D;
 
     [Header("Movement")]
-    protected float MovementSpeed = 10.0f;
-=======
-    protected float MovementSpeed = 7.0f;
->>>>>>> feature-enemy
+    protected float MovementSpeed = 5.0f;
     protected Vector3 MovementDirection;
     protected bool isSprinting;
     public bool IsSprinting

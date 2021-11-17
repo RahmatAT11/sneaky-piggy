@@ -9,7 +9,7 @@ public class NonPlayerController : BaseCharController
     private PathsController _paths;
     private PlayerController _player;
     
-    private float _detectionRadius = 10.0f;
+    private float _detectionRadius = 6.0f;
     private float _detectionAngle = 170.0f;
     private float _distance;
 
