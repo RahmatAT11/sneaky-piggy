@@ -23,7 +23,6 @@ public class BaseCharController : MonoBehaviour
             isSprinting = value;
         }
     }
-    private float _sprintSpeedMultiplier = 1.7f;
     protected float _sprintSpeedMultiplier = 1.5f;
 
     protected virtual void Walking()

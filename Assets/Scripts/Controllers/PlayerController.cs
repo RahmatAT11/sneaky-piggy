@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,20 +37,24 @@ public class PlayerController : BaseCharController
 
     private void Update()
     {
-        float xAxis = Input.GetAxis("Horizontal");
-        float yAxis = Input.GetAxis("Vertical");
-        
-        MovementDirection.Set(xAxis, yAxis, 0f);
+        ProcessInput();
+    }
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            isSprinting = true;
-            return;
-        }
+    private void ProcessInput()
+    {
+        /*float xAxis = Input.GetAxis("Horizontal");
+        float yAxis = Input.GetAxis("Vertical");*/
 
+<<<<<<< HEAD
         isSprinting = false;
 
         TreasureMagneticPick();
+=======
+        float xAxis = _joystick.InputHorizontal();
+        float yAxis = _joystick.InputVertical();
+
+        MovementDirection.Set(xAxis, yAxis, 0f);
+>>>>>>> feature-enemy
     }
 
     private void FixedUpdate()
