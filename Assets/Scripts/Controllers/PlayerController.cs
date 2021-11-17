@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : BaseCharController
 {
+<<<<<<< HEAD
     [Header("Treasure Magnetic")]
     GameObject treasureMagnetic;
     Text treasureInfo;
@@ -27,9 +28,14 @@ public class PlayerController : BaseCharController
         filledCollectedUI.fillAmount = 0;
     }
 
+=======
+    private GameJoystickController _joystick;
+    
+>>>>>>> feature-enemy
     private void Awake()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
+        _joystick = FindObjectOfType<GameJoystickController>();
     }
 
     private void Update()
