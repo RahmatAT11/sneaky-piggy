@@ -5,7 +5,7 @@ public class BaseCharController : MonoBehaviour
     protected Rigidbody2D Rigidbody2D;
 
     [Header("Movement")]
-    protected float MovementSpeed = 5.0f;
+    protected float MovementSpeed = 2.0f;
     protected Vector3 MovementDirection;
     protected bool isSprinting;
     public bool IsSprinting

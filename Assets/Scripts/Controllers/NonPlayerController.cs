@@ -8,6 +8,7 @@ public class NonPlayerController : BaseCharController
     [SerializeField] private List<Transform> defaultPath;
     private PathsController _paths;
     private PlayerController _player;
+    private AudioListener _soundDetector;
     
     private float _detectionRadius = 6.0f;
     private float _detectionAngle = 170.0f;
@@ -23,6 +24,7 @@ public class NonPlayerController : BaseCharController
         Rigidbody2D = GetComponent<Rigidbody2D>();
         _paths = FindObjectOfType<PathsController>();
         defaultPath = _paths.NpcPath;
+        _soundDetector = Camera.main.GetComponent<AudioListener>();
     }
 
     private void Start()
@@ -119,6 +121,18 @@ public class NonPlayerController : BaseCharController
         _isMoveToNewPath = false;
         yield return new WaitUntil(() => { return _distance < 0.1f;});
         _isMoveToNewPath = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        PlayerController player = other.gameObject.GetComponent<PlayerController>();
+        if (player == null)
+            return;
+
+        if (player.IsSprinting)
+        {
+            _isPlayerDetected = true;
+        }
     }
 
 #if UNITY_EDITOR
