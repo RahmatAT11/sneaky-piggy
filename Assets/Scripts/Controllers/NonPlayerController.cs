@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +7,8 @@ public class NonPlayerController : BaseCharController
     [SerializeField] private List<Transform> defaultPath;
     private PathsController _paths;
     private PlayerController _player;
-    private AudioListener _soundDetector;
+    private FieldOfView _fieldOfView;
     
-    private float _detectionRadius = 6.0f;
-    private float _detectionAngle = 170.0f;
     private float _distance;
 
     private int _currentPathIndex;
@@ -24,17 +21,21 @@ public class NonPlayerController : BaseCharController
         Rigidbody2D = GetComponent<Rigidbody2D>();
         _paths = FindObjectOfType<PathsController>();
         defaultPath = _paths.NpcPath;
-        _soundDetector = Camera.main.GetComponent<AudioListener>();
+        _fieldOfView = FindObjectOfType<FieldOfView>();
     }
 
     private void Start()
     {
         transform.position = defaultPath[_currentPathIndex].transform.position;
+        _fieldOfView.SetFov(90f);
+        _fieldOfView.SetViewDistance(10f);
     }
 
     private void Update()
     {
         //MovementDirection = (player.transform.position - transform.position).normalized;
+        _fieldOfView.SetOrigin(transform.position);
+        _fieldOfView.SetAimDirection(MovementDirection);
         if (MoveNpcToPlayer()) return;
         CheckIndexPath();
         MoveNpcToPath();
@@ -42,7 +43,7 @@ public class NonPlayerController : BaseCharController
 
     private bool MoveNpcToPlayer()
     {
-        _player = DetectPlayer();
+        _player = _fieldOfView.DetectedPlayer;
         _isPlayerDetected = _player != null;
 
         if (_isPlayerDetected)
@@ -91,7 +92,7 @@ public class NonPlayerController : BaseCharController
         Rigidbody2D.velocity = MovementDirection * (MovementSpeed * _sprintSpeedMultiplier);
     }
     
-    private PlayerController DetectPlayer()
+    /*private PlayerController DetectPlayer()
     {
         PlayerController player = FindObjectOfType<PlayerController>();
         if (player == null)
@@ -114,7 +115,7 @@ public class NonPlayerController : BaseCharController
         }
         
         return null;
-    }
+    }*/
     
     private IEnumerator WaitForNextPathAvailable()
     {
@@ -134,24 +135,4 @@ public class NonPlayerController : BaseCharController
             _isPlayerDetected = true;
         }
     }
-
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
-    {
-        Color c = new Color(0.8f, 0, 0, 0.4f);
-        UnityEditor.Handles.color = c;
-
-        Vector3 rotatedForward = Quaternion.Euler(
-            0,
-            0,
-            -_detectionAngle * 0.5f) * transform.up;
-
-        UnityEditor.Handles.DrawSolidArc(
-            transform.position,
-            Vector3.forward,
-            rotatedForward,
-            _detectionAngle,
-            _detectionRadius);
-    }
-#endif
 }

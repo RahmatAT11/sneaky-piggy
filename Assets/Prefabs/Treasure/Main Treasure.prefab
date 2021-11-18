@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5936883627301930314}
   - component: {fileID: 5925348355369464259}
   - component: {fileID: 2305389977083905017}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main Treasure
   m_TagString: Treasure
   m_Icon: {fileID: 0}

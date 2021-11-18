@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1681734737722331040}
   - component: {fileID: 3416297915513013840}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: forward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6619765456929609735}
   - component: {fileID: 6619765456929609732}
   - component: {fileID: -327012259946111141}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Home Owner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultPath: []
+  fov: {fileID: 0}
 --- !u!50 &6619765456929609735
 Rigidbody2D:
   serializedVersion: 4
