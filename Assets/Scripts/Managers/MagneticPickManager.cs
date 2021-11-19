@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MagneticPickManager : MonoBehaviour
 {
-    Rigidbody2D rb;
-    GameObject player;
-    Vector2 playerDirection;
-    float timeStamp;
-    bool isMagnetic;
+    private Rigidbody2D rb;
+    private GameObject player;
+    private Vector2 playerDirection;
+    private float timeStamp;
+    private bool isMagnetic;
 
     void Start()
     {
