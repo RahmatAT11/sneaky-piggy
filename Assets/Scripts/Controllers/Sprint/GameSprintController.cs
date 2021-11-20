@@ -2,9 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Controllers;
 
-namespace Sprint
+namespace Controllers.Sprint
 {
     public class GameSprintController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
