@@ -3,7 +3,9 @@ namespace Interfaces
     public interface IWinnable
     {
         public void GameWin();
-        public void SetWin(bool isGameOver, bool isGameWin);
-        public void SetWin(bool isGameWin);
+        public void SetIsPlayerEscape(bool isPlayerEscape);
+        public void SetIsMainTreasureGet(bool isMainTreasureGet);
+        public void SetIsTimeRunningOut(bool isTimeRunningOut);
+        public void SetIsCatchByNpc(bool isCatchByNpc);
     }
 }

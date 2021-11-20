@@ -1,3 +1,4 @@
+using System;
 using Interfaces;
 using Managers;
 using UnityEngine;
@@ -11,7 +12,16 @@ namespace Controllers
             if (other.CompareTag("Player"))
             {
                 IWinnable victoryManager = FindObjectOfType<VictoryManager>();
-                victoryManager.SetWin(true, true);
+                victoryManager.SetIsPlayerEscape(true);
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                IWinnable victoryManager = FindObjectOfType<VictoryManager>();
+                victoryManager.SetIsPlayerEscape(false);
             }
         }
     }

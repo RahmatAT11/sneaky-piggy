@@ -150,10 +150,9 @@ namespace Controllers
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            CapsuleCollider2D capsuleCollider2D = other.gameObject.GetComponent<CapsuleCollider2D>();
-            if (capsuleCollider2D)
+            if (other.gameObject.CompareTag("Player"))
             {
-                _victoryManager.SetWin(true, false);
+                _victoryManager.SetIsCatchByNpc(true);
             }
         }
     }

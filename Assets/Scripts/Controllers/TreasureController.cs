@@ -15,7 +15,7 @@ namespace Controllers
 
         private bool _isReachable;
 
-        public bool IsMainTreasure;
+        [SerializeField] private bool IsMainTreasure;
 
         private void Awake()
         {
@@ -64,13 +64,19 @@ namespace Controllers
                 _treasureRigidbody.velocity =
                     new Vector2(targetDirection.x, targetDirection.y) * 10f * (Time.time / _timeStamp);
             }
+
+            if (Vector3.Distance(transform.position, _player.transform.position) < 0.5f)
+            {
+                _player.AddTreasureNumber(1);
+                DestroyTreasure();
+            }
         }
 
         public void DestroyTreasure()
         {
             if (IsMainTreasure)
             {
-                _victoryManager.SetWin(true);
+                _victoryManager.SetIsMainTreasureGet(true);
             }
             Destroy(gameObject);
         }

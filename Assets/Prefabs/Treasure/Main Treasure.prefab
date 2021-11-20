@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5936883627301930316}
   - component: {fileID: 2305389977083905017}
   - component: {fileID: 7353125678608381199}
-  - component: {fileID: 3965382801041368952}
   m_Layer: 7
   m_Name: Main Treasure
   m_TagString: MainTreasure
@@ -118,19 +117,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 616879f41c95eaf7abceb557c737a8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &3965382801041368952
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5936883627301930317}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  IsMainTreasure: 0

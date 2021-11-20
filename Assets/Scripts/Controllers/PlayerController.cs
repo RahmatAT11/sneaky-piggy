@@ -18,7 +18,6 @@ namespace Controllers
 
         private void Start()
         {
-            _treasureMagnetic = GameObject.Find("Treasure Magnetic");
             _treasureInfo = GameObject.Find("Treasure Info").GetComponent<Text>();
             filledCollectedUI = GameObject.Find("CollectedFill").GetComponent<Image>();
             _treasure = GameObject.Find("Treasures");
@@ -64,18 +63,11 @@ namespace Controllers
         {
             _treasureInfo.text = _treasureNumber.ToString();
             filledCollectedUI.fillAmount = _treasureNumber * (1 / _treasureCount);
-
-            _treasureMagnetic.transform.position = new Vector2(transform.position.x, transform.position.y);
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        public void AddTreasureNumber(int number)
         {
-            TreasureController treasure = other.GetComponent<TreasureController>();
-            if (treasure != null)
-            {
-                treasure.DestroyTreasure();
-                _treasureNumber += 1;
-            }
+            _treasureNumber += number;
         }
     }
 }
