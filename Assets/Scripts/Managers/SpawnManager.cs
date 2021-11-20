@@ -1,11 +1,15 @@
 using UnityEngine;
+using Controllers;
 
-public class SpawnManager : MonoBehaviour
+namespace Managers
 {
-    [SerializeField] private BaseCharController CharacterPrefab;
-
-    private void Awake()
+    public class SpawnManager : MonoBehaviour
     {
-        Instantiate(CharacterPrefab, transform.position, CharacterPrefab.transform.rotation);
+        [SerializeField] private BaseCharController CharacterPrefab;
+
+        private void Awake()
+        {
+            Instantiate(CharacterPrefab, transform.position, CharacterPrefab.transform.rotation);
+        }
     }
 }
