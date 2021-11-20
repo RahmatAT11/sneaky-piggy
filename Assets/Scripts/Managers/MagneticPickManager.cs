@@ -33,7 +33,6 @@ namespace Managers
             {
                 _timeStamp = Time.time;
                 _player = FindObjectOfType<PlayerController>();
-                ;
                 _isMagnetic = true;
             }
         }

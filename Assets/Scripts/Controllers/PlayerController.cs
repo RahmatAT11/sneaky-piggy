@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Controllers.Joystick;
@@ -65,12 +66,13 @@ namespace Controllers
             _treasureMagnetic.transform.position = new Vector2(transform.position.x, transform.position.y);
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (col.gameObject.tag.Equals("Treasure"))
+            TreasureController treasure = other.GetComponent<TreasureController>();
+            if (treasure != null)
             {
-                Destroy(col.gameObject);
-                _treasureNumber += 1;
+                treasure.DestroyTreasure();
+                _treasureNumber++;
             }
         }
     }

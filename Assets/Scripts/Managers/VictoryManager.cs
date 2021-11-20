@@ -1,21 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using Interfaces;
 using UnityEngine;
 
 namespace Managers
 {
-    public class VictoryManager : MonoBehaviour
+    public class VictoryManager : MonoBehaviour, IWinnable
     {
-        // Start is called before the first frame update
-        void Start()
+        private void Update()
         {
-
+            
         }
 
-        // Update is called once per frame
-        void Update()
+        public bool GameWin()
         {
+            return true;
+        }
 
+        public bool GameOver()
+        {
+            return true;
         }
     }
 }
