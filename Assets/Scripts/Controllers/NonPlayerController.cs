@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Interfaces;
+using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -18,12 +21,19 @@ namespace Controllers
         private bool _isMoveToNewPath;
         private bool _isPlayerDetected;
 
+        private IWinnable _victoryManager;
+        public bool IsPlayerDetected
+        {
+            get { return _isPlayerDetected; }
+        }
+
         private void Awake()
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
             _paths = FindObjectOfType<PathsController>();
             defaultPath = _paths.NpcPath;
             _fieldOfView = FindObjectOfType<FieldOfView>();
+            _victoryManager = FindObjectOfType<VictoryManager>();
         }
 
         private void Start()
@@ -135,6 +145,15 @@ namespace Controllers
             if (player.IsSprinting)
             {
                 _isPlayerDetected = true;
+            }
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            CapsuleCollider2D capsuleCollider2D = other.gameObject.GetComponent<CapsuleCollider2D>();
+            if (capsuleCollider2D)
+            {
+                _victoryManager.SetWin(true, false);
             }
         }
     }

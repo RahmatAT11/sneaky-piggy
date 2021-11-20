@@ -1,4 +1,6 @@
 using System;
+using Interfaces;
+using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -7,19 +9,27 @@ namespace Controllers
     {
         private Rigidbody2D _treasureRigidbody;
         private PlayerController _player;
+        private IWinnable _victoryManager;
         private float _maxDistance = 3.0f;
         private float _timeStamp;
 
         private bool _isReachable;
 
+        public bool IsMainTreasure;
+
         private void Awake()
         {
             _treasureRigidbody = GetComponent<Rigidbody2D>();
+            _victoryManager = FindObjectOfType<VictoryManager>();
         }
 
         private void Start()
         {
             _player = FindObjectOfType<PlayerController>();
+            if (CompareTag("MainTreasure"))
+            {
+                IsMainTreasure = true;
+            }
         }
 
         private void Update()
@@ -58,6 +68,10 @@ namespace Controllers
 
         public void DestroyTreasure()
         {
+            if (IsMainTreasure)
+            {
+                _victoryManager.SetWin(true);
+            }
             Destroy(gameObject);
         }
     }

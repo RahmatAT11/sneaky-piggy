@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Controllers.Joystick;
+using Interfaces;
 
 namespace Controllers
 {
@@ -22,6 +23,7 @@ namespace Controllers
             filledCollectedUI = GameObject.Find("CollectedFill").GetComponent<Image>();
             _treasure = GameObject.Find("Treasures");
 
+            _treasureNumber = 0;
             _treasureCount = _treasure.transform.childCount;
             filledCollectedUI.fillAmount = 0;
         }
@@ -72,7 +74,7 @@ namespace Controllers
             if (treasure != null)
             {
                 treasure.DestroyTreasure();
-                _treasureNumber++;
+                _treasureNumber += 1;
             }
         }
     }
