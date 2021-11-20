@@ -63,5 +63,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Treasure
       objectReference: {fileID: 0}
+    - target: {fileID: 5936883627301930317, guid: 12e441a9bbd00b240800d769bf2f9256, type: 3}
+      propertyPath: m_TagString
+      value: Treasure
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12e441a9bbd00b240800d769bf2f9256, type: 3}

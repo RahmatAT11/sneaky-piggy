@@ -1,74 +1,77 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Controllers.Joystick;
 
-public class PlayerController : BaseCharController
+namespace Controllers
 {
-    [Header("Treasure Magnetic")]
-    private GameObject _treasureMagnetic;
-    private Text _treasureInfo;
-    private int _treasureNumber;
-
-    [Header("Collected UI")]
-    public Image filledCollectedUI;
-    private float _treasureCount;
-    private GameObject _treasure;
-
-    private void Start()
+    public class PlayerController : BaseCharController
     {
-        _treasureMagnetic = GameObject.Find("Treasure Magnetic");
-        _treasureInfo = GameObject.Find("Treasure Info").GetComponent<Text>();
-        filledCollectedUI = GameObject.Find("CollectedFill").GetComponent<Image>();
-        _treasure = GameObject.Find("Treasures");
+        [Header("Treasure Magnetic")] private GameObject _treasureMagnetic;
+        private Text _treasureInfo;
+        private int _treasureNumber;
 
-        _treasureCount = _treasure.transform.childCount;
-        filledCollectedUI.fillAmount = 0;
-    }
-    
-    private GameJoystickController _joystick;
-    
-    private void Awake()
-    {
-        Rigidbody2D = GetComponent<Rigidbody2D>();
-        _joystick = FindObjectOfType<GameJoystickController>();
-    }
+        [Header("Collected UI")] public Image filledCollectedUI;
+        private float _treasureCount;
+        private GameObject _treasure;
 
-    private void Update()
-    {
-        ProcessInput();
-        TreasureMagneticPick();
-    }
-
-    private void ProcessInput()
-    {
-        /*float xAxis = Input.GetAxis("Horizontal");
-        float yAxis = Input.GetAxis("Vertical");*/
-        
-        float xAxis = _joystick.InputHorizontal();
-        float yAxis = _joystick.InputVertical();
-
-        MovementDirection.Set(xAxis, yAxis, 0f);
-    }
-
-    private void FixedUpdate()
-    {
-        Walking();
-        Turning();
-        Sprinting();
-    }
-    void TreasureMagneticPick()
-    {
-        _treasureInfo.text = _treasureNumber.ToString();
-        filledCollectedUI.fillAmount = _treasureNumber * (1 / _treasureCount);
-
-        _treasureMagnetic.transform.position = new Vector2(transform.position.x, transform.position.y);
-    }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag.Equals ("Treasure"))
+        private void Start()
         {
-            Destroy(col.gameObject);
-            _treasureNumber += 1;
+            _treasureMagnetic = GameObject.Find("Treasure Magnetic");
+            _treasureInfo = GameObject.Find("Treasure Info").GetComponent<Text>();
+            filledCollectedUI = GameObject.Find("CollectedFill").GetComponent<Image>();
+            _treasure = GameObject.Find("Treasures");
+
+            _treasureCount = _treasure.transform.childCount;
+            filledCollectedUI.fillAmount = 0;
+        }
+
+        private GameJoystickController _joystick;
+
+        private void Awake()
+        {
+            Rigidbody2D = GetComponent<Rigidbody2D>();
+            _joystick = FindObjectOfType<GameJoystickController>();
+        }
+
+        private void Update()
+        {
+            ProcessInput();
+            TreasureMagneticPick();
+        }
+
+        private void ProcessInput()
+        {
+            /*float xAxis = Input.GetAxis("Horizontal");
+        float yAxis = Input.GetAxis("Vertical");*/
+
+            float xAxis = _joystick.InputHorizontal();
+            float yAxis = _joystick.InputVertical();
+
+            MovementDirection.Set(xAxis, yAxis, 0f);
+        }
+
+        private void FixedUpdate()
+        {
+            Walking();
+            Turning();
+            Sprinting();
+        }
+
+        void TreasureMagneticPick()
+        {
+            _treasureInfo.text = _treasureNumber.ToString();
+            filledCollectedUI.fillAmount = _treasureNumber * (1 / _treasureCount);
+
+            _treasureMagnetic.transform.position = new Vector2(transform.position.x, transform.position.y);
+        }
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.gameObject.tag.Equals("Treasure"))
+            {
+                Destroy(col.gameObject);
+                _treasureNumber += 1;
+            }
         }
     }
 }

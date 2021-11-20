@@ -2,75 +2,78 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GameJoystickController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+namespace Controllers.Joystick
 {
-    private Image _imageJoystickBackground;
-    private Image _imageJoystick;
-    private Vector2 _inputPosition;
-
-    private void Awake()
+    public class GameJoystickController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
-        _imageJoystickBackground = GetComponent<Image>();
-        _imageJoystick = transform.GetChild(0).GetComponent<Image>();
-    }
+        private Image _imageJoystickBackground;
+        private Image _imageJoystick;
+        private Vector2 _inputPosition;
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        // get the position on joystick background when dragging
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            _imageJoystickBackground.rectTransform,
-            eventData.position,
-            eventData.pressEventCamera,
-            out _inputPosition))
+        private void Awake()
         {
-            Vector2 rectTransformSizeDeltaJoystickBg = _imageJoystickBackground.rectTransform.sizeDelta;
-            // make the values a bit lower
-            _inputPosition.x = _inputPosition.x / rectTransformSizeDeltaJoystickBg.x;
-            _inputPosition.y = _inputPosition.y / rectTransformSizeDeltaJoystickBg.y;
-            Debug.Log(_inputPosition.x + " / " + _inputPosition.y);
-            
-            // normalize the input position
-            _inputPosition = _inputPosition.normalized;
-            
-            // move the joystick
-            _imageJoystick.rectTransform.anchoredPosition = new Vector2(
-                _inputPosition.x * (rectTransformSizeDeltaJoystickBg.x / 3.5f), 
-                _inputPosition.y * (rectTransformSizeDeltaJoystickBg.y / 3.5f));
+            _imageJoystickBackground = GetComponent<Image>();
+            _imageJoystick = transform.GetChild(0).GetComponent<Image>();
         }
-    }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        OnDrag(eventData);
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        _inputPosition = Vector2.zero;
-        _imageJoystick.rectTransform.anchoredPosition = Vector2.zero;
-    }
-
-    public float InputHorizontal()
-    {
-        if (_inputPosition.x != 0)
+        public void OnDrag(PointerEventData eventData)
         {
-            return _inputPosition.x;
+            // get the position on joystick background when dragging
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                _imageJoystickBackground.rectTransform,
+                eventData.position,
+                eventData.pressEventCamera,
+                out _inputPosition))
+            {
+                Vector2 rectTransformSizeDeltaJoystickBg = _imageJoystickBackground.rectTransform.sizeDelta;
+                // make the values a bit lower
+                _inputPosition.x = _inputPosition.x / rectTransformSizeDeltaJoystickBg.x;
+                _inputPosition.y = _inputPosition.y / rectTransformSizeDeltaJoystickBg.y;
+                Debug.Log(_inputPosition.x + " / " + _inputPosition.y);
+
+                // normalize the input position
+                _inputPosition = _inputPosition.normalized;
+
+                // move the joystick
+                _imageJoystick.rectTransform.anchoredPosition = new Vector2(
+                    _inputPosition.x * (rectTransformSizeDeltaJoystickBg.x / 3.5f),
+                    _inputPosition.y * (rectTransformSizeDeltaJoystickBg.y / 3.5f));
+            }
         }
-        else
-        {
-            return Input.GetAxis("Horizontal");
-        }
-    }
 
-    public float InputVertical()
-    {
-        if (_inputPosition.y != 0)
+        public void OnPointerDown(PointerEventData eventData)
         {
-            return _inputPosition.y;
+            OnDrag(eventData);
         }
-        else
+
+        public void OnPointerUp(PointerEventData eventData)
         {
-            return Input.GetAxis("Vertical");
+            _inputPosition = Vector2.zero;
+            _imageJoystick.rectTransform.anchoredPosition = Vector2.zero;
+        }
+
+        public float InputHorizontal()
+        {
+            if (_inputPosition.x != 0)
+            {
+                return _inputPosition.x;
+            }
+            else
+            {
+                return Input.GetAxis("Horizontal");
+            }
+        }
+
+        public float InputVertical()
+        {
+            if (_inputPosition.y != 0)
+            {
+                return _inputPosition.y;
+            }
+            else
+            {
+                return Input.GetAxis("Vertical");
+            }
         }
     }
 }

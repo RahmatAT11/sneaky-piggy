@@ -3,18 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+namespace Controllers
 {
-    private PlayerController _followPlayer;
-    private Vector3 _cameraOffsetPosition = new Vector3(0f, 0f, -10f);
-
-    private void Start()
+    public class CameraController : MonoBehaviour
     {
-        _followPlayer = FindObjectOfType<PlayerController>();
-    }
+        private PlayerController _followPlayer;
+        private Vector3 _cameraOffsetPosition = new Vector3(0f, 0f, -10f);
 
-    private void Update()
-    {
-        transform.position = _followPlayer.transform.position + _cameraOffsetPosition;
+        private void Start()
+        {
+            _followPlayer = FindObjectOfType<PlayerController>();
+        }
+
+        private void Update()
+        {
+            transform.position = _followPlayer.transform.position + _cameraOffsetPosition;
+        }
     }
 }

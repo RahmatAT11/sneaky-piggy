@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathsController : MonoBehaviour
+namespace Controllers
 {
-    [SerializeField] private List<Transform> npcPath;
-    public List<Transform> NpcPath
+    public class PathsController : MonoBehaviour
     {
-        get
+        [SerializeField] private List<Transform> npcPath;
+
+        public List<Transform> NpcPath
         {
-            if (npcPath.Count < 0)
+            get
             {
-                return null;
+                if (npcPath.Count < 0)
+                {
+                    return null;
+                }
+
+                return npcPath;
             }
-            return npcPath;
         }
     }
 }
