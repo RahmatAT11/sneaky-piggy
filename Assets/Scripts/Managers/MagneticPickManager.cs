@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class MagneticPickManager : MonoBehaviour
 {
-    Rigidbody2D rb;
-    GameObject player;
-    Vector2 playerDirection;
-    float timeStamp;
-    bool isMagnetic;
+    private Rigidbody2D _rigidbody2D;
+    private PlayerController _player;
+    private Vector2 _targetDirection;
+    private float _timeStamp;
+    private bool _isMagnetic;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        if (isMagnetic)
+        if (_isMagnetic)
         {
-            playerDirection =- (transform.position - player.transform.position).normalized;
+            _targetDirection =- (transform.position - _player.transform.position).normalized;
 
-            rb.velocity = new Vector2(playerDirection.x, playerDirection.y) * 10f * (Time.time / timeStamp);
+            _rigidbody2D.velocity = new Vector2(_targetDirection.x, _targetDirection.y) * 10f * (Time.time / _timeStamp);
         }
     }
 
@@ -29,9 +29,9 @@ public class MagneticPickManager : MonoBehaviour
     {
         if (col.gameObject.name.Equals ("Treasure Magnetic"))
         {
-            timeStamp = Time.time;
-            player = GameObject.Find("Character(Clone)");
-            isMagnetic = true;
+            _timeStamp = Time.time;
+            _player = FindObjectOfType<PlayerController>();;
+            _isMagnetic = true;
         }
     }
 }
