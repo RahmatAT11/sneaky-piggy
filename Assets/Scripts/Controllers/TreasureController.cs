@@ -78,6 +78,7 @@ namespace Controllers
             {
                 _victoryManager.SetIsMainTreasureGet(true);
             }
+
             Destroy(gameObject);
         }
     }

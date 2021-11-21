@@ -3,18 +3,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using Controllers.Joystick;
 using Interfaces;
+using Managers;
 
 namespace Controllers
 {
     public class PlayerController : BaseCharController
     {
+        private IWinnable _victoryManager;
+
         [Header("Treasure Magnetic")] private GameObject _treasureMagnetic;
         private Text _treasureInfo;
-        private int _treasureNumber;
+        public float _treasureNumber;
 
         [Header("Collected UI")] public Image filledCollectedUI;
-        private float _treasureCount;
+        [SerializeField] public float _treasureCount;
         private GameObject _treasure;
+        [SerializeField] private bool isCollectedAllTreasures;
 
         private void Start()
         {
@@ -25,6 +29,8 @@ namespace Controllers
             _treasureNumber = 0;
             _treasureCount = _treasure.transform.childCount;
             filledCollectedUI.fillAmount = 0;
+
+            isCollectedAllTreasures = false;
         }
 
         private GameJoystickController _joystick;
@@ -33,6 +39,7 @@ namespace Controllers
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
             _joystick = FindObjectOfType<GameJoystickController>();
+            _victoryManager = FindObjectOfType<VictoryManager>();
         }
 
         private void Update()
@@ -59,10 +66,21 @@ namespace Controllers
             Sprinting();
         }
 
-        void TreasureMagneticPick()
+        private void TreasureMagneticPick()
         {
             _treasureInfo.text = _treasureNumber.ToString();
             filledCollectedUI.fillAmount = _treasureNumber * (1 / _treasureCount);
+
+            if (_treasureCount == _treasureNumber)
+            {
+                Debug.Log("AllCollected");
+                isCollectedAllTreasures = true;
+            }
+
+            if (isCollectedAllTreasures == true)
+            {
+                _victoryManager.SetIsTreasureAllCollected(true);
+            }
         }
 
         public void AddTreasureNumber(int number)

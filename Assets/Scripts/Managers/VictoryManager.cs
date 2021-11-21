@@ -16,8 +16,12 @@ namespace Managers
         private bool _isMainTreasureGet;
         private bool _isTimeRunningOut;
         private bool _isCatchByNpc;
+        private bool _isPlayerDetected;
+
+        [SerializeField] private bool _isAllTreasureCollected;
 
         [SerializeField] private Text victoryText;
+        [SerializeField] private GameObject panelWin, star1, star2, star3;
         private Color _colorLose = Color.red;
         private Color _colorWin = Color.green;
 
@@ -27,6 +31,8 @@ namespace Managers
             _isMainTreasureGet = false;
             _isTimeRunningOut = false;
             _isCatchByNpc = false;
+            _isAllTreasureCollected = false;
+            _isPlayerDetected = false;
         }
 
         private void Update()
@@ -67,6 +73,16 @@ namespace Managers
                 victoryText.color = _colorWin;
                 StartCoroutine(WaitingForRestartGame(5));
             }
+
+            if (_isAllTreasureCollected)
+            {
+                Debug.Log("PPPPP");
+            }
+
+            if (_isPlayerDetected)
+            {
+                Debug.Log("Player Detecteddddd");
+            }
         }
 
         private IEnumerator WaitingForRestartGame(float time)
@@ -96,6 +112,16 @@ namespace Managers
         public void SetIsCatchByNpc(bool isCatchByNpc)
         {
             _isCatchByNpc = isCatchByNpc;
+        }
+
+        public void SetIsTreasureAllCollected(bool isAllTreasureCollected)
+        {
+            _isAllTreasureCollected = isAllTreasureCollected;
+        }
+
+        public void SetIsPlayerDetected(bool isPlayerDetected)
+        {
+            _isPlayerDetected = isPlayerDetected;
         }
     }
 }
