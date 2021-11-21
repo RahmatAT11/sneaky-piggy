@@ -7,5 +7,7 @@ namespace Interfaces
         public void SetIsMainTreasureGet(bool isMainTreasureGet);
         public void SetIsTimeRunningOut(bool isTimeRunningOut);
         public void SetIsCatchByNpc(bool isCatchByNpc);
+        public void SetIsTreasureAllCollected(bool isAllTreasureCollected);
+        public void SetIsPlayerDetected(bool isPlayerDetected);
     }
 }

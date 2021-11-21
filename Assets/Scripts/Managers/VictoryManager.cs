@@ -16,8 +16,12 @@ namespace Managers
         private bool _isMainTreasureGet;
         private bool _isTimeRunningOut;
         private bool _isCatchByNpc;
+        private bool _isPlayerDetected;
+
+        [SerializeField] private bool _isAllTreasureCollected;
 
         [SerializeField] private Text victoryText;
+        [SerializeField] private GameObject panelWin, star1, star2, star3;
         private Color _colorLose = Color.red;
         private Color _colorWin = Color.green;
 
@@ -27,6 +31,13 @@ namespace Managers
             _isMainTreasureGet = false;
             _isTimeRunningOut = false;
             _isCatchByNpc = false;
+            _isAllTreasureCollected = false;
+            _isPlayerDetected = false;
+
+            panelWin.SetActive(false);
+            star1.SetActive(false);
+            star2.SetActive(false);
+            star3.SetActive(false);
         }
 
         private void Update()
@@ -66,6 +77,47 @@ namespace Managers
                 victoryText.text = "You Win";
                 victoryText.color = _colorWin;
                 StartCoroutine(WaitingForRestartGame(5));
+
+                if(_isAllTreasureCollected && !_isPlayerDetected)
+                {
+                    SetStar("3B");
+                }
+
+                if (_isAllTreasureCollected && _isPlayerDetected)
+                {
+                    SetStar("2B");
+                }
+
+                if (!_isAllTreasureCollected && !_isPlayerDetected)
+                {
+                    SetStar("2B");
+                }
+
+                if (!_isAllTreasureCollected && _isPlayerDetected)
+                {
+                    SetStar("1B");
+                }
+            }
+        }
+
+        private void SetStar(string star)
+        {
+            panelWin.SetActive(true);
+
+            if ("3B" == star)
+            {
+                star1.SetActive(true);
+                star2.SetActive(true);
+                star3.SetActive(true);
+            }
+            if ("2B" == star)
+            {
+                star1.SetActive(true);
+                star2.SetActive(true);
+            }
+            if ("1B" == star)
+            {
+                star1.SetActive(true);
             }
         }
 
@@ -96,6 +148,16 @@ namespace Managers
         public void SetIsCatchByNpc(bool isCatchByNpc)
         {
             _isCatchByNpc = isCatchByNpc;
+        }
+
+        public void SetIsTreasureAllCollected(bool isAllTreasureCollected)
+        {
+            _isAllTreasureCollected = isAllTreasureCollected;
+        }
+
+        public void SetIsPlayerDetected(bool isPlayerDetected)
+        {
+            _isPlayerDetected = isPlayerDetected;
         }
     }
 }

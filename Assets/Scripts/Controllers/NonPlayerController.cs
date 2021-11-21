@@ -60,6 +60,7 @@ namespace Controllers
 
             if (_isPlayerDetected)
             {
+                _victoryManager.SetIsPlayerDetected(true);
                 MovementDirection = (_player.transform.position - transform.position).normalized;
                 return true;
             }

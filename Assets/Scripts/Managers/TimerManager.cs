@@ -45,7 +45,6 @@ namespace Managers
 
                 if (timeRemaining <= (timeCounter-15))
                 {
-                    Debug.Log("Panic Time");
                     panicDisplay.SetActive(true);
                 }
             }
