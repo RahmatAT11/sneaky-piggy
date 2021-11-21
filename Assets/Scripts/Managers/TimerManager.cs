@@ -10,7 +10,9 @@ namespace Managers
     public class TimerManager : MonoBehaviour
     {
         [SerializeField] private Text timeText;
-        [SerializeField] private float timeRemaining = 15f;
+        [SerializeField] private float timeRemaining;
+        [SerializeField] private GameObject panicDisplay;
+        private float timeCounter;
         private bool _timeIsRunning;
         private IWinnable _victoryManager;
 
@@ -18,6 +20,9 @@ namespace Managers
         {
             _timeIsRunning = true;
             _victoryManager = FindObjectOfType<VictoryManager>();
+
+            timeCounter = timeRemaining;
+            panicDisplay.SetActive(false);
         }
 
         private void Update()
@@ -36,6 +41,12 @@ namespace Managers
                     timeRemaining = 0;
                     _timeIsRunning = false;
                     _victoryManager.SetIsTimeRunningOut(!_timeIsRunning);
+                }
+
+                if (timeRemaining <= (timeCounter-15))
+                {
+                    Debug.Log("Panic Time");
+                    panicDisplay.SetActive(true);
                 }
             }
         }
