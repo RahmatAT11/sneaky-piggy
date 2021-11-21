@@ -454,7 +454,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d9c0a94fdd5de90be8475d8dc83116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAllTreasureCollected: 0
   victoryText: {fileID: 2104609493}
+  panelWin: {fileID: 2003886361}
+  star1: {fileID: 688189125}
+  star2: {fileID: 2052494182}
+  star3: {fileID: 176628711}
 --- !u!4 &135063595
 Transform:
   m_ObjectHideFlags: 0

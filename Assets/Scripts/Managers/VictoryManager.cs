@@ -33,6 +33,11 @@ namespace Managers
             _isCatchByNpc = false;
             _isAllTreasureCollected = false;
             _isPlayerDetected = false;
+
+            panelWin.SetActive(false);
+            star1.SetActive(false);
+            star2.SetActive(false);
+            star3.SetActive(false);
         }
 
         private void Update()
@@ -72,16 +77,47 @@ namespace Managers
                 victoryText.text = "You Win";
                 victoryText.color = _colorWin;
                 StartCoroutine(WaitingForRestartGame(5));
-            }
 
-            if (_isAllTreasureCollected)
-            {
-                Debug.Log("PPPPP");
-            }
+                if(_isAllTreasureCollected && !_isPlayerDetected)
+                {
+                    SetStar("3B");
+                }
 
-            if (_isPlayerDetected)
+                if (_isAllTreasureCollected && _isPlayerDetected)
+                {
+                    SetStar("2B");
+                }
+
+                if (!_isAllTreasureCollected && !_isPlayerDetected)
+                {
+                    SetStar("2B");
+                }
+
+                if (!_isAllTreasureCollected && _isPlayerDetected)
+                {
+                    SetStar("1B");
+                }
+            }
+        }
+
+        private void SetStar(string star)
+        {
+            panelWin.SetActive(true);
+
+            if ("3B" == star)
             {
-                Debug.Log("Player Detecteddddd");
+                star1.SetActive(true);
+                star2.SetActive(true);
+                star3.SetActive(true);
+            }
+            if ("2B" == star)
+            {
+                star1.SetActive(true);
+                star2.SetActive(true);
+            }
+            if ("1B" == star)
+            {
+                star1.SetActive(true);
             }
         }
 
