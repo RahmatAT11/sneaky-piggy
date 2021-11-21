@@ -29,7 +29,7 @@ public class HidingManger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.name.Equals("Treasure Magnetic"))
+        if (col.CompareTag("Player"))
         {
             _buttonHide1.SetActive(true);
         }
@@ -37,7 +37,7 @@ public class HidingManger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.name.Equals("Treasure Magnetic"))
+        if (col.CompareTag("Player"))
         {
             _buttonHide1.SetActive(false);
         }
