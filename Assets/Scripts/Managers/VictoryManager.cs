@@ -6,6 +6,7 @@ using Controllers;
 using UnityEngine;
 using Interfaces;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Managers
 {
@@ -15,6 +16,10 @@ namespace Managers
         private bool _isMainTreasureGet;
         private bool _isTimeRunningOut;
         private bool _isCatchByNpc;
+
+        [SerializeField] private Text victoryText;
+        private Color _colorLose = Color.red;
+        private Color _colorWin = Color.green;
 
         private void Start()
         {
@@ -39,21 +44,27 @@ namespace Managers
         {
             if (_isCatchByNpc)
             {
-                Debug.Log("Player was catch by NPC!");
+                victoryText.gameObject.SetActive(true);
+                victoryText.text = "You Lose";
+                victoryText.color = _colorLose;
                 StartCoroutine(WaitingForRestartGame(5));
                 return;
             }
 
             if (_isTimeRunningOut)
             {
-                Debug.Log("Time is run out!");
+                victoryText.gameObject.SetActive(true);
+                victoryText.text = "You Lose";
+                victoryText.color = _colorLose;
                 StartCoroutine(WaitingForRestartGame(5));
                 return;
             }
 
             if (_isMainTreasureGet && _isPlayerEscape)
             {
-                Debug.Log("You Win!");
+                victoryText.gameObject.SetActive(true);
+                victoryText.text = "You Win";
+                victoryText.color = _colorWin;
                 StartCoroutine(WaitingForRestartGame(5));
             }
         }
