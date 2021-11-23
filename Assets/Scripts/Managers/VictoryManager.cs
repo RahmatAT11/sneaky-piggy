@@ -17,6 +17,7 @@ namespace Managers
         private bool _isTimeRunningOut;
         private bool _isCatchByNpc;
         private bool _isPlayerDetected;
+        private bool _isOnTime;
 
         [SerializeField] private bool _isAllTreasureCollected;
 
@@ -33,6 +34,7 @@ namespace Managers
             _isCatchByNpc = false;
             _isAllTreasureCollected = false;
             _isPlayerDetected = false;
+            _isOnTime = true;
 
             panelWin.SetActive(false);
             panelLose.SetActive(false);
@@ -83,25 +85,30 @@ namespace Managers
                 victoryText.color = _colorWin;
                 StartCoroutine(WaitingForRestartGame(5));
 
-                if(_isAllTreasureCollected && !_isPlayerDetected)
+                if(_isOnTime && _isAllTreasureCollected && !_isPlayerDetected)
                 {
                     SetStar("3B");
                 }
 
-                if (_isAllTreasureCollected && _isPlayerDetected)
+                if ((_isOnTime && _isAllTreasureCollected && _isPlayerDetected) ||
+                    (_isOnTime && !_isAllTreasureCollected && !_isPlayerDetected) ||
+                    (!_isOnTime && _isAllTreasureCollected && !_isPlayerDetected))
                 {
                     SetStar("2B");
                 }
 
-                if (!_isAllTreasureCollected && !_isPlayerDetected)
-                {
-                    SetStar("2B");
-                }
-
-                if (!_isAllTreasureCollected && _isPlayerDetected)
+                if ((!_isOnTime && !_isAllTreasureCollected && !_isPlayerDetected) ||
+                    (!_isOnTime && _isAllTreasureCollected && _isPlayerDetected) ||
+                    (_isOnTime && !_isAllTreasureCollected && _isPlayerDetected))
                 {
                     SetStar("1B");
                 }
+
+                if (!_isOnTime && !_isAllTreasureCollected && _isPlayerDetected)
+                {
+                    SetStar("0B");
+                }
+
             }
         }
 
@@ -123,6 +130,12 @@ namespace Managers
             if ("1B" == star)
             {
                 star1.SetActive(true);
+            }
+            if ("0B" == star)
+            {
+                star1.SetActive(false);
+                star2.SetActive(false);
+                star3.SetActive(false);
             }
         }
 
@@ -163,6 +176,11 @@ namespace Managers
         public void SetIsPlayerDetected(bool isPlayerDetected)
         {
             _isPlayerDetected = isPlayerDetected;
+        }
+
+        public void SetIsOnTime(bool isOnTime)
+        {
+            _isOnTime = isOnTime;
         }
     }
 }

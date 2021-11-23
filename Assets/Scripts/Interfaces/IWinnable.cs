@@ -9,5 +9,6 @@ namespace Interfaces
         public void SetIsCatchByNpc(bool isCatchByNpc);
         public void SetIsTreasureAllCollected(bool isAllTreasureCollected);
         public void SetIsPlayerDetected(bool isPlayerDetected);
+        public void SetIsOnTime(bool isOnTime);
     }
 }

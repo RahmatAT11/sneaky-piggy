@@ -45,6 +45,7 @@ namespace Managers
 
                 if (timeRemaining <= (timeCounter-15))
                 {
+                    _victoryManager.SetIsOnTime(false);
                     panicDisplay.SetActive(true);
                 }
             }
