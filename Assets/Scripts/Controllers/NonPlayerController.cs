@@ -39,8 +39,8 @@ namespace Controllers
         private void Start()
         {
             transform.position = defaultPath[_currentPathIndex].transform.position;
-            _fieldOfView.SetFov(90f);
-            _fieldOfView.SetViewDistance(10f);
+            _fieldOfView.SetFov(60f);
+            _fieldOfView.SetViewDistance(5f);
         }
 
         private void Update()
