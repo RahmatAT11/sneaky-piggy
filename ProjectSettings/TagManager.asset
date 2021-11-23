@@ -7,6 +7,8 @@ TagManager:
   - Treasure
   - MainTreasure
   - Wall
+  - Hide Location
+  - Roof
   layers:
   - Default
   - TransparentFX
