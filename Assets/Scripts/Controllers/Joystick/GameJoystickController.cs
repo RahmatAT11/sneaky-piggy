@@ -29,7 +29,7 @@ namespace Controllers.Joystick
                 // make the values a bit lower
                 _inputPosition.x = _inputPosition.x / rectTransformSizeDeltaJoystickBg.x;
                 _inputPosition.y = _inputPosition.y / rectTransformSizeDeltaJoystickBg.y;
-                Debug.Log(_inputPosition.x + " / " + _inputPosition.y);
+                //Debug.Log(_inputPosition.x + " / " + _inputPosition.y);
 
                 // normalize the input position
                 _inputPosition = _inputPosition.normalized;

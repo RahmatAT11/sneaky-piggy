@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Hide Location
   - Roof
+  - Door
   layers:
   - Default
   - TransparentFX
