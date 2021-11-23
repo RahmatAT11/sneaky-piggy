@@ -141,10 +141,8 @@ namespace Managers
 
         private IEnumerator WaitingForRestartGame(float time)
         {
-            Debug.Log("Start");
             Time.timeScale = 0f;
             yield return new WaitForSecondsRealtime(time);
-            Debug.Log("Finish");
             RestartGame();
         }
 

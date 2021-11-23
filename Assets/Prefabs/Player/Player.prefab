@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9023589988195902998}
   - component: {fileID: 7344144453426615436}
   m_Layer: 0
-  m_Name: Character
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a6278c17fb18504a0847622734aae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _treasureNumber: 0
   filledCollectedUI: {fileID: 0}
+  _treasureCount: 0
+  isCollectedAllTreasures: 0
 --- !u!1 &7847536788523509165
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,7 +37,6 @@ namespace Managers
                 }
                 else
                 {
-                    Debug.Log("Time has run out!");
                     timeRemaining = 0;
                     _timeIsRunning = false;
                     _victoryManager.SetIsTimeRunningOut(!_timeIsRunning);

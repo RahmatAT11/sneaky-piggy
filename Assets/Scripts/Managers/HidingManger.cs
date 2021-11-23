@@ -10,7 +10,7 @@ public class HidingManger : MonoBehaviour
 
     void Start()
     {
-        _player = GameObject.Find("Character(Clone)");
+        _player = GameObject.FindGameObjectWithTag("Player");
         _buttonHide1.SetActive(false);
         _buttonHide2.SetActive(false);
 
@@ -53,8 +53,6 @@ public class HidingManger : MonoBehaviour
 
             _buttonHide1.SetActive(false);
             _buttonHide2.SetActive(true);
-
-            Debug.Log("Hide");
         } 
     }
 
@@ -68,8 +66,6 @@ public class HidingManger : MonoBehaviour
 
             _buttonHide1.SetActive(true);
             _buttonHide2.SetActive(false);
-
-            Debug.Log("Unhide");
         }
     }
 
