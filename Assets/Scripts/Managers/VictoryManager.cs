@@ -21,7 +21,7 @@ namespace Managers
         [SerializeField] private bool _isAllTreasureCollected;
 
         [SerializeField] private Text victoryText;
-        [SerializeField] private GameObject panelWin, star1, star2, star3;
+        [SerializeField] private GameObject panelWin, panelLose, star1, star2, star3;
         private Color _colorLose = Color.red;
         private Color _colorWin = Color.green;
 
@@ -35,6 +35,7 @@ namespace Managers
             _isPlayerDetected = false;
 
             panelWin.SetActive(false);
+            panelLose.SetActive(false);
             star1.SetActive(false);
             star2.SetActive(false);
             star3.SetActive(false);
@@ -55,6 +56,8 @@ namespace Managers
         {
             if (_isCatchByNpc)
             {
+                panelLose.SetActive(true);
+                
                 victoryText.gameObject.SetActive(true);
                 victoryText.text = "You Lose";
                 victoryText.color = _colorLose;
@@ -64,6 +67,8 @@ namespace Managers
 
             if (_isTimeRunningOut)
             {
+                panelLose.SetActive(true);
+
                 victoryText.gameObject.SetActive(true);
                 victoryText.text = "You Lose";
                 victoryText.color = _colorLose;
