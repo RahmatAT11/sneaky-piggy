@@ -1,50 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
-    public void pauseButton()
+    [SerializeField] private GameObject pauseButton, pausePanel;
+    
+    public void PauseButton()
+    {
+        pauseButton.SetActive(false);
+        pausePanel.SetActive(true);
+
+        Time.timeScale = 0;
+    }
+
+    public void ResumeButton()
+    {
+        pauseButton.SetActive(true);
+        pausePanel.SetActive(false);
+
+        Time.timeScale = 1;
+    }
+
+    public void RestartButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        Time.timeScale = 1;
+    }
+
+    public void SettingButton()
     {
 
     }
 
-    public void resumeButton()
+    public void MainMenuButton()
+    {
+        
+    }
+
+    public void AdjustButton()
     {
 
     }
 
-    public void restartButton()
+    public void StoreButton()
     {
 
     }
 
-    public void settingButton()
+    public void SoundOnButton()
     {
 
     }
 
-    public void mainMenuButton()
-    {
-
-    }
-
-    public void adjustButton()
-    {
-
-    }
-
-    public void storeButton()
-    {
-
-    }
-
-    public void soundOnButton()
-    {
-
-    }
-
-    public void soundOffButton()
+    public void SoundOffButton()
     {
 
     }
