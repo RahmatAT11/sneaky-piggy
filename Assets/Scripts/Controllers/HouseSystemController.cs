@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -28,17 +29,6 @@ namespace Controllers
         {
             foreach (var wall in mutableWalls)
             {
-                float offsetYWall = wall.transform.lossyScale.y / 2;
-                float positionYWall = transform.position.y;
-                if (_playerTransform.position.y > positionYWall - Mathf.Pow(offsetYWall, 5))
-                {
-                    _isWallMuted = true;
-                }
-                else
-                {
-                    _isWallMuted = false;
-                }
-
                 if (_isWallMuted)
                 {
                     wall.GetComponent<SpriteRenderer>().enabled = false;
@@ -49,6 +39,22 @@ namespace Controllers
                     wall.GetComponent<SpriteRenderer>().enabled = true;
                     _door.GetComponentInChildren<SpriteRenderer>().enabled = true;
                 }
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _isWallMuted = true;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _isWallMuted = false;
             }
         }
     }

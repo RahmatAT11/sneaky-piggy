@@ -6,6 +6,13 @@ namespace Controllers
     {
         [SerializeField] private Animator door;
         private bool _isDoorOpened;
+        public bool IsDoorOpened
+        {
+            get
+            {
+                return _isDoorOpened;
+            }
+        }
 
         private void Update()
         {
