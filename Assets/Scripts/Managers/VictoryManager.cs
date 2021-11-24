@@ -1,10 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Controllers;
 using UnityEngine;
 using Interfaces;
+using UnityEngine.Profiling;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -116,26 +113,25 @@ namespace Managers
         {
             panelWin.SetActive(true);
 
-            if ("3B" == star)
+            switch (star)
             {
-                star1.SetActive(true);
-                star2.SetActive(true);
-                star3.SetActive(true);
-            }
-            if ("2B" == star)
-            {
-                star1.SetActive(true);
-                star2.SetActive(true);
-            }
-            if ("1B" == star)
-            {
-                star1.SetActive(true);
-            }
-            if ("0B" == star)
-            {
-                star1.SetActive(false);
-                star2.SetActive(false);
-                star3.SetActive(false);
+                case "3B":
+                    star1.SetActive(true);
+                    star2.SetActive(true);
+                    star3.SetActive(true);
+                    break;
+                case "2B":
+                    star1.SetActive(true);
+                    star2.SetActive(true);
+                    break;
+                case "1B":
+                    star1.SetActive(true);
+                    break;
+                case "0B":
+                    star1.SetActive(false);
+                    star2.SetActive(false);
+                    star3.SetActive(false);
+                    break;
             }
         }
 

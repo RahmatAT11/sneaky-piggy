@@ -41,6 +41,7 @@ namespace Controllers
             transform.position = defaultPath[_currentPathIndex].transform.position;
             _fieldOfView.SetFov(60f);
             _fieldOfView.SetViewDistance(5f);
+            MovementSpeed = 4f;
         }
 
         private void Update()

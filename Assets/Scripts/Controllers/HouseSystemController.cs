@@ -7,16 +7,14 @@ namespace Controllers
     public class HouseSystemController : MonoBehaviour
     {
         [SerializeField] private List<GameObject> mutableWalls;
-        private List<GameObject> _walls;
-        private GameObject _roof;
+        private RoofSystemController _roof;
         private Transform _playerTransform;
         private bool _isWallMuted;
         private DoorSystemController _door;
 
         private void Start()
         {
-            _walls = GameObject.FindGameObjectsWithTag("Wall").ToList();
-            _roof = GameObject.FindWithTag("Roof");
+            _roof = FindObjectOfType<RoofSystemController>();
             _playerTransform = FindObjectOfType<PlayerController>().transform;
             _door = FindObjectOfType<DoorSystemController>();
         }
@@ -44,13 +42,11 @@ namespace Controllers
                 if (_isWallMuted)
                 {
                     wall.GetComponent<SpriteRenderer>().enabled = false;
-                    _roof.GetComponent<SpriteRenderer>().enabled = false;
                     _door.GetComponentInChildren<SpriteRenderer>().enabled = false;
                 }
                 else
                 {
                     wall.GetComponent<SpriteRenderer>().enabled = true;
-                    _roof.GetComponent<SpriteRenderer>().enabled = true;
                     _door.GetComponentInChildren<SpriteRenderer>().enabled = true;
                 }
             }

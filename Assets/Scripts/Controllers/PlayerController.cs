@@ -31,6 +31,8 @@ namespace Controllers
             filledCollectedUI.fillAmount = 0;
 
             isCollectedAllTreasures = false;
+            MovementSpeed = 5f;
+            _sprintSpeedMultiplier = 2f;
         }
 
         private GameJoystickController _joystick;
@@ -73,7 +75,6 @@ namespace Controllers
 
             if (_treasureCount == _treasureNumber)
             {
-                Debug.Log("AllCollected");
                 isCollectedAllTreasures = true;
             }
 
