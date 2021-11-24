@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
-    [SerializeField] private GameObject soundOnButton, soundOffButton, pauseButton, pausePanel;
+    [SerializeField] private GameObject soundOnButton, soundOffButton, pauseButton, pausePanel, settingPanel, storePanel;
     
     public void PauseButton()
     {
@@ -32,7 +32,14 @@ public class ButtonManager : MonoBehaviour
 
     public void SettingButton()
     {
+        settingPanel.SetActive(true);
+        pausePanel.SetActive(false);
+    }
 
+    public void BackSettingButton()
+    {
+        settingPanel.SetActive(false);
+        pausePanel.SetActive(true);
     }
 
     public void MainMenuButton()
@@ -47,7 +54,14 @@ public class ButtonManager : MonoBehaviour
 
     public void StoreButton()
     {
+        storePanel.SetActive(true);
+        pausePanel.SetActive(false);
+    }
 
+    public void BackStoreButton()
+    {
+        storePanel.SetActive(false);
+        pausePanel.SetActive(true);
     }
 
     public void SoundOnButton()

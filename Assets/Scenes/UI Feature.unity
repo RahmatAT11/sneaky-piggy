@@ -5317,6 +5317,8 @@ MonoBehaviour:
   soundOffButton: {fileID: 730531476}
   pauseButton: {fileID: 27462893}
   pausePanel: {fileID: 1311494903}
+  settingPanel: {fileID: 0}
+  storePanel: {fileID: 0}
 --- !u!4 &833000231
 Transform:
   m_ObjectHideFlags: 0
