@@ -58,6 +58,8 @@ namespace Managers
         {
             if (_isCatchByNpc)
             {
+                StartCoroutine(WaitingForWinLosePanelShow(2));
+
                 panelLose.SetActive(true);
                 
                 victoryText.gameObject.SetActive(true);
@@ -69,6 +71,8 @@ namespace Managers
 
             if (_isTimeRunningOut)
             {
+                StartCoroutine(WaitingForWinLosePanelShow(2));
+
                 panelLose.SetActive(true);
 
                 victoryText.gameObject.SetActive(true);
@@ -80,6 +84,8 @@ namespace Managers
 
             if (_isMainTreasureGet && _isPlayerEscape)
             {
+                StartCoroutine(WaitingForWinLosePanelShow(2));
+                
                 victoryText.gameObject.SetActive(true);
                 victoryText.text = "You Win";
                 victoryText.color = _colorWin;
@@ -146,6 +152,11 @@ namespace Managers
             yield return new WaitForSecondsRealtime(time);
             Debug.Log("Finish");
             RestartGame();
+        }
+
+        private IEnumerator WaitingForWinLosePanelShow(float time)
+        {
+            yield return new WaitForSecondsRealtime(time);
         }
 
         public void SetIsPlayerEscape(bool isPlayerEscape)
