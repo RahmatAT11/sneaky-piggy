@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseButton, pausePanel;
+    [SerializeField] private GameObject soundOnButton, soundOffButton, pauseButton, pausePanel;
     
     public void PauseButton()
     {
@@ -52,11 +52,13 @@ public class ButtonManager : MonoBehaviour
 
     public void SoundOnButton()
     {
-
+        soundOnButton.SetActive(false);
+        soundOffButton.SetActive(true);
     }
 
     public void SoundOffButton()
     {
-
+        soundOnButton.SetActive(true);
+        soundOffButton.SetActive(false);
     }
 }
