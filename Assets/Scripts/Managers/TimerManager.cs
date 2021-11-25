@@ -11,6 +11,7 @@ namespace Managers
     {
         [SerializeField] private Text timeText;
         [SerializeField] private float timeRemaining;
+        [SerializeField] private float timeOnTime;
         [SerializeField] private GameObject panicDisplay;
         private float timeCounter;
         private bool _timeIsRunning;
@@ -42,7 +43,7 @@ namespace Managers
                     _victoryManager.SetIsTimeRunningOut(!_timeIsRunning);
                 }
 
-                if (timeRemaining <= (timeCounter-15))
+                if (timeRemaining <= timeOnTime)
                 {
                     _victoryManager.SetIsOnTime(false);
                     panicDisplay.SetActive(true);

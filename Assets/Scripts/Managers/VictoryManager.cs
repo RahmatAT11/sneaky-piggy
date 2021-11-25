@@ -18,7 +18,6 @@ namespace Managers
 
         [SerializeField] private bool _isAllTreasureCollected;
 
-        [SerializeField] private Text victoryText;
         [SerializeField] private GameObject panelWin, panelLose, star1, star2, star3;
         private Color _colorLose = Color.red;
         private Color _colorWin = Color.green;
@@ -38,55 +37,32 @@ namespace Managers
             star1.SetActive(false);
             star2.SetActive(false);
             star3.SetActive(false);
+
+            Time.timeScale = 1f;
         }
 
         private void Update()
         {
             GameWin();
-        }
-
-        private void RestartGame()
-        {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }        
+        }     
         
         public void GameWin()
         {
             if (_isCatchByNpc)
             {
-                StartCoroutine(WaitingForWinLosePanelShow(2));
-
-                panelLose.SetActive(true);
-                
-                victoryText.gameObject.SetActive(true);
-                victoryText.text = "You Lose";
-                victoryText.color = _colorLose;
-                StartCoroutine(WaitingForRestartGame(5));
+                StartCoroutine(WaitingForWinLosePanelShow(2, "lose"));
                 return;
             }
 
             if (_isTimeRunningOut)
             {
-                StartCoroutine(WaitingForWinLosePanelShow(2));
-
-                panelLose.SetActive(true);
-
-                victoryText.gameObject.SetActive(true);
-                victoryText.text = "You Lose";
-                victoryText.color = _colorLose;
-                StartCoroutine(WaitingForRestartGame(5));
+                StartCoroutine(WaitingForWinLosePanelShow(2, "lose"));
                 return;
             }
 
             if (_isMainTreasureGet && _isPlayerEscape)
             {
-                StartCoroutine(WaitingForWinLosePanelShow(2));
-                
-                victoryText.gameObject.SetActive(true);
-                victoryText.text = "You Win";
-                victoryText.color = _colorWin;
-                StartCoroutine(WaitingForRestartGame(5));
+                StartCoroutine(WaitingForWinLosePanelShow(2, "win"));
 
                 if(_isOnTime && _isAllTreasureCollected && !_isPlayerDetected)
                 {
@@ -111,14 +87,11 @@ namespace Managers
                 {
                     SetStar("0B");
                 }
-
             }
         }
 
         private void SetStar(string star)
         {
-            panelWin.SetActive(true);
-
             switch (star)
             {
                 case "3B":
@@ -141,16 +114,21 @@ namespace Managers
             }
         }
 
-        private IEnumerator WaitingForRestartGame(float time)
+        private IEnumerator WaitingForWinLosePanelShow(float time, string winlose)
         {
             Time.timeScale = 0f;
             yield return new WaitForSecondsRealtime(time);
-            RestartGame();
-        }
-
-        private IEnumerator WaitingForWinLosePanelShow(float time)
-        {
-            yield return new WaitForSecondsRealtime(time);
+            Debug.Log("PPPP");
+            
+            switch (winlose)
+            {
+                case "win":
+                    panelWin.SetActive(true);
+                    break;
+                case "lose":
+                    panelLose.SetActive(true);
+                    break;
+            } 
         }
 
         public void SetIsPlayerEscape(bool isPlayerEscape)

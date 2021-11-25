@@ -12,7 +12,7 @@ public class ButtonManager : MonoBehaviour
         pauseButton.SetActive(false);
         pausePanel.SetActive(true);
 
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
     }
 
     public void ResumeButton()
@@ -20,14 +20,15 @@ public class ButtonManager : MonoBehaviour
         pauseButton.SetActive(true);
         pausePanel.SetActive(false);
 
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
     }
 
     public void RestartButton()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-        Time.timeScale = 1;
+        
     }
 
     public void SettingButton()
