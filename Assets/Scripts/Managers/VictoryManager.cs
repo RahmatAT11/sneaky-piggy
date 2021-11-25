@@ -15,12 +15,10 @@ namespace Managers
         private bool _isCatchByNpc;
         private bool _isPlayerDetected;
         private bool _isOnTime;
-
-        [SerializeField] private bool _isAllTreasureCollected;
+        private bool _isAllTreasureCollected;
 
         [SerializeField] private GameObject panelWin, panelLose, star1, star2, star3;
-        private Color _colorLose = Color.red;
-        private Color _colorWin = Color.green;
+        [SerializeField] private Image detectedInfoFill;
 
         private void Start()
         {
@@ -39,11 +37,18 @@ namespace Managers
             star3.SetActive(false);
 
             Time.timeScale = 1f;
+
+            detectedInfoFill.fillAmount = 1;
         }
 
         private void Update()
         {
             GameWin();
+
+            if (_isPlayerDetected)
+            {
+                detectedInfoFill.fillAmount = 0;
+            }
         }     
         
         public void GameWin()

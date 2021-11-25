@@ -9,21 +9,26 @@ namespace Managers
 {
     public class TimerManager : MonoBehaviour
     {
-        [SerializeField] private Text timeText;
+        [SerializeField] private Text timeText, onTimeFillText;
         [SerializeField] private float timeRemaining;
-        [SerializeField] private float timeOnTime;
+        [SerializeField] private float timeOnTime, timeOnTimeCounter;
         [SerializeField] private GameObject panicDisplay;
+        [SerializeField] private Image onTimeFill;
         private float timeCounter;
-        private bool _timeIsRunning;
+        private bool _timeIsRunning, _onTimeIsRunning;
         private IWinnable _victoryManager;
 
         private void Start()
         {
             _timeIsRunning = true;
+            _onTimeIsRunning = true;
             _victoryManager = FindObjectOfType<VictoryManager>();
 
             timeCounter = timeRemaining;
+            timeOnTimeCounter = timeOnTime;
             panicDisplay.SetActive(false);
+
+            onTimeFill.fillAmount = 1;
         }
 
         private void Update()
@@ -48,6 +53,8 @@ namespace Managers
                     _victoryManager.SetIsOnTime(false);
                     panicDisplay.SetActive(true);
                 }
+
+                DisplayOnTime();
             }
         }
 
@@ -59,6 +66,26 @@ namespace Managers
             float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
             timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+
+        private void DisplayOnTime()
+        {
+            if (_onTimeIsRunning)
+            {
+                onTimeFill.fillAmount -= 1 / timeOnTime * Time.deltaTime;
+                timeOnTimeCounter -= Time.deltaTime;
+                onTimeFillText.text = timeOnTimeCounter.ToString("0");
+            }
+            else
+            {
+                timeOnTimeCounter = 0;
+            }
+
+            if (timeOnTimeCounter <= 0)
+            {
+                _onTimeIsRunning = false;
+                timeOnTimeCounter = 0;
+            }
         }
     }
 }
