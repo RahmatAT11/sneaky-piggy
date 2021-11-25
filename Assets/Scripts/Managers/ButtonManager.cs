@@ -75,4 +75,14 @@ public class ButtonManager : MonoBehaviour
         soundOnButton.SetActive(true);
         soundOffButton.SetActive(false);
     }
+
+    public void AboutButton()
+    {
+
+    }
+
+    public void QuitButton()
+    {
+
+    }
 }
