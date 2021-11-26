@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Controllers.Joystick;
@@ -20,8 +19,18 @@ namespace Controllers
         private GameObject _treasure;
         [SerializeField] private bool isCollectedAllTreasures;
 
+        private GameJoystickController _joystick;
+        private StaminaSystemController _staminaSystem;
+        
+        private void Awake()
+        {
+            Rigidbody2D = GetComponent<Rigidbody2D>();
+            _joystick = FindObjectOfType<GameJoystickController>();
+            _victoryManager = FindObjectOfType<VictoryManager>();
+        }
         private void Start()
         {
+            _staminaSystem = FindObjectOfType<StaminaSystemController>();
             _treasureInfo = GameObject.Find("Treasure Info").GetComponent<Text>();
             filledCollectedUI = GameObject.Find("CollectedFill").GetComponent<Image>();
             _treasure = GameObject.Find("Treasures");
@@ -33,15 +42,7 @@ namespace Controllers
             isCollectedAllTreasures = false;
             MovementSpeed = 5f;
             _sprintSpeedMultiplier = 2f;
-        }
-
-        private GameJoystickController _joystick;
-
-        private void Awake()
-        {
-            Rigidbody2D = GetComponent<Rigidbody2D>();
-            _joystick = FindObjectOfType<GameJoystickController>();
-            _victoryManager = FindObjectOfType<VictoryManager>();
+            _staminaSystem.Amount = 1;
         }
 
         private void Update()
@@ -68,6 +69,15 @@ namespace Controllers
             Sprinting();
         }
 
+        protected override void Sprinting()
+        {
+            if (isSprinting)
+            {
+                Rigidbody2D.velocity = MovementDirection * (MovementSpeed * _sprintSpeedMultiplier);
+                _staminaSystem.UseStamina(_staminaSystem.Amount);
+            }
+        }
+
         private void TreasureMagneticPick()
         {
             _treasureInfo.text = _treasureNumber.ToString();
@@ -77,11 +87,8 @@ namespace Controllers
             {
                 isCollectedAllTreasures = true;
             }
-
-            if (isCollectedAllTreasures == true)
-            {
-                _victoryManager.SetIsTreasureAllCollected(true);
-            }
+            
+            _victoryManager.SetIsTreasureAllCollected(isCollectedAllTreasures);
         }
 
         public void AddTreasureNumber(int number)
