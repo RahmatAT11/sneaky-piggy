@@ -123,7 +123,6 @@ namespace Managers
         {
             Time.timeScale = 0f;
             yield return new WaitForSecondsRealtime(time);
-            Debug.Log("PPPP");
             
             switch (winlose)
             {
