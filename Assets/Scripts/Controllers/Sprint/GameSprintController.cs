@@ -1,57 +1,36 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Controllers;
+using UnityEngine.UI;
 
 namespace Controllers.Sprint
 {
     public class GameSprintController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        private PlayerController _playerController;
-        [SerializeField] private float sprintTimeDuration = 5f;
-        private float _sprintTimeCounter;
-
-        private Color _activeSprint;
-        private Color _unactiveSprint;
-
-        private bool _isSprintAllowed;
+        private PlayerController _player;
+        private StaminaSystemController _staminaSystem;
 
         private void Start()
         {
-            _activeSprint = GetComponent<Image>().color;
-            _playerController = FindObjectOfType<PlayerController>();
-            _unactiveSprint = Color.grey;
-            _sprintTimeCounter = sprintTimeDuration;
-            _isSprintAllowed = true;
+            _player = FindObjectOfType<PlayerController>(true);
+            _staminaSystem = gameObject.GetComponent<StaminaSystemController>();
         }
 
         private void Update()
         {
-            if (_playerController.IsSprinting && _isSprintAllowed)
+            if (_staminaSystem.IsStaminaEmpty && _player.IsSprinting)
             {
-                _sprintTimeCounter -= Time.deltaTime;
+                Sprint(false);
+                Debug.Log(false);
             }
-
-            if (_sprintTimeCounter < 0 && _isSprintAllowed)
-            {
-                _playerController.IsSprinting = false;
-                StartCoroutine(WaitForNextSprint());
-                _sprintTimeCounter = sprintTimeDuration;
-            }
-        }
-
-        private IEnumerator WaitForNextSprint()
-        {
-            _isSprintAllowed = false;
-            GetComponent<Image>().color = _unactiveSprint;
-            yield return new WaitForSeconds(sprintTimeDuration);
-            GetComponent<Image>().color = _activeSprint;
-            _isSprintAllowed = true;
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
             Sprint(true);
+            Debug.Log(true);
         }
 
         public void OnPointerUp(PointerEventData eventData)
@@ -59,9 +38,9 @@ namespace Controllers.Sprint
             Sprint(false);
         }
 
-        public void Sprint(bool isSprinting)
+        private void Sprint(bool isSprinting)
         {
-            _playerController.IsSprinting = isSprinting;
+            _player.IsSprinting = isSprinting;
         }
     }
 }
