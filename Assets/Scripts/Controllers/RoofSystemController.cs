@@ -1,23 +1,23 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RoofSystemController : MonoBehaviour
+namespace Controllers
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    public class RoofSystemController : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            GetComponent<SpriteRenderer>().enabled = false;
+            if (other.CompareTag("Player"))
+            {
+                GetComponent<SpriteRenderer>().enabled = false;
+            }
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        private void OnTriggerExit2D(Collider2D other)
         {
-            GetComponent<SpriteRenderer>().enabled = true;
+            if (other.CompareTag("Player"))
+            {
+                GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
     }
 }
