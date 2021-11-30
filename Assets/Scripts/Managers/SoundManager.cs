@@ -5,8 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
-
-    [SerializeField] private AudioSource BGM;
+    [SerializeField] private AudioSource bgmSource, effectSource;
 
     private void Awake()
     {
@@ -21,8 +20,23 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(AudioClip clip)
+    public void PlaySound (AudioClip clip)
     {
-        BGM.PlayOneShot(clip);
+        effectSource.PlayOneShot(clip);
+    }
+
+    public void ChangeMasterVolume(float value)
+    {
+        AudioListener.volume = value;
+    }
+
+    public void ToggleMusic(bool value)
+    {
+        bgmSource.mute = value;
+    }
+
+    public void ToggleEffects(bool value)
+    {
+        effectSource.mute = value;
     }
 }
