@@ -9,14 +9,12 @@ namespace Controllers
     {
         [SerializeField] private List<GameObject> mutableWalls;
         private RoofSystemController _roof;
-        private Transform _playerTransform;
         private bool _isWallMuted;
         private DoorSystemController _door;
 
         private void Start()
         {
             _roof = FindObjectOfType<RoofSystemController>();
-            _playerTransform = FindObjectOfType<PlayerController>().transform;
             _door = FindObjectOfType<DoorSystemController>();
         }
 
