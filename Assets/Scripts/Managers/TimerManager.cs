@@ -25,7 +25,7 @@ namespace Managers
             _victoryManager = FindObjectOfType<VictoryManager>();
 
             timeCounter = timeRemaining;
-            timeOnTimeCounter = timeOnTime;
+            timeOnTimeCounter = timeRemaining - timeOnTime;
             panicDisplay.SetActive(false);
 
             onTimeFill.fillAmount = 1;
@@ -72,7 +72,7 @@ namespace Managers
         {
             if (_onTimeIsRunning)
             {
-                onTimeFill.fillAmount -= 1 / timeOnTime * Time.deltaTime;
+                onTimeFill.fillAmount -= 1 / timeOnTimeCounter * Time.deltaTime;
                 timeOnTimeCounter -= Time.deltaTime;
                 onTimeFillText.text = timeOnTimeCounter.ToString("0");
             }

@@ -230,7 +230,7 @@ MonoBehaviour:
   timeText: {fileID: 1917408735}
   onTimeFillText: {fileID: 1043794586}
   timeRemaining: 120
-  timeOnTime: 60
+  timeOnTime: 15
   timeOnTimeCounter: 0
   panicDisplay: {fileID: 1076234836}
   onTimeFill: {fileID: 306529360}
@@ -7316,9 +7316,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1076234837}
   - {fileID: 1902680557}
   - {fileID: 1913653024}
-  - {fileID: 1076234837}
   - {fileID: 1059258966}
   - {fileID: 1101130390}
   - {fileID: 2012337331}
@@ -8229,7 +8229,7 @@ RectTransform:
   m_Children:
   - {fileID: 749492018}
   m_Father: {fileID: 1037548319}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -13832,7 +13832,7 @@ RectTransform:
   - {fileID: 975683972}
   - {fileID: 1216217857}
   m_Father: {fileID: 1037548319}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -14103,7 +14103,7 @@ RectTransform:
   m_Children:
   - {fileID: 1968318660}
   m_Father: {fileID: 1037548319}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}

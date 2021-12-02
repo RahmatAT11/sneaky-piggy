@@ -237,7 +237,7 @@ RectTransform:
   m_Children:
   - {fileID: 1713401738}
   m_Father: {fileID: 1029428596}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1218,13 +1218,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d9c0a94fdd5de90be8475d8dc83116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isAllTreasureCollected: 0
-  victoryText: {fileID: 1841803496}
   panelWin: {fileID: 328619848}
   panelLose: {fileID: 1316471354}
   star1: {fileID: 1655226612}
   star2: {fileID: 967595758}
   star3: {fileID: 137386047}
+  detectedInfoFill: {fileID: 0}
 --- !u!4 &135063595
 Transform:
   m_ObjectHideFlags: 0
@@ -1345,7 +1344,7 @@ RectTransform:
   m_Children:
   - {fileID: 1628430486}
   m_Father: {fileID: 1029428596}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1626,7 +1625,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b411d6aa7317cc4186f6f1edf99db8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BGM: {fileID: 62376937}
+  bgmSource: {fileID: 0}
+  effectSource: {fileID: 0}
 --- !u!4 &187341488
 Transform:
   m_ObjectHideFlags: 0
@@ -4007,7 +4007,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571f1da6011494b2eb22ce12c3b96b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprintTimeDuration: 5
 --- !u!114 &524316827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5448,10 +5447,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundOnButton: {fileID: 821275213}
   soundOffButton: {fileID: 730531476}
+  effectsOnButton: {fileID: 0}
+  effectsOffButton: {fileID: 0}
   pauseButton: {fileID: 27462893}
   pausePanel: {fileID: 1311494903}
   settingPanel: {fileID: 1646884922}
   storePanel: {fileID: 1519147880}
+  buttonSource: {fileID: 0}
 --- !u!4 &833000231
 Transform:
   m_ObjectHideFlags: 0
@@ -6957,8 +6959,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 27462894}
   - {fileID: 151252651}
+  - {fileID: 27462894}
   - {fileID: 1176223522}
   - {fileID: 1797275932}
   - {fileID: 1366350853}
@@ -7200,8 +7202,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 131291478}
+  onTimeFillText: {fileID: 0}
   timeRemaining: 30
+  timeOnTime: 0
+  timeOnTimeCounter: 0
   panicDisplay: {fileID: 151252650}
+  onTimeFill: {fileID: 0}
 --- !u!4 &1046828899
 Transform:
   m_ObjectHideFlags: 0
