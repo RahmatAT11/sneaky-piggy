@@ -53,3 +53,6 @@ TagManager:
   - name: Exterior
     uniqueID: 4265243715
     locked: 0
+  - name: Character
+    uniqueID: 965759907
+    locked: 0

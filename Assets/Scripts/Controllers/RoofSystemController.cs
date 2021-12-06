@@ -6,7 +6,7 @@ namespace Controllers
     {
         public void ShowRoof(bool isShow)
         {
-            GetComponent<SpriteRenderer>().enabled = isShow;
+            gameObject.SetActive(isShow);
         }
     }
 }
