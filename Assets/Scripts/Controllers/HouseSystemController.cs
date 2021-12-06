@@ -45,6 +45,7 @@ namespace Controllers
             if (other.CompareTag("Player"))
             {
                 _isWallMuted = true;
+                _roof.ShowRoof(false);
             }
         }
 
@@ -53,6 +54,7 @@ namespace Controllers
             if (other.CompareTag("Player"))
             {
                 _isWallMuted = false;
+                _roof.ShowRoof(true);
             }
         }
     }

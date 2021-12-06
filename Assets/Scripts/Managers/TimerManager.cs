@@ -33,6 +33,11 @@ namespace Managers
 
         private void Update()
         {
+            CheckCurrentTime();
+        }
+
+        private void CheckCurrentTime()
+        {
             if (_timeIsRunning)
             {
                 DisplayTime(timeRemaining);
