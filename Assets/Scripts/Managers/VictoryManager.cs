@@ -4,6 +4,7 @@ using Interfaces;
 using UnityEngine.Profiling;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Controllers;
 
 namespace Managers
 {
@@ -17,7 +18,7 @@ namespace Managers
         private bool _isOnTime;
         private bool _isAllTreasureCollected;
 
-        [SerializeField] private GameObject panelWin, panelLose, star1, star2, star3;
+        [SerializeField] private GameObject panelWin, panelLose, star1, star2, star3, controllerUI, cameraController;
         [SerializeField] private Image detectedInfoFill;
 
         private void Start()
@@ -121,7 +122,10 @@ namespace Managers
 
         private IEnumerator WaitingForWinLosePanelShow(float time, string winlose)
         {
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
+            controllerUI.SetActive(false);
+            cameraController.GetComponent<CameraController>().enabled = false;
+
             yield return new WaitForSecondsRealtime(time);
             
             switch (winlose)
