@@ -4,6 +4,7 @@ using Interfaces;
 using UnityEngine.Profiling;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Controllers;
 
 namespace Managers
 {
@@ -17,8 +18,10 @@ namespace Managers
         private bool _isOnTime;
         private bool _isAllTreasureCollected;
 
-        [SerializeField] private GameObject panelWin, panelLose, star1, star2, star3;
+        [SerializeField] private GameObject panelWin, panelLose, star1, star2, star3, controllerUI, cameraController;
         [SerializeField] private Image detectedInfoFill;
+        [SerializeField] private GameObject particlePrefabs, playerObj;
+        private Transform playerPos;
 
         private void Start()
         {
@@ -39,6 +42,9 @@ namespace Managers
             Time.timeScale = 1f;
 
             detectedInfoFill.fillAmount = 1;
+
+            playerPos = GameObject.Find("Player(Clone)").GetComponent<Transform>();
+            playerObj = GameObject.Find("Player(Clone)");
         }
 
         private void Update()
@@ -121,15 +127,28 @@ namespace Managers
 
         private IEnumerator WaitingForWinLosePanelShow(float time, string winlose)
         {
-            Time.timeScale = 0f;
-            yield return new WaitForSecondsRealtime(time);
-            
             switch (winlose)
             {
                 case "win":
+                    controllerUI.SetActive(false);
+                    cameraController.GetComponent<CameraController>().enabled = false;
+
+                    yield return new WaitForSecondsRealtime(time);
+
                     panelWin.SetActive(true);
+
                     break;
+
                 case "lose":
+                    controllerUI.SetActive(false);
+                    GameObject.Instantiate(particlePrefabs, playerPos.position, Quaternion.identity);
+                    playerObj.SetActive(false);
+
+                    yield return new WaitForSecondsRealtime(1);
+                    particlePrefabs.SetActive(false);
+
+                    yield return new WaitForSecondsRealtime(time);
+
                     panelLose.SetActive(true);
                     break;
             } 
