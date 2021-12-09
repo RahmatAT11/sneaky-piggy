@@ -4068,6 +4068,8 @@ MonoBehaviour:
   controllerUI: {fileID: 483894935}
   cameraController: {fileID: 718822057}
   detectedInfoFill: {fileID: 62339301}
+  particlePrefabs: {fileID: 8652548598919181283, guid: 57d84123f14802e47b46ce3569fe66e6, type: 3}
+  playerObj: {fileID: 0}
 --- !u!4 &697488249
 Transform:
   m_ObjectHideFlags: 0
