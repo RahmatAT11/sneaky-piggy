@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6619765456929609735}
   - component: {fileID: 6619765456929609732}
   - component: {fileID: -327012259946111141}
+  - component: {fileID: -3037270542751299722}
   m_Layer: 6
   m_Name: Bapak
   m_TagString: Untagged
@@ -235,3 +236,31 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
+--- !u!114 &-3037270542751299722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6619765456929609733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 0000000039a90ef343743afea3539039
+  m_ShapePath:
+  - {x: -0.47662523, y: -0.5914641, z: 0}
+  - {x: 0.03734827, y: -0.95861316, z: 0}
+  - {x: 0.49471438, y: -0.5914641, z: 0}
+  - {x: 0.49471447, y: 0.7904465, z: 0}
+  - {x: 0.03734827, y: 1.1035678, z: 0}
+  - {x: -0.51280373, y: 0.8085358, z: 0}
+  m_ShapePathHash: 1804107402
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 23930

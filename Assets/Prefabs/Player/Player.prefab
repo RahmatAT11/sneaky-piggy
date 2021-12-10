@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6726309462310126534}
   - component: {fileID: 9023589988195902998}
   - component: {fileID: 7344144453426615436}
+  - component: {fileID: 5285959208329080916}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -139,6 +140,34 @@ MonoBehaviour:
   filledCollectedUI: {fileID: 0}
   _treasureCount: 0
   isCollectedAllTreasures: 0
+--- !u!114 &5285959208329080916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2820906729948963424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 0000000039a90ef343743afea3539039
+  m_ShapePath:
+  - {x: -0.43563178, y: -0.6143682, z: 0}
+  - {x: 0.03522724, y: -0.99270415, z: 0}
+  - {x: 0.45703974, y: -0.5929602, z: 0}
+  - {x: 0.46338606, y: 0.71993107, z: 0}
+  - {x: 0.050288845, y: 1.1281588, z: 0}
+  - {x: -0.4570397, y: 0.7214079, z: 0}
+  m_ShapePathHash: 1850511430
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -22398
 --- !u!1 &7847536788523509165
 GameObject:
   m_ObjectHideFlags: 0
