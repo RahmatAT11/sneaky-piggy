@@ -45,10 +45,5 @@ namespace Controllers
                 Rigidbody2D.velocity = MovementDirection * (MovementSpeed * _sprintSpeedMultiplier);
             }
         }
-    
-        protected virtual void SetRotationToZero()
-        {
-            transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
-        }
     }
 }

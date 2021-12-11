@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Controllers.Joystick;
 using Interfaces;
 using Managers;
+using UnityEngine.Events;
 
 namespace Controllers
 {
@@ -22,19 +24,26 @@ namespace Controllers
         private GameJoystickController _joystick;
         private StaminaSystemController _staminaSystem;
         
+        // Just for sake of using character
+        [SerializeField] private List<Sprite> pigs;
+
+        private UnityEvent _onPigTurning;
+
         private void Awake()
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
             _joystick = FindObjectOfType<GameJoystickController>();
             _victoryManager = FindObjectOfType<VictoryManager>();
-        }
-        private void Start()
-        {
+            
             _staminaSystem = FindObjectOfType<StaminaSystemController>();
             _treasureInfo = GameObject.Find("Treasure Info").GetComponent<Text>();
             filledCollectedUI = GameObject.Find("CollectedFill").GetComponent<Image>();
             _treasure = GameObject.Find("Treasures");
 
+            _onPigTurning = new UnityEvent();
+        }
+        private void Start()
+        {
             _treasureNumber = 0;
             _treasureCount = _treasure.transform.childCount;
             filledCollectedUI.fillAmount = 0;
@@ -43,12 +52,15 @@ namespace Controllers
             MovementSpeed = 5f;
             _sprintSpeedMultiplier = 2f;
             _staminaSystem.Amount = 1;
+            
+            _onPigTurning.AddListener(ChangeAssetBasedOnTurning);
         }
 
         private void Update()
         {
             ProcessInput();
             TreasureMagneticPick();
+            ChangeAssetBasedOnTurning();
         }
 
         private void ProcessInput()
@@ -78,6 +90,41 @@ namespace Controllers
             }
         }
 
+        protected override void Turning()
+        {
+            base.Turning();
+            _onPigTurning.Invoke();
+        }
+
+        private void ChangeAssetBasedOnTurning()
+        {
+            // rotate if vector _movementDirection is not zero
+            if (MovementDirection == Vector3.zero) return;
+            
+            float angle = Vector2.SignedAngle(transform.up, MovementDirection);
+
+            float turningDirection = angle;
+
+            if (Mathf.FloorToInt(turningDirection) < 45 || Mathf.FloorToInt(turningDirection) > -45)
+            {
+                SetPigSprite(0);
+            }
+            else if (Mathf.FloorToInt(turningDirection) < 135)
+            {
+                SetPigSprite(2);
+            }
+            else if (Mathf.FloorToInt(turningDirection) > -135)
+            {
+                SetPigSprite(1);
+            }
+            else
+            {
+                SetPigSprite(3);
+            }
+            
+            Rigidbody2D.MoveRotation(Rigidbody2D.rotation + angle);
+        }
+
         private void TreasureMagneticPick()
         {
             _treasureInfo.text = _treasureNumber.ToString();
@@ -94,6 +141,11 @@ namespace Controllers
         public void AddTreasureNumber(int number)
         {
             _treasureNumber += number;
+        }
+
+        private void SetPigSprite(int index)
+        {
+            GetComponent<SpriteRenderer>().sprite = pigs[index];
         }
     }
 }
