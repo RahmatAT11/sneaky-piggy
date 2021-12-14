@@ -52,6 +52,11 @@ namespace Controllers
             }
         }
 
+        private void OnDisable()
+        {
+            StopCoroutine(_regen);
+        }
+
         private IEnumerator RegenerateStamina()
         {
             yield return new WaitForSeconds(2f);
