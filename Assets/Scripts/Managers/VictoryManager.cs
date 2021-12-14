@@ -43,8 +43,8 @@ namespace Managers
 
             detectedInfoFill.fillAmount = 1;
 
-            playerPos = GameObject.Find("Player(Clone)").GetComponent<Transform>();
-            playerObj = GameObject.Find("Player(Clone)");
+            playerObj = GameObject.FindWithTag("Player");
+            playerPos = playerObj.transform;
         }
 
         private void Update()

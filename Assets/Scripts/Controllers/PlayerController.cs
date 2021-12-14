@@ -105,10 +105,5 @@ namespace Controllers
         {
             _treasureNumber += number;
         }
-
-        private void SetPigSprite(int index)
-        {
-            GetComponent<SpriteRenderer>().sprite = pigs[index];
-        }
     }
 }

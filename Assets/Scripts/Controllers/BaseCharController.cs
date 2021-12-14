@@ -25,8 +25,6 @@ namespace Controllers
     
         protected virtual void Walking()
         {
-            // menggerakkan player ke vector
-            //Rigidbody2D.velocity = MovementDirection * MovementSpeed;
             Rigidbody2D.MovePosition(Rigidbody2D.position + 
                                      (Vector2)(MovementDirection * movementSpeed* Time.fixedDeltaTime));
         }
