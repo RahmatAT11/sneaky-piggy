@@ -27,8 +27,6 @@ namespace Controllers
         // Just for sake of using character
         [SerializeField] private List<Sprite> pigs;
 
-        private UnityEvent _onPigTurning;
-
         private void Awake()
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -39,8 +37,6 @@ namespace Controllers
             _treasureInfo = GameObject.Find("Treasure Info").GetComponent<Text>();
             filledCollectedUI = GameObject.Find("CollectedFill").GetComponent<Image>();
             _treasure = GameObject.Find("Treasures");
-
-            _onPigTurning = new UnityEvent();
         }
         private void Start()
         {
@@ -52,15 +48,12 @@ namespace Controllers
             MovementSpeed = 5f;
             _sprintSpeedMultiplier = 2f;
             _staminaSystem.Amount = 1;
-            
-            _onPigTurning.AddListener(ChangeAssetBasedOnTurning);
         }
 
         private void Update()
         {
             ProcessInput();
             TreasureMagneticPick();
-            ChangeAssetBasedOnTurning();
         }
 
         private void ProcessInput()
@@ -88,41 +81,6 @@ namespace Controllers
                 Rigidbody2D.velocity = MovementDirection * (MovementSpeed * _sprintSpeedMultiplier);
                 _staminaSystem.UseStamina(_staminaSystem.Amount);
             }
-        }
-
-        protected override void Turning()
-        {
-            base.Turning();
-            _onPigTurning.Invoke();
-        }
-
-        private void ChangeAssetBasedOnTurning()
-        {
-            // rotate if vector _movementDirection is not zero
-            if (MovementDirection == Vector3.zero) return;
-            
-            float angle = Vector2.SignedAngle(transform.up, MovementDirection);
-
-            float turningDirection = angle;
-
-            if (Mathf.FloorToInt(turningDirection) < 45 || Mathf.FloorToInt(turningDirection) > -45)
-            {
-                SetPigSprite(0);
-            }
-            else if (Mathf.FloorToInt(turningDirection) < 135)
-            {
-                SetPigSprite(2);
-            }
-            else if (Mathf.FloorToInt(turningDirection) > -135)
-            {
-                SetPigSprite(1);
-            }
-            else
-            {
-                SetPigSprite(3);
-            }
-            
-            Rigidbody2D.MoveRotation(Rigidbody2D.rotation + angle);
         }
 
         private void TreasureMagneticPick()
