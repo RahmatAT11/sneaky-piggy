@@ -9,14 +9,20 @@ namespace Controllers
     {
         [SerializeField] private int maxStamina = 100;
         [SerializeField] private int currentStamina;
+        [SerializeField] private float regenerateTick = 0.1f;
 
-        private WaitForSeconds _regenTick = new WaitForSeconds(0.1f);
+        private WaitForSeconds _regenTick;
         private Coroutine _regen;
 
         private Slider _sprintButton;
         
         public int Amount { get; set; }
         public bool IsStaminaEmpty { get; private set; }
+
+        private void Awake()
+        {
+            _regenTick = new WaitForSeconds(regenerateTick);
+        }
 
         private void Start()
         {

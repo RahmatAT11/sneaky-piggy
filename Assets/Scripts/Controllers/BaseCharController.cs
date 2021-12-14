@@ -7,26 +7,28 @@ namespace Controllers
         protected Rigidbody2D Rigidbody2D;
     
         [Header("Movement")]
-        protected float MovementSpeed = 2.0f;
+        [SerializeField] protected float movementSpeed = 2.0f;
         protected Vector3 MovementDirection;
-        protected bool isSprinting;
-        public bool IsSprinting
+        protected bool IsSprinting;
+        public bool IsSprintingEx
         {
             get
             {
-                return isSprinting;
+                return IsSprinting;
             }
             set
             {
-                isSprinting = value;
+                IsSprinting = value;
             }
         }
-        protected float _sprintSpeedMultiplier = 1.5f;
+        [SerializeField] protected float sprintSpeedMultiplier = 5f;
     
         protected virtual void Walking()
         {
             // menggerakkan player ke vector
-            Rigidbody2D.velocity = MovementDirection * MovementSpeed;
+            //Rigidbody2D.velocity = MovementDirection * MovementSpeed;
+            Rigidbody2D.MovePosition(Rigidbody2D.position + 
+                                     (Vector2)(MovementDirection * movementSpeed* Time.fixedDeltaTime));
         }
     
         protected virtual void Turning()
@@ -34,16 +36,15 @@ namespace Controllers
             // rotate if vector _movementDirection is not zero
             if (MovementDirection == Vector3.zero) return;
             
-            float angle = Vector2.SignedAngle(transform.up, MovementDirection);
-            Rigidbody2D.MoveRotation(Rigidbody2D.rotation + angle);
+            Quaternion rotation = Quaternion.LookRotation(MovementDirection, Vector3.back);
+            Rigidbody2D.MoveRotation(rotation);
         }
         
         protected virtual void Sprinting()
         {
-            if (IsSprinting)
-            {
-                Rigidbody2D.velocity = MovementDirection * (MovementSpeed * _sprintSpeedMultiplier);
-            }
+            Rigidbody2D.MovePosition(Rigidbody2D.position + 
+                                     (Vector2)(MovementDirection * movementSpeed * sprintSpeedMultiplier
+                                     * Time.fixedDeltaTime));
         }
     }
 }

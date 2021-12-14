@@ -41,7 +41,7 @@ namespace Controllers
             transform.position = defaultPath[_currentPathIndex].transform.position;
             _fieldOfView.SetFov(60f);
             _fieldOfView.SetViewDistance(5f);
-            MovementSpeed = 4f;
+            movementSpeed = 4f;
         }
 
         private void Update()
@@ -103,7 +103,7 @@ namespace Controllers
 
         protected override void Sprinting()
         {
-            Rigidbody2D.velocity = MovementDirection * (MovementSpeed * _sprintSpeedMultiplier);
+            Rigidbody2D.velocity = MovementDirection * (movementSpeed * sprintSpeedMultiplier);
         }
 
         /*private PlayerController DetectPlayer()
@@ -144,7 +144,7 @@ namespace Controllers
             if (player == null)
                 return;
 
-            if (player.IsSprinting)
+            if (player.IsSprintingEx)
             {
                 _isPlayerDetected = true;
             }

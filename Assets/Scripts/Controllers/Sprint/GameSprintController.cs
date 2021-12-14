@@ -20,7 +20,7 @@ namespace Controllers.Sprint
 
         private void Update()
         {
-            if (_staminaSystem.IsStaminaEmpty && _player.IsSprinting)
+            if (_staminaSystem.IsStaminaEmpty && _player.IsSprintingEx)
             {
                 Sprint(false);
                 Debug.Log(false);
@@ -40,7 +40,7 @@ namespace Controllers.Sprint
 
         private void Sprint(bool isSprinting)
         {
-            _player.IsSprinting = isSprinting;
+            _player.IsSprintingEx = isSprinting;
         }
     }
 }

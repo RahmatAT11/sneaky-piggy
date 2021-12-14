@@ -36,8 +36,8 @@ namespace Controllers.Joystick
 
                 // move the joystick
                 _imageJoystick.rectTransform.anchoredPosition = new Vector2(
-                    _inputPosition.x * (rectTransformSizeDeltaJoystickBg.x / 3.5f),
-                    _inputPosition.y * (rectTransformSizeDeltaJoystickBg.y / 3.5f));
+                    _inputPosition.x * (rectTransformSizeDeltaJoystickBg.x / 2.5f),
+                    _inputPosition.y * (rectTransformSizeDeltaJoystickBg.y / 2.5f));
             }
         }
 

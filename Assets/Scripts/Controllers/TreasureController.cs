@@ -10,7 +10,7 @@ namespace Controllers
         private Rigidbody2D _treasureRigidbody;
         private PlayerController _player;
         private IWinnable _victoryManager;
-        private float _maxDistance = 3.0f;
+        [SerializeField] private float _maxDistance = 3.0f;
         private float _timeStamp;
 
         private bool _isReachable;

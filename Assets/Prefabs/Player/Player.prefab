@@ -118,10 +118,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a6278c17fb18504a0847622734aae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 0.5
+  sprintSpeedMultiplier: 5
   _treasureNumber: 0
   filledCollectedUI: {fileID: 0}
   _treasureCount: 0
   isCollectedAllTreasures: 0
+  staminaUseAmount: 2
   pigs:
   - {fileID: 21300000, guid: e316a4b1b8aba4ac2bc37b995eee4d7d, type: 3}
   - {fileID: 21300000, guid: 0b62fdf92294ed007a3b8a02192db705, type: 3}

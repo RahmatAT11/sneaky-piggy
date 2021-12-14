@@ -12,17 +12,21 @@ namespace Controllers
     {
         private IWinnable _victoryManager;
 
-        [Header("Treasure Magnetic")] private GameObject _treasureMagnetic;
+        [Header("Treasure Magnetic")] 
+        private GameObject _treasureMagnetic;
         private Text _treasureInfo;
         public float _treasureNumber;
 
-        [Header("Collected UI")] public Image filledCollectedUI;
+        [Header("Collected UI")] 
+        public Image filledCollectedUI;
         [SerializeField] public float _treasureCount;
         private GameObject _treasure;
         [SerializeField] private bool isCollectedAllTreasures;
 
         private GameJoystickController _joystick;
         private StaminaSystemController _staminaSystem;
+        [Header("Stamina")] 
+        [SerializeField] private int staminaUseAmount = 1;
         
         // Just for sake of using character
         [SerializeField] private List<Sprite> pigs;
@@ -45,9 +49,10 @@ namespace Controllers
             filledCollectedUI.fillAmount = 0;
 
             isCollectedAllTreasures = false;
-            MovementSpeed = 5f;
-            _sprintSpeedMultiplier = 2f;
-            _staminaSystem.Amount = 1;
+            
+            //MovementSpeed = 0.5f;
+            //_sprintSpeedMultiplier = 5f;
+            _staminaSystem.Amount = staminaUseAmount;
         }
 
         private void Update()
@@ -76,9 +81,9 @@ namespace Controllers
 
         protected override void Sprinting()
         {
-            if (isSprinting)
+            if (IsSprinting)
             {
-                Rigidbody2D.velocity = MovementDirection * (MovementSpeed * _sprintSpeedMultiplier);
+                base.Sprinting();
                 _staminaSystem.UseStamina(_staminaSystem.Amount);
             }
         }
