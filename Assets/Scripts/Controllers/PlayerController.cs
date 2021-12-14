@@ -27,6 +27,8 @@ namespace Controllers
         [Header("Stamina")] 
         [SerializeField] private int staminaUseAmount = 1;
 
+        [SerializeField] private UnityArmatureComponent _animation;
+
         private void Awake()
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -81,6 +83,27 @@ namespace Controllers
             {
                 base.Sprinting();
                 _staminaSystem.UseStamina(_staminaSystem.Amount);
+                _animation.animation.Play("Walk", 0);
+                _animation.animation.timeScale = 1.5f;
+            }
+        }
+
+        protected override void Walking()
+        {
+            base.Walking();
+            _animation.animation.Play("Walk", 0);
+            _animation.animation.timeScale = 1f;
+        }
+
+        protected override void Turning()
+        {
+            if (MovementDirection.x < 0)
+            {
+                _animation._armature.flipX = true;
+            }
+            else
+            {
+                _animation._armature.flipX = false;
             }
         }
 
