@@ -124,7 +124,7 @@ MonoBehaviour:
   filledCollectedUI: {fileID: 0}
   _treasureCount: 0
   isCollectedAllTreasures: 0
-  staminaUseAmount: 2
+  staminaUseAmount: 1
   pigs:
   - {fileID: 21300000, guid: e316a4b1b8aba4ac2bc37b995eee4d7d, type: 3}
   - {fileID: 21300000, guid: 0b62fdf92294ed007a3b8a02192db705, type: 3}
