@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a64e5b0e436d4bed9780211ae245f7b, type: 3}
+  m_Name: BabiSamping_walk_Data
+  m_EditorClassIdentifier: 
+  dataName: BabiSamping_walk
+  dragonBonesJSON: {fileID: 4900000, guid: 7eb8ddb95411114ecb51b0fd8d790788, type: 3}
+  textureAtlas:
+  - textureAtlasJSON: {fileID: 4900000, guid: 287b58ffe0a027399af47541ca4d5981, type: 3}
+    texture: {fileID: 2800000, guid: b994e7ac0a80f59c5ac3bd766c4bd51d, type: 3}
+    material: {fileID: 2100000, guid: 353f0919a617c0432ad80017c409d374, type: 2}
+    uiMaterial: {fileID: 0}

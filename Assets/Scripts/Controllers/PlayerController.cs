@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Controllers.Joystick;
 using Interfaces;
 using Managers;
-using UnityEngine.Events;
+using DragonBones;
 
 namespace Controllers
 {
@@ -27,9 +26,6 @@ namespace Controllers
         private StaminaSystemController _staminaSystem;
         [Header("Stamina")] 
         [SerializeField] private int staminaUseAmount = 1;
-        
-        // Just for sake of using character
-        [SerializeField] private List<Sprite> pigs;
 
         private void Awake()
         {
