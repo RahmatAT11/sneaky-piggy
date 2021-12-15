@@ -1,11 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers.Player;
 using Interfaces;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.NPC
 {
     public class NonPlayerController : BaseCharController
     {

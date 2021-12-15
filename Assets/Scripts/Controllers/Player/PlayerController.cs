@@ -4,73 +4,64 @@ using Controllers.Joystick;
 using Interfaces;
 using Managers;
 using DragonBones;
-using AnimationState = DragonBones.AnimationState;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerController : BaseCharController
     {
         private IWinnable _victoryManager;
 
-        [Header("Treasure Magnetic")] 
-        private GameObject _treasureMagnetic;
-        private Text _treasureInfo;
-        public float _treasureNumber;
-
-        [Header("Collected UI")] 
-        public Image filledCollectedUI;
-        [SerializeField] public float _treasureCount;
+        // Treasure Data
+        private float _treasureNumber;
+        private float _treasureCount;
+        private bool _isCollectedAllTreasures;
         private GameObject _treasure;
-        [SerializeField] private bool isCollectedAllTreasures;
+        
+        // Treasure UI
+        private Image _filledCollectedUI;
+        private Text _treasureInfo;
 
+        // Joystick
         private GameJoystickController _joystick;
         private StaminaSystemController _staminaSystem;
+        
+        // Player Stamina
         [Header("Stamina")] 
         [SerializeField] private int staminaUseAmount = 1;
-
-        [SerializeField] private UnityArmatureComponent _animation;
-        private AnimationState _currentAnimState;
+        [SerializeField] private UnityArmatureComponent unityArmatureComponent;
+        
+        // Player Component
+        private IInputProcess _playerInput;
 
         private void Awake()
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
             _joystick = FindObjectOfType<GameJoystickController>();
             _victoryManager = FindObjectOfType<VictoryManager>();
+            _playerInput = GetComponent<PlayerInput>();
             
             _staminaSystem = FindObjectOfType<StaminaSystemController>();
+            
             _treasureInfo = GameObject.Find("Treasure Info").GetComponent<Text>();
-            filledCollectedUI = GameObject.Find("CollectedFill").GetComponent<Image>();
+            _filledCollectedUI = GameObject.Find("CollectedFill").GetComponent<Image>();
             _treasure = GameObject.Find("Treasures");
         }
         private void Start()
         {
             _treasureNumber = 0;
             _treasureCount = _treasure.transform.childCount;
-            filledCollectedUI.fillAmount = 0;
-
-            isCollectedAllTreasures = false;
+            _filledCollectedUI.fillAmount = 0;
             
             //MovementSpeed = 0.5f;
             //_sprintSpeedMultiplier = 5f;
             _staminaSystem.Amount = staminaUseAmount;
-            _animation.animation.Play("Walk");
+            unityArmatureComponent.animation.Play("Walk");
         }
 
         private void Update()
         {
-            ProcessInput();
+            MovementDirection = _playerInput.MovementInput(_joystick);
             TreasureMagneticPick();
-        }
-
-        private void ProcessInput()
-        {
-            /*float xAxis = Input.GetAxis("Horizontal");
-        float yAxis = Input.GetAxis("Vertical");*/
-
-            float xAxis = _joystick.InputHorizontal();
-            float yAxis = _joystick.InputVertical();
-
-            MovementDirection.Set(xAxis, yAxis, 0f);
         }
 
         private void FixedUpdate()
@@ -86,37 +77,30 @@ namespace Controllers
             {
                 base.Sprinting();
                 _staminaSystem.UseStamina(_staminaSystem.Amount);
-                _animation.animation.timeScale = 1.5f;
+                unityArmatureComponent.animation.timeScale = 1.5f;
             }
             else
             {
-                _animation.animation.timeScale = 1f;
+                unityArmatureComponent.animation.timeScale = 1f;
             }
         }
 
         protected override void Turning()
         {
-            if (MovementDirection.x < 0)
-            {
-                _animation._armature.flipX = true;
-            }
-            else
-            {
-                _animation._armature.flipX = false;
-            }
+            unityArmatureComponent._armature.flipX = MovementDirection.x < 0;
         }
 
         private void TreasureMagneticPick()
         {
-            _treasureInfo.text = _treasureNumber.ToString();
-            filledCollectedUI.fillAmount = _treasureNumber * (1 / _treasureCount);
+            _treasureInfo.text = $"{_treasureNumber}";
+            _filledCollectedUI.fillAmount = _treasureNumber * (1 / _treasureCount);
 
-            if (_treasureCount == _treasureNumber)
+            if (Mathf.FloorToInt(_treasureCount) == Mathf.FloorToInt(_treasureNumber))
             {
-                isCollectedAllTreasures = true;
+                _isCollectedAllTreasures = true;
             }
             
-            _victoryManager.SetIsTreasureAllCollected(isCollectedAllTreasures);
+            _victoryManager.SetIsTreasureAllCollected(_isCollectedAllTreasures);
         }
 
         public void AddTreasureNumber(int number)

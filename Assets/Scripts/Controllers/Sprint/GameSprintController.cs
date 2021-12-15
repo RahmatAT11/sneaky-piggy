@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Controllers;
-using UnityEngine.UI;
+using Controllers.Player;
 
 namespace Controllers.Sprint
 {

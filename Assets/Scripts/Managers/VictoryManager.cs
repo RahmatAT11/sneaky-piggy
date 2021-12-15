@@ -1,10 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using Interfaces;
-using UnityEngine.Profiling;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Controllers;
+using Controllers.Camera;
 
 namespace Managers
 {

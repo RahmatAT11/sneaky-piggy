@@ -1,9 +1,9 @@
 using UnityEngine;
-using Controllers;
+using Controllers.Player;
 
 public class FieldOfView : MonoBehaviour
 {
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private LayerMask layerMask;
     private Mesh _mesh;
     private Vector3 _origin;
     private float _startingAngle;
@@ -43,7 +43,7 @@ public class FieldOfView : MonoBehaviour
             Vector3 vertex;
             
             RaycastHit2D raycastHit2D = 
-                Physics2D.Raycast(_origin, GetVectorFromAngle(angle), _viewDistance, _layerMask);
+                Physics2D.Raycast(_origin, GetVectorFromAngle(angle), _viewDistance, layerMask);
             Collider2D hitCollider = raycastHit2D.collider;
             if (hitCollider == null)
             {
