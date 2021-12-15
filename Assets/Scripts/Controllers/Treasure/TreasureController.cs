@@ -8,7 +8,6 @@ namespace Controllers.Treasure
     public class TreasureController : MonoBehaviour
     {
         private Rigidbody2D _treasureRigidbody;
-        private TreasureCollectorController _treasureCollector;
         private Transform _player;
         private IWinnable _victoryManager;
         [SerializeField] private float maxDistance = 3.0f;
@@ -17,6 +16,10 @@ namespace Controllers.Treasure
         private bool _isReachable;
 
         [SerializeField] private bool isMainTreasure;
+
+        public delegate void TreasureCollectHandler();
+
+        public static event TreasureCollectHandler TreasureCollected;
 
         private void Awake()
         {
@@ -27,7 +30,6 @@ namespace Controllers.Treasure
         private void Start()
         {
             _player = FindObjectOfType<PlayerController>().transform;
-            _treasureCollector = FindObjectOfType<TreasureCollectorController>();
             if (CompareTag("MainTreasure"))
             {
                 isMainTreasure = true;
@@ -70,13 +72,14 @@ namespace Controllers.Treasure
 
             if (Vector3.Distance(transform.position, _player.position) < 0.5f)
             {
-                _treasureCollector.AddTreasureNumber(1);
                 DestroyTreasure();
             }
         }
 
         private void DestroyTreasure()
         {
+            TreasureCollected?.Invoke();
+            
             if (isMainTreasure)
             {
                 _victoryManager.SetIsMainTreasureGet(true);

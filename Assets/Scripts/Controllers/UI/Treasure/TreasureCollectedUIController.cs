@@ -1,3 +1,4 @@
+using System;
 using Controllers.Treasure;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,12 +22,23 @@ namespace Controllers.UI.Treasure
         private void Start()
         {
             filledCollectedUI.fillAmount = 0;
+
+            TreasureController.TreasureCollected += UpdateTreasureCollectedUIHandler;
+        }
+
+        private void OnDestroy()
+        {
+            TreasureController.TreasureCollected -= UpdateTreasureCollectedUIHandler;
+        }
+
+        private void UpdateTreasureCollectedUIHandler()
+        {
+            UpdateTreasureCollectedUI();
         }
 
         private void Update()
         {
             UpdateTreasureCollectedUI();
-            ChangeIfAllTreasureCollected();
         }
 
         private void UpdateTreasureCollectedUI()
@@ -34,14 +46,6 @@ namespace Controllers.UI.Treasure
             treasureInfo.text = $"{_treasureCollector.TreasureNumber}";
             filledCollectedUI.fillAmount = 
                 _treasureCollector.TreasureNumber * (1 / _treasureCollector.TreasureCount);
-        }
-        
-        private void ChangeIfAllTreasureCollected()
-        {
-            if (Mathf.FloorToInt(_treasureCollector.TreasureNumber) == Mathf.FloorToInt(_treasureCollector.TreasureCount))
-            {
-                _treasureCollector.UpdateIsTreasureCollected(true);
-            }
         }
     }
 }

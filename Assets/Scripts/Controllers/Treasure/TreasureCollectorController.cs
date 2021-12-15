@@ -1,5 +1,3 @@
-using Interfaces;
-using Managers;
 using UnityEngine;
 
 namespace Controllers.Treasure
@@ -38,21 +36,30 @@ namespace Controllers.Treasure
                 _isCollectedAllTreasures = value;
             }
         }
-
-        private IWinnable _victoryManager;
         
         private GameObject _treasure;
+
+        public delegate void AllTreasureCollectedHandler();
+        public static event AllTreasureCollectedHandler AllTreasureCollected;
         
         private void Awake()
         {
             _treasure = GameObject.Find("Treasures");
-            _victoryManager = FindObjectOfType<VictoryManager>();
         }
 
         private void Start()
         {
             _treasureNumber = 0;
             _treasureCount = _treasure.transform.childCount;
+
+            TreasureController.TreasureCollected += AddTreasureNumberHandler;
+            TreasureController.TreasureCollected += ChangeAllTreasureCollectedStatusHandler;
+        }
+
+        private void OnDestroy()
+        {
+            TreasureController.TreasureCollected -= AddTreasureNumberHandler;
+            TreasureController.TreasureCollected -= ChangeAllTreasureCollectedStatusHandler;
         }
 
         // akan di eksekusi ketika player berhasil menyentuh
@@ -62,10 +69,22 @@ namespace Controllers.Treasure
             _treasureNumber += number;
         }
 
-        public void UpdateIsTreasureCollected(bool isCollectedAllTreasures)
+        public void AddTreasureNumberHandler()
         {
-            _isCollectedAllTreasures = isCollectedAllTreasures;
-            _victoryManager.SetIsTreasureAllCollected(_isCollectedAllTreasures);
+            AddTreasureNumber(1);
+        }
+
+        private void ChangeAllTreasureCollectedStatus()
+        {
+            if (Mathf.FloorToInt(_treasureNumber) == Mathf.FloorToInt(_treasureCount))
+            {
+                AllTreasureCollected?.Invoke();
+            }
+        }
+
+        private void ChangeAllTreasureCollectedStatusHandler()
+        {
+            ChangeAllTreasureCollectedStatus();
         }
     }
 }

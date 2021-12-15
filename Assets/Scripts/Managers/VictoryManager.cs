@@ -3,6 +3,7 @@ using UnityEngine;
 using Interfaces;
 using UnityEngine.UI;
 using Controllers.Camera;
+using Controllers.Treasure;
 
 namespace Managers
 {
@@ -43,6 +44,13 @@ namespace Managers
 
             playerObj = GameObject.FindWithTag("Player");
             playerPos = playerObj.transform;
+
+            TreasureCollectorController.AllTreasureCollected += SetIsTreasureAllCollectedHandler;
+        }
+
+        private void OnDestroy()
+        {
+            TreasureCollectorController.AllTreasureCollected -= SetIsTreasureAllCollectedHandler;
         }
 
         private void Update()
@@ -175,6 +183,11 @@ namespace Managers
         public void SetIsTreasureAllCollected(bool isAllTreasureCollected)
         {
             _isAllTreasureCollected = isAllTreasureCollected;
+        }
+
+        private void SetIsTreasureAllCollectedHandler()
+        {
+            SetIsTreasureAllCollected(true);
         }
 
         public void SetIsPlayerDetected(bool isPlayerDetected)
