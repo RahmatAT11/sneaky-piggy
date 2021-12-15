@@ -1,5 +1,5 @@
 using Controllers.Joystick;
-using Interfaces;
+using Interfaces.Player;
 using UnityEngine;
 
 namespace Controllers.Player

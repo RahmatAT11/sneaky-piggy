@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class StaminaSystemController : MonoBehaviour
     {
@@ -35,6 +34,7 @@ namespace Controllers
         private void Update()
         {
             IsStaminaEmpty = currentStamina  <= 0;
+            DeactivatedGameObject();
         }
 
         public void UseStamina(int amount)
@@ -52,9 +52,11 @@ namespace Controllers
             }
         }
 
-        private void OnDisable()
+        private void DeactivatedGameObject()
         {
-            StopCoroutine(_regen);
+            if(gameObject.activeInHierarchy) return;
+            
+            StopCoroutine(RegenerateStamina());
         }
 
         private IEnumerator RegenerateStamina()

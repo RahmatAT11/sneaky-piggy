@@ -1,7 +1,7 @@
 using Controllers.Joystick;
 using UnityEngine;
 
-namespace Interfaces
+namespace Interfaces.Player
 {
     public interface IInputProcess
     {

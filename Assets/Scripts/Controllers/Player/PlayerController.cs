@@ -1,26 +1,13 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Controllers.Joystick;
-using Interfaces;
 using Managers;
 using DragonBones;
+using Interfaces.Player;
 
 namespace Controllers.Player
 {
     public class PlayerController : BaseCharController
     {
-        private IWinnable _victoryManager;
-
-        // Treasure Data
-        private float _treasureNumber;
-        private float _treasureCount;
-        private bool _isCollectedAllTreasures;
-        private GameObject _treasure;
-        
-        // Treasure UI
-        private Image _filledCollectedUI;
-        private Text _treasureInfo;
-
         // Joystick
         private GameJoystickController _joystick;
         private StaminaSystemController _staminaSystem;
@@ -37,21 +24,12 @@ namespace Controllers.Player
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
             _joystick = FindObjectOfType<GameJoystickController>();
-            _victoryManager = FindObjectOfType<VictoryManager>();
             _playerInput = GetComponent<PlayerInput>();
             
             _staminaSystem = FindObjectOfType<StaminaSystemController>();
-            
-            _treasureInfo = GameObject.Find("Treasure Info").GetComponent<Text>();
-            _filledCollectedUI = GameObject.Find("CollectedFill").GetComponent<Image>();
-            _treasure = GameObject.Find("Treasures");
         }
         private void Start()
         {
-            _treasureNumber = 0;
-            _treasureCount = _treasure.transform.childCount;
-            _filledCollectedUI.fillAmount = 0;
-            
             //MovementSpeed = 0.5f;
             //_sprintSpeedMultiplier = 5f;
             _staminaSystem.Amount = staminaUseAmount;
@@ -61,7 +39,6 @@ namespace Controllers.Player
         private void Update()
         {
             MovementDirection = _playerInput.MovementInput(_joystick);
-            TreasureMagneticPick();
         }
 
         private void FixedUpdate()
@@ -88,24 +65,6 @@ namespace Controllers.Player
         protected override void Turning()
         {
             unityArmatureComponent._armature.flipX = MovementDirection.x < 0;
-        }
-
-        private void TreasureMagneticPick()
-        {
-            _treasureInfo.text = $"{_treasureNumber}";
-            _filledCollectedUI.fillAmount = _treasureNumber * (1 / _treasureCount);
-
-            if (Mathf.FloorToInt(_treasureCount) == Mathf.FloorToInt(_treasureNumber))
-            {
-                _isCollectedAllTreasures = true;
-            }
-            
-            _victoryManager.SetIsTreasureAllCollected(_isCollectedAllTreasures);
-        }
-
-        public void AddTreasureNumber(int number)
-        {
-            _treasureNumber += number;
         }
     }
 }
