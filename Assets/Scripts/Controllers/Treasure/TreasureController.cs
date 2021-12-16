@@ -16,9 +16,9 @@ namespace Controllers.Treasure
         private bool _isReachable;
 
         [SerializeField] private bool isMainTreasure;
+        [SerializeField] private LayerMask detectLayer;
 
         public delegate void TreasureCollectHandler();
-
         public static event TreasureCollectHandler TreasureCollected;
 
         private void Awake()
@@ -44,7 +44,7 @@ namespace Controllers.Treasure
         private void CheckPlayerDistanceToTreasure()
         {
             // cek posisi coin terhadap jarak ke player
-            float distance = Vector3.Distance(transform.position, _player.position);
+            float distance = Vector3.Distance(_player.position, transform.position);
             _isReachable = distance <= maxDistance;
         }
 
@@ -59,15 +59,18 @@ namespace Controllers.Treasure
             {
                 Vector3 currentTreasurePosition = transform.position;
                 Vector3 targetDirection = (_player.position - currentTreasurePosition).normalized;
-                RaycastHit2D raycastHit2D = 
-                    Physics2D.Raycast(currentTreasurePosition, targetDirection);
-                if (raycastHit2D.collider.CompareTag("Wall"))
+
+                RaycastHit2D raycastHit2D = Physics2D.Raycast(
+                    currentTreasurePosition, targetDirection, maxDistance, detectLayer);
+                Collider2D hitCollider2D = raycastHit2D.collider;
+                
+                Debug.Log(hitCollider2D.tag);
+                if (hitCollider2D.tag.Contains("Player"))
                 {
-                    return;
+                    _timeStamp = Time.time;
+                    _treasureRigidbody.velocity =
+                        new Vector2(targetDirection.x, targetDirection.y) * (10f * (Time.time / _timeStamp));
                 }
-                _timeStamp = Time.time;
-                _treasureRigidbody.velocity =
-                    new Vector2(targetDirection.x, targetDirection.y) * (10f * (Time.time / _timeStamp));
             }
 
             if (Vector3.Distance(transform.position, _player.position) < 0.5f)

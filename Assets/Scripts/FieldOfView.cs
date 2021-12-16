@@ -6,9 +6,10 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     private Mesh _mesh;
     private Vector3 _origin;
-    private float _startingAngle;
-    private float _fieldOfView;
-    private float _viewDistance;
+    [SerializeField] private float startingAngle;
+    [SerializeField] private float fieldOfView;
+    [SerializeField] private float viewDistance;
+    [SerializeField] private int rayCount;
 
     private PlayerController _detectedPlayer;
     public PlayerController DetectedPlayer
@@ -26,9 +27,9 @@ public class FieldOfView : MonoBehaviour
 
     private void LateUpdate()
     {
-        int rayCount = 50;
-        float angle = _startingAngle;
-        float angleIncrease = _fieldOfView / rayCount;
+        int rayCount = this.rayCount;
+        float angle = startingAngle;
+        float angleIncrease = fieldOfView / rayCount;
 
         Vector3[] vertices = new Vector3[rayCount + 1 + 1];
         Vector2[] uv = new Vector2[vertices.Length];
@@ -43,12 +44,12 @@ public class FieldOfView : MonoBehaviour
             Vector3 vertex;
             
             RaycastHit2D raycastHit2D = 
-                Physics2D.Raycast(_origin, GetVectorFromAngle(angle), _viewDistance, layerMask);
+                Physics2D.Raycast(_origin, GetVectorFromAngle(angle), viewDistance, layerMask);
             Collider2D hitCollider = raycastHit2D.collider;
             if (hitCollider == null)
             {
                 // No hit
-                vertex = _origin + GetVectorFromAngle(angle) * _viewDistance;
+                vertex = _origin + GetVectorFromAngle(angle) * viewDistance;
             }
             else
             {
@@ -87,17 +88,17 @@ public class FieldOfView : MonoBehaviour
 
     public void SetAimDirection(Vector3 aimDirection)
     {
-        _startingAngle = GetAngleFromVectorFloat(aimDirection) + _fieldOfView / 2f;
+        startingAngle = GetAngleFromVectorFloat(aimDirection) + fieldOfView / 2f;
     }
 
     public void SetFov(float fov)
     {
-        _fieldOfView = fov;
+        fieldOfView = fov;
     }
 
-    public void SetViewDistance(float viewDistance)
+    public void SetViewDistance(float viewDis)
     {
-        _viewDistance = viewDistance;
+        this.viewDistance = viewDis;
     }
     
     private Vector3 GetVectorFromAngle(float angle)

@@ -117,4 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 616879f41c95eaf7abceb557c737a8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsMainTreasure: 0
+  maxDistance: 3
+  isMainTreasure: 0
+  detectLayer:
+    serializedVersion: 2
+    m_Bits: 8
