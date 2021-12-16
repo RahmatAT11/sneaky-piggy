@@ -64,7 +64,6 @@ namespace Controllers.Treasure
                     currentTreasurePosition, targetDirection, maxDistance, detectLayer);
                 Collider2D hitCollider2D = raycastHit2D.collider;
                 
-                Debug.Log(hitCollider2D.tag);
                 if (hitCollider2D.tag.Contains("Player"))
                 {
                     _timeStamp = Time.time;

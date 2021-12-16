@@ -1,12 +1,22 @@
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.House
 {
     public class RoofSystemController : MonoBehaviour
     {
-        public void ShowRoof(bool isShow)
+        private void Start()
         {
-            gameObject.SetActive(isShow);
+            HouseSystemController.PlayerEntered += ShowRoof;
+        }
+
+        private void OnDestroy()
+        {
+            HouseSystemController.PlayerEntered -= ShowRoof;
+        }
+
+        private void ShowRoof(bool isShow)
+        {
+            gameObject.SetActive(!isShow);
         }
     }
 }

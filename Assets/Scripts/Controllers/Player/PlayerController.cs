@@ -1,6 +1,5 @@
 using UnityEngine;
 using Controllers.Joystick;
-using Managers;
 using DragonBones;
 using Interfaces.Player;
 
@@ -33,6 +32,11 @@ namespace Controllers.Player
             //MovementSpeed = 0.5f;
             //_sprintSpeedMultiplier = 5f;
             _staminaSystem.Amount = staminaUseAmount;
+            unityArmatureComponent.animation.Play("Walk");
+        }
+
+        private void OnEnable()
+        {
             unityArmatureComponent.animation.Play("Walk");
         }
 

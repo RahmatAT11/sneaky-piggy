@@ -1,43 +1,30 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
 
-namespace Controllers
+namespace Controllers.House
 {
     public class HouseSystemController : MonoBehaviour
     {
         [SerializeField] private List<GameObject> mutableWalls;
-        private RoofSystemController _roof;
-        private bool _isWallMuted;
-        private DoorSystemController _door;
+
+        public delegate void PlayerEnter(bool isEnter);
+        public static event PlayerEnter PlayerEntered;
 
         private void Start()
         {
-            _roof = FindObjectOfType<RoofSystemController>();
-            _door = FindObjectOfType<DoorSystemController>();
+            PlayerEntered += ShowInsideHouse;
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            ShowInsideHouse();
+            PlayerEntered -= ShowInsideHouse;
         }
 
-        private void ShowInsideHouse()
+        private void ShowInsideHouse(bool isDoorOpen)
         {
             foreach (var wall in mutableWalls)
             {
-                if (_isWallMuted)
-                {
-                    wall.GetComponent<SpriteRenderer>().enabled = false;
-                    _door.GetComponentInChildren<SpriteRenderer>().enabled = false;
-                }
-                else
-                {
-                    wall.GetComponent<SpriteRenderer>().enabled = true;
-                    _door.GetComponentInChildren<SpriteRenderer>().enabled = true;
-                }
+                wall.GetComponent<SpriteRenderer>().enabled = !isDoorOpen;
             }
         }
 
@@ -45,8 +32,7 @@ namespace Controllers
         {
             if (other.CompareTag("Player"))
             {
-                _isWallMuted = true;
-                _roof.ShowRoof(false);
+                PlayerEntered?.Invoke(true);
             }
         }
 
@@ -54,8 +40,7 @@ namespace Controllers
         {
             if (other.CompareTag("Player"))
             {
-                _isWallMuted = false;
-                _roof.ShowRoof(true);
+                PlayerEntered?.Invoke(false);
             }
         }
     }

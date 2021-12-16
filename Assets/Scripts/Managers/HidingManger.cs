@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Controllers.Player;
+using DragonBones;
 using UnityEngine;
 
 public class HidingManger : MonoBehaviour
@@ -7,6 +9,7 @@ public class HidingManger : MonoBehaviour
     [SerializeField] private GameObject _buttonHide1, _buttonHide2;
     private GameObject _player;
     [SerializeField] private bool isMove, isUnhide;
+    private int _playerLastOrderInLayer;
 
     void Start()
     {
@@ -49,7 +52,7 @@ public class HidingManger : MonoBehaviour
 
         if (isUnhide == false)
         {
-            _player.SetActive(false);
+            HidePlayer(true);
 
             _buttonHide1.SetActive(false);
             _buttonHide2.SetActive(true);
@@ -62,10 +65,25 @@ public class HidingManger : MonoBehaviour
 
         if (isUnhide == true)
         {
-            _player.SetActive(true);
+            HidePlayer(false);
 
             _buttonHide1.SetActive(true);
             _buttonHide2.SetActive(false);
+        }
+    }
+
+    private void HidePlayer(bool isHide)
+    {
+        _player.GetComponent<PlayerController>().enabled = !isHide;
+        if (isHide)
+        {
+            _player.layer = LayerMask.NameToLayer("Player");
+            _player.GetComponentInChildren<UnityArmatureComponent>().sortingOrder = -1;
+        }
+        else
+        {
+            _player.layer = LayerMask.NameToLayer("Objects");
+            _player.GetComponentInChildren<UnityArmatureComponent>().sortingOrder = 2;
         }
     }
 

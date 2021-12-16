@@ -1,11 +1,14 @@
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.House
 {
     public class DoorSystemController : MonoBehaviour
     {
         [SerializeField] private Animator door;
         private bool _isDoorOpened;
+        
+        /*public delegate void DoorOpen(bool isOpen);
+        public static event DoorOpen DoorOpened;*/
 
         private void Update()
         {
