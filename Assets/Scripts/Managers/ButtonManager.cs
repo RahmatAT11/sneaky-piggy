@@ -2,19 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class ButtonManager : MonoBehaviour
 {
     [SerializeField] private GameObject soundOnButton, soundOffButton, effectsOnButton, effectsOffButton,
         pauseButton, pausePanel, settingPanel, storePanel;
     [SerializeField] private AudioClip buttonSource;
-    
+
+    [SerializeField] private RectTransform pausePanelRect;
+
+    [SerializeField] private DotweenUIManager DOTweenManager;
+
+    private void Start()
+    {
+        DOTweenManager = GetComponent<DotweenUIManager>();
+    }
+
     public void PauseButton()
     {
         SoundManager.Instance.PlaySound(buttonSource);
-
         pauseButton.SetActive(false);
-        pausePanel.SetActive(true);
+
+        StartCoroutine(DOTweenManager.AnimationSnapOut(pausePanelRect, 0.5f));
+        
+        //pausePanel.SetActive(true);
 
         Time.timeScale = 0f;
     }
