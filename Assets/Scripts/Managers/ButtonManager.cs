@@ -136,4 +136,49 @@ public class ButtonManager : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(buttonSource);
     }
+
+    //======= MAIN MENU =========
+    [Header ("Main Menu")]
+    [SerializeField] private GameObject mainMenuPanel, storePanelMenu, optionsPanelMenu, chapter1PanelMenu;
+
+    public void StoreButtonMenu()
+    {
+        mainMenuPanel.SetActive(false);
+        storePanelMenu.SetActive(true);
+    }
+
+    public void OptionsButtonMenu()
+    {
+        mainMenuPanel.SetActive(false);
+        optionsPanelMenu.SetActive(true);
+    }
+
+    public void Chapter1Button()
+    {
+        mainMenuPanel.SetActive(false);
+        chapter1PanelMenu.SetActive(true);
+    }
+
+    public void BackStoreButtonMenu()
+    {
+        mainMenuPanel.SetActive(true);
+        storePanelMenu.SetActive(false);
+    }
+
+    public void BackOptionsButtonMenu()
+    {
+        mainMenuPanel.SetActive(true);
+        optionsPanelMenu.SetActive(false);
+    }
+
+    public void BackChapter1Button()
+    {
+        mainMenuPanel.SetActive(true);
+        chapter1PanelMenu.SetActive(false);
+    }
+
+    public void Level1Button()
+    {
+
+    }
 }
