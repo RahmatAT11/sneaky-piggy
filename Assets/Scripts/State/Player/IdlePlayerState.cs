@@ -1,11 +1,11 @@
 using Controllers.Player;
 using UnityEngine;
 
-namespace State
+namespace State.Player
 {
-    public class IdleState : State
+    public class IdlePlayerState : PlayerState
     {
-        public IdleState(PlayerController playerController) : base(playerController)
+        public IdlePlayerState(PlayerController playerController) : base(playerController)
         {
         }
 
@@ -15,11 +15,11 @@ namespace State
             {
                 if (PlayerController.IsSprintingEx)
                 {
-                    PlayerController.SetState(new RunState(PlayerController));
+                    PlayerController.SetState(new RunPlayerState(PlayerController));
                 }
                 else
                 {
-                    PlayerController.SetState(new WalkState(PlayerController));
+                    PlayerController.SetState(new WalkPlayerState(PlayerController));
                 }
             }
         }

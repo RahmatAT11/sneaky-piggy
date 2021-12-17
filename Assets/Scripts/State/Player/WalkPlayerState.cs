@@ -1,11 +1,11 @@
 using Controllers.Player;
 using UnityEngine;
 
-namespace State
+namespace State.Player
 {
-    public class RunState : State
+    public class WalkPlayerState : PlayerState
     {
-        public RunState(PlayerController playerController) : base(playerController)
+        public WalkPlayerState(PlayerController playerController) : base(playerController)
         {
         }
 
@@ -13,25 +13,25 @@ namespace State
         {
             if (IsMoving())
             {
-                if (!PlayerController.IsSprintingEx)
+                if (PlayerController.IsSprintingEx)
                 {
-                    PlayerController.SetState(new WalkState(PlayerController));
+                    PlayerController.SetState(new RunPlayerState(PlayerController));
                 }
             }
             else
             {
-                PlayerController.SetState(new IdleState(PlayerController));
+                PlayerController.SetState(new IdlePlayerState(PlayerController));
             }
         }
-        
+
         public override void OnStateEnter()
         {
-            PlayerController.PlayerArmature.animation.Play("Run");
+            PlayerController.PlayerArmature.animation.Play("Walk");
         }
 
         public override void OnStateExit()
         {
-            PlayerController.PlayerArmature.animation.Stop("Run");
+            PlayerController.PlayerArmature.animation.Stop("Walk");
         }
         
         private bool IsMoving()

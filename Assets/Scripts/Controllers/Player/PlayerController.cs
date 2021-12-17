@@ -3,7 +3,7 @@ using Controllers.Joystick;
 using Controllers.Base;
 using DragonBones;
 using Interfaces.Player;
-using State;
+using State.Player;
 
 namespace Controllers.Player
 {
@@ -27,7 +27,7 @@ namespace Controllers.Player
         
         // Player Component
         private IInputProcess _playerInput;
-        private State.State _currentState;
+        private PlayerState _currentPlayerState;
 
         private void Awake()
         {
@@ -42,13 +42,13 @@ namespace Controllers.Player
             //MovementSpeed = 0.5f;
             //_sprintSpeedMultiplier = 5f;
             _staminaSystem.Amount = staminaUseAmount;
-            SetState(new IdleState(this));
+            SetState(new IdlePlayerState(this));
         }
 
         private void Update()
         {
             MovementDirection = _playerInput.MovementInput(_joystick);
-            _currentState.Tick();
+            _currentPlayerState.Tick();
         }
 
         private void FixedUpdate()
@@ -84,13 +84,13 @@ namespace Controllers.Player
             }
         }
 
-        public void SetState(State.State state)
+        public void SetState(PlayerState playerState)
         {
-            _currentState?.OnStateExit();
+            _currentPlayerState?.OnStateExit();
 
-            _currentState = state;
+            _currentPlayerState = playerState;
 
-            _currentState?.OnStateEnter();
+            _currentPlayerState?.OnStateEnter();
         }
 
         public Vector3 GetMovementDirection()
