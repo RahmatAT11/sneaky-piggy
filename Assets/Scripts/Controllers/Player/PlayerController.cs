@@ -3,6 +3,7 @@ using Controllers.Joystick;
 using Controllers.Base;
 using DragonBones;
 using Interfaces.Player;
+using State;
 
 namespace Controllers.Player
 {
@@ -16,9 +17,17 @@ namespace Controllers.Player
         [Header("Stamina")] 
         [SerializeField] private int staminaUseAmount = 1;
         [SerializeField] private UnityArmatureComponent unityArmatureComponent;
+        public UnityArmatureComponent PlayerArmature
+        {
+            get
+            {
+                return unityArmatureComponent;
+            }
+        }
         
         // Player Component
         private IInputProcess _playerInput;
+        private State.State _currentState;
 
         private void Awake()
         {
@@ -33,26 +42,13 @@ namespace Controllers.Player
             //MovementSpeed = 0.5f;
             //_sprintSpeedMultiplier = 5f;
             _staminaSystem.Amount = staminaUseAmount;
-            unityArmatureComponent.animation.Play("Idle");
-        }
-
-        private void OnEnable()
-        {
-            unityArmatureComponent.animation.Play("Idle");
+            SetState(new IdleState(this));
         }
 
         private void Update()
         {
             MovementDirection = _playerInput.MovementInput(_joystick);
-            if (MovementDirection.magnitude == 0f)
-            {
-                unityArmatureComponent.animation.Play("Idle");
-                IsWalking = false;
-            }
-            else
-            {
-                IsWalking = true;
-            }
+            _currentState.Tick();
         }
 
         private void FixedUpdate()
@@ -68,22 +64,38 @@ namespace Controllers.Player
             {
                 base.Sprinting();
                 _staminaSystem.UseStamina(_staminaSystem.Amount);
-                unityArmatureComponent.animation.Play("Run");
-            }
-        }
-
-        protected override void Walking()
-        {
-            if (IsWalking)
-            {
-                base.Walking();
-                unityArmatureComponent.animation.Play("Walk");
             }
         }
 
         protected override void Turning()
         {
-            unityArmatureComponent._armature.flipX = MovementDirection.x < 0;
+            bool lastSpriteFlipStatus = unityArmatureComponent._armature.flipX;
+            if (MovementDirection.x < 0)
+            {
+                unityArmatureComponent._armature.flipX = true;
+            }
+            else if (MovementDirection.x > 0)
+            {
+                unityArmatureComponent._armature.flipX = false;
+            }
+            else
+            {
+                unityArmatureComponent._armature.flipX = lastSpriteFlipStatus;
+            }
+        }
+
+        public void SetState(State.State state)
+        {
+            _currentState?.OnStateExit();
+
+            _currentState = state;
+
+            _currentState?.OnStateEnter();
+        }
+
+        public Vector3 GetMovementDirection()
+        {
+            return MovementDirection;
         }
     }
 }

@@ -21,20 +21,6 @@ namespace Controllers.Base
                 IsSprinting = value;
             }
         }
-
-        protected bool IsWalking;
-
-        public bool IsWalkingEx
-        {
-            get
-            {
-                return IsWalking;
-            }
-            set
-            {
-                IsWalking = value;
-            }
-        }
         [SerializeField] protected float sprintSpeedMultiplier = 5f;
     
         protected virtual void Walking()
