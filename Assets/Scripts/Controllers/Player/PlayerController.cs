@@ -1,5 +1,6 @@
 using UnityEngine;
 using Controllers.Joystick;
+using Controllers.Base;
 using DragonBones;
 using Interfaces.Player;
 
@@ -32,17 +33,26 @@ namespace Controllers.Player
             //MovementSpeed = 0.5f;
             //_sprintSpeedMultiplier = 5f;
             _staminaSystem.Amount = staminaUseAmount;
-            unityArmatureComponent.animation.Play("Walk");
+            unityArmatureComponent.animation.Play("Idle");
         }
 
         private void OnEnable()
         {
-            unityArmatureComponent.animation.Play("Walk");
+            unityArmatureComponent.animation.Play("Idle");
         }
 
         private void Update()
         {
             MovementDirection = _playerInput.MovementInput(_joystick);
+            if (MovementDirection.magnitude == 0f)
+            {
+                unityArmatureComponent.animation.Play("Idle");
+                IsWalking = false;
+            }
+            else
+            {
+                IsWalking = true;
+            }
         }
 
         private void FixedUpdate()
@@ -58,11 +68,16 @@ namespace Controllers.Player
             {
                 base.Sprinting();
                 _staminaSystem.UseStamina(_staminaSystem.Amount);
-                unityArmatureComponent.animation.timeScale = 1.5f;
+                unityArmatureComponent.animation.Play("Run");
             }
-            else
+        }
+
+        protected override void Walking()
+        {
+            if (IsWalking)
             {
-                unityArmatureComponent.animation.timeScale = 1f;
+                base.Walking();
+                unityArmatureComponent.animation.Play("Walk");
             }
         }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Base
 {
     public class BaseCharController : MonoBehaviour
     {
@@ -19,6 +19,20 @@ namespace Controllers
             set
             {
                 IsSprinting = value;
+            }
+        }
+
+        protected bool IsWalking;
+
+        public bool IsWalkingEx
+        {
+            get
+            {
+                return IsWalking;
+            }
+            set
+            {
+                IsWalking = value;
             }
         }
         [SerializeField] protected float sprintSpeedMultiplier = 5f;
