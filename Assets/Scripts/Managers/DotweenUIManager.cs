@@ -5,6 +5,22 @@ using DG.Tweening;
 
 public class DotweenUIManager : MonoBehaviour
 {
+    public IEnumerator FadeIn(CanvasGroup container, float duration)
+    {
+        container.gameObject.SetActive(true);
+        container.alpha = 0f;
+        yield return new WaitForSecondsRealtime(0);
+        container.DOFade(1f, duration).SetUpdate(true);
+    }
+
+    public IEnumerator FadeOut(CanvasGroup container, float duration)
+    {
+        container.alpha = 1f;
+        container.DOFade(0f, duration).SetEase(Ease.InQuint);
+        yield return new WaitForSecondsRealtime(duration);
+        container.gameObject.SetActive(false);
+    }
+
     public IEnumerator AnimationWideIn(RectTransform container, float duration)
     {
         container.localScale = new Vector3(1, 1, 1);

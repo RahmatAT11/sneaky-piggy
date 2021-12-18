@@ -139,42 +139,78 @@ public class ButtonManager : MonoBehaviour
 
     //======= MAIN MENU =========
     [Header ("Main Menu")]
-    [SerializeField] private GameObject mainMenuPanel, storePanelMenu, optionsPanelMenu, chapter1PanelMenu;
+    [SerializeField] private CanvasGroup mainMenuPanel, storePanelMenu, optionsPanelMenu, chapter1PanelMenu;
 
     public void StoreButtonMenu()
     {
-        mainMenuPanel.SetActive(false);
-        storePanelMenu.SetActive(true);
+        StartCoroutine(StoreButtomMenuIsAnim(0.4f));
+    }
+
+    private IEnumerator StoreButtomMenuIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(mainMenuPanel, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(storePanelMenu, duration));
     }
 
     public void OptionsButtonMenu()
     {
-        mainMenuPanel.SetActive(false);
-        optionsPanelMenu.SetActive(true);
+        StartCoroutine(OptionsButtonMenuIsAnim(0.4f));
+    }
+
+    private IEnumerator OptionsButtonMenuIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(mainMenuPanel, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(optionsPanelMenu, duration));
     }
 
     public void Chapter1Button()
     {
-        mainMenuPanel.SetActive(false);
-        chapter1PanelMenu.SetActive(true);
+        StartCoroutine(Chapter1ButtonIsAnim(0.4f));
+    }
+
+    private IEnumerator Chapter1ButtonIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(mainMenuPanel, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(chapter1PanelMenu, duration));
     }
 
     public void BackStoreButtonMenu()
     {
-        mainMenuPanel.SetActive(true);
-        storePanelMenu.SetActive(false);
+        StartCoroutine(BackStoreButtonMenuIsAnim(0.4f));
+    }
+
+    private IEnumerator BackStoreButtonMenuIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(storePanelMenu, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(mainMenuPanel, duration));
     }
 
     public void BackOptionsButtonMenu()
     {
-        mainMenuPanel.SetActive(true);
-        optionsPanelMenu.SetActive(false);
+        StartCoroutine(BackOptionsButtonMenuIsAnim(0.4f));
+    }
+
+    private IEnumerator BackOptionsButtonMenuIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(optionsPanelMenu, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(mainMenuPanel, duration));
     }
 
     public void BackChapter1Button()
     {
-        mainMenuPanel.SetActive(true);
-        chapter1PanelMenu.SetActive(false);
+        StartCoroutine(BackChapter1ButtonIsAnim(0.4f));
+    }
+
+    private IEnumerator BackChapter1ButtonIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(chapter1PanelMenu, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(mainMenuPanel, duration));
     }
 
     public void Level1Button()

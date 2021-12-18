@@ -1453,6 +1453,7 @@ GameObject:
   - component: {fileID: 156726461}
   - component: {fileID: 156726463}
   - component: {fileID: 156726462}
+  - component: {fileID: 156726464}
   m_Layer: 5
   m_Name: Store Panel
   m_TagString: Untagged
@@ -1521,6 +1522,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156726460}
   m_CullTransparentMesh: 1
+--- !u!225 &156726464
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156726460}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &181913794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1545,7 @@ GameObject:
   - component: {fileID: 181913795}
   - component: {fileID: 181913797}
   - component: {fileID: 181913796}
+  - component: {fileID: 181913798}
   m_Layer: 5
   m_Name: MainMenu Panel
   m_TagString: Untagged
@@ -1601,6 +1615,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181913794}
   m_CullTransparentMesh: 1
+--- !u!225 &181913798
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181913794}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &199981433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1888,6 +1914,7 @@ GameObject:
   - component: {fileID: 236847710}
   - component: {fileID: 236847712}
   - component: {fileID: 236847711}
+  - component: {fileID: 236847713}
   m_Layer: 5
   m_Name: Options Panel
   m_TagString: Untagged
@@ -1958,6 +1985,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236847709}
   m_CullTransparentMesh: 1
+--- !u!225 &236847713
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236847709}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &247859769
 GameObject:
   m_ObjectHideFlags: 0
@@ -7048,6 +7087,7 @@ GameObject:
   - component: {fileID: 972044883}
   - component: {fileID: 972044885}
   - component: {fileID: 972044884}
+  - component: {fileID: 972044886}
   m_Layer: 5
   m_Name: Chapter 1 Selection
   m_TagString: Untagged
@@ -7116,6 +7156,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972044882}
   m_CullTransparentMesh: 1
+--- !u!225 &972044886
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972044882}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &980993038
 GameObject:
   m_ObjectHideFlags: 0
@@ -16972,6 +17024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2084875132}
   - component: {fileID: 2084875131}
+  - component: {fileID: 2084875133}
   m_Layer: 0
   m_Name: Button Manager
   m_TagString: Untagged
@@ -17001,11 +17054,11 @@ MonoBehaviour:
   storePanel: {fileID: 0}
   buttonSource: {fileID: 0}
   pausePanelRect: {fileID: 0}
-  DOTweenManager: {fileID: 0}
-  mainMenuPanel: {fileID: 181913794}
-  storePanelMenu: {fileID: 156726460}
-  optionsPanelMenu: {fileID: 236847709}
-  chapter1PanelMenu: {fileID: 972044882}
+  DOTweenManager: {fileID: 2084875133}
+  mainMenuPanel: {fileID: 181913798}
+  storePanelMenu: {fileID: 156726464}
+  optionsPanelMenu: {fileID: 236847713}
+  chapter1PanelMenu: {fileID: 972044886}
 --- !u!4 &2084875132
 Transform:
   m_ObjectHideFlags: 0
@@ -17020,6 +17073,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2084875133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084875130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4056cdee1a4d7498eedf57d5c2a782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2085963723
 GameObject:
   m_ObjectHideFlags: 0
