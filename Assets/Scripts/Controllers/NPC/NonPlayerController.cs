@@ -11,7 +11,7 @@ namespace Controllers.NPC
 {
     public class NonPlayerController : BaseCharController
     {
-        [SerializeField] private List<Transform> defaultPath;
+        private List<Transform> _defaultPath;
         private PathsController _paths;
         private PlayerController _player;
         private FieldOfView _fieldOfView;
@@ -22,12 +22,9 @@ namespace Controllers.NPC
 
         private bool _isMoveToNewPath;
         private bool _isPlayerDetected;
+        public bool IsPlayerDetected => _isPlayerDetected;
 
         private IWinnable _victoryManager;
-        public bool IsPlayerDetected
-        {
-            get { return _isPlayerDetected; }
-        }
 
         private NpcState _currentState;
 
@@ -35,57 +32,49 @@ namespace Controllers.NPC
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
             _paths = FindObjectOfType<PathsController>();
-            defaultPath = _paths.NpcPath;
+            _defaultPath = _paths.NpcPath;
             _fieldOfView = FindObjectOfType<FieldOfView>();
             _victoryManager = FindObjectOfType<VictoryManager>();
         }
 
         private void Start()
         {
-            transform.position = defaultPath[_currentPathIndex].transform.position;
-            _fieldOfView.SetFov(60f);
-            _fieldOfView.SetViewDistance(5f);
-            movementSpeed = 4f;
+            SetState(new FollowPathNpcState(this));
         }
 
         private void Update()
         {
-            //MovementDirection = (player.transform.position - transform.position).normalized;
+            _currentState.Tick();
             _fieldOfView.SetOrigin(transform.position);
             _fieldOfView.SetAimDirection(MovementDirection);
-            if (MoveNpcToPlayer()) return;
-            CheckIndexPath();
-            MoveNpcToPath();
         }
 
-        private bool MoveNpcToPlayer()
+        public void MoveNpcToPlayer()
+        {
+            _victoryManager.SetIsPlayerDetected(true);
+            MovementDirection = (_player.transform.position - transform.position).normalized;
+        }
+
+        public void DetectPlayer()
         {
             _player = _fieldOfView.DetectedPlayer;
             _isPlayerDetected = _player != null;
-
-            if (_isPlayerDetected)
-            {
-                _victoryManager.SetIsPlayerDetected(true);
-                MovementDirection = (_player.transform.position - transform.position).normalized;
-                return true;
-            }
-
-            return false;
         }
 
-        private void MoveNpcToPath()
+        public void MoveNpcToPath()
         {
-            _distance = Vector3.Distance(defaultPath[_currentPathIndex].position, transform.position);
+            _distance = Vector3.Distance(_defaultPath[_currentPathIndex].position, transform.position);
             if (_distance < 0.1f)
             {
                 _currentPathIndex++;
+                CheckIndexPath();
             }
             else
             {
                 _isMoveToNewPath = true;
                 if (_isMoveToNewPath)
                 {
-                    MovementDirection = (defaultPath[_currentPathIndex].position - transform.position).normalized;
+                    MovementDirection = (_defaultPath[_currentPathIndex].position - transform.position).normalized;
                     StartCoroutine(WaitForNextPathAvailable());
                 }
             }
@@ -94,46 +83,17 @@ namespace Controllers.NPC
         private void FixedUpdate()
         {
             Walking();
+            Sprinting();
             Turning();
         }
 
         private void CheckIndexPath()
         {
-            if (_currentPathIndex > defaultPath.Count - 1)
+            if (_currentPathIndex > _defaultPath.Count - 1)
             {
                 _currentPathIndex = 0;
             }
         }
-
-        protected override void Sprinting()
-        {
-            Rigidbody2D.velocity = MovementDirection * (movementSpeed * sprintSpeedMultiplier);
-        }
-
-        /*private PlayerController DetectPlayer()
-    {
-        PlayerController player = FindObjectOfType<PlayerController>();
-        if (player == null)
-        {
-            return null;
-        }
-
-        Vector3 currentPosition = transform.position;
-        Vector3 distanceToPlayer = player.transform.position - currentPosition;
-        distanceToPlayer.z = 0;
-
-        if (distanceToPlayer.magnitude <= _detectionRadius)
-        {
-            if (Vector3.Dot(distanceToPlayer.normalized, transform.up) > 
-                Mathf.Cos((_detectionAngle * 0.5f) * Mathf.Deg2Rad))
-            {
-                Debug.Log("Player has been detected!");
-                return player;
-            }
-        }
-        
-        return null;
-    }*/
 
         private IEnumerator WaitForNextPathAvailable()
         {

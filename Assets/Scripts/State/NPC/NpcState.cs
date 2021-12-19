@@ -13,7 +13,7 @@ namespace State.NPC
 
         protected NpcState(NonPlayerController nonPlayerController)
         {
-            NonPlayerController = NonPlayerController;
+            NonPlayerController = nonPlayerController;
         }
     }
 }
