@@ -20,7 +20,6 @@ namespace Controllers.Sprint
             if (_staminaSystem.IsStaminaEmpty && _player.IsSprintingEx)
             {
                 Sprint(false);
-                Debug.Log(false);
             }
         }
 

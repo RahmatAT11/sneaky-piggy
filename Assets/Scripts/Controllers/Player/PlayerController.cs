@@ -1,7 +1,9 @@
 using UnityEngine;
 using Controllers.Joystick;
+using Controllers.Base;
 using DragonBones;
 using Interfaces.Player;
+using State.Player;
 
 namespace Controllers.Player
 {
@@ -15,9 +17,17 @@ namespace Controllers.Player
         [Header("Stamina")] 
         [SerializeField] private int staminaUseAmount = 1;
         [SerializeField] private UnityArmatureComponent unityArmatureComponent;
+        public UnityArmatureComponent PlayerArmature
+        {
+            get
+            {
+                return unityArmatureComponent;
+            }
+        }
         
         // Player Component
         private IInputProcess _playerInput;
+        private PlayerState _currentPlayerState;
 
         private void Awake()
         {
@@ -32,17 +42,13 @@ namespace Controllers.Player
             //MovementSpeed = 0.5f;
             //_sprintSpeedMultiplier = 5f;
             _staminaSystem.Amount = staminaUseAmount;
-            unityArmatureComponent.animation.Play("Walk");
-        }
-
-        private void OnEnable()
-        {
-            unityArmatureComponent.animation.Play("Walk");
+            SetState(new IdlePlayerState(this));
         }
 
         private void Update()
         {
             MovementDirection = _playerInput.MovementInput(_joystick);
+            _currentPlayerState.Tick();
         }
 
         private void FixedUpdate()
@@ -58,17 +64,38 @@ namespace Controllers.Player
             {
                 base.Sprinting();
                 _staminaSystem.UseStamina(_staminaSystem.Amount);
-                unityArmatureComponent.animation.timeScale = 1.5f;
-            }
-            else
-            {
-                unityArmatureComponent.animation.timeScale = 1f;
             }
         }
 
         protected override void Turning()
         {
-            unityArmatureComponent._armature.flipX = MovementDirection.x < 0;
+            bool lastSpriteFlipStatus = unityArmatureComponent._armature.flipX;
+            if (MovementDirection.x < 0)
+            {
+                unityArmatureComponent._armature.flipX = true;
+            }
+            else if (MovementDirection.x > 0)
+            {
+                unityArmatureComponent._armature.flipX = false;
+            }
+            else
+            {
+                unityArmatureComponent._armature.flipX = lastSpriteFlipStatus;
+            }
+        }
+
+        public void SetState(PlayerState playerState)
+        {
+            _currentPlayerState?.OnStateExit();
+
+            _currentPlayerState = playerState;
+
+            _currentPlayerState?.OnStateEnter();
+        }
+
+        public Vector3 GetMovementDirection()
+        {
+            return MovementDirection;
         }
     }
 }

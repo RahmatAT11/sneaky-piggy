@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Base
 {
     public class BaseCharController : MonoBehaviour
     {
