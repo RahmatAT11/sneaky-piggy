@@ -4,6 +4,7 @@ using Controllers.Player;
 using Controllers.Base;
 using Interfaces;
 using Managers;
+using State.NPC;
 using UnityEngine;
 
 namespace Controllers.NPC
@@ -27,6 +28,8 @@ namespace Controllers.NPC
         {
             get { return _isPlayerDetected; }
         }
+
+        private NpcState _currentState;
 
         private void Awake()
         {
@@ -157,6 +160,15 @@ namespace Controllers.NPC
             {
                 _victoryManager.SetIsCatchByNpc(true);
             }
+        }
+
+        public void SetState(NpcState state)
+        {
+            _currentState?.OnStateExit();
+
+            _currentState = state;
+
+            _currentState?.OnStateEnter();
         }
     }
 }
