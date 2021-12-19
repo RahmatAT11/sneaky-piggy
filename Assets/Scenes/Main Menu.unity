@@ -10797,13 +10797,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2084875130}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 2084875131}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: Level1Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -17049,11 +17049,12 @@ MonoBehaviour:
   effectsOnButton: {fileID: 0}
   effectsOffButton: {fileID: 0}
   pauseButton: {fileID: 0}
-  pausePanel: {fileID: 0}
-  settingPanel: {fileID: 0}
-  storePanel: {fileID: 0}
   buttonSource: {fileID: 0}
-  pausePanelRect: {fileID: 0}
+  controllerUIPanel: {fileID: 0}
+  pausePanel: {fileID: 0}
+  storePanel: {fileID: 0}
+  optionsPanel: {fileID: 0}
+  QuitWarningPanel: {fileID: 0}
   DOTweenManager: {fileID: 2084875133}
   mainMenuPanel: {fileID: 181913798}
   storePanelMenu: {fileID: 156726464}

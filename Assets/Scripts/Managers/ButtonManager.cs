@@ -6,11 +6,10 @@ using DG.Tweening;
 
 public class ButtonManager : MonoBehaviour
 {
-    [SerializeField] private GameObject soundOnButton, soundOffButton, effectsOnButton, effectsOffButton,
-        pauseButton, pausePanel, settingPanel, storePanel;
+    [SerializeField] private GameObject soundOnButton, soundOffButton, effectsOnButton, effectsOffButton, pauseButton;
     [SerializeField] private AudioClip buttonSource;
 
-    [SerializeField] private RectTransform pausePanelRect;
+    [SerializeField] private CanvasGroup controllerUIPanel, pausePanel, storePanel, optionsPanel, QuitWarningPanel;
 
     [SerializeField] private DotweenUIManager DOTweenManager;
 
@@ -21,24 +20,30 @@ public class ButtonManager : MonoBehaviour
 
     public void PauseButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
-        pauseButton.SetActive(false);
-
-        StartCoroutine(DOTweenManager.AnimationSnapOut(pausePanelRect, 0.5f));
-        
-        //pausePanel.SetActive(true);
-
+        SoundManager.Instance.PlaySound(buttonSource);      
+        StartCoroutine(PauseButtonIsAnim(0.4f));
         Time.timeScale = 0f;
+    }
+
+    private IEnumerator PauseButtonIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(controllerUIPanel, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(pausePanel, duration));
     }
 
     public void ResumeButton()
     {
         SoundManager.Instance.PlaySound(buttonSource);
-
-        pauseButton.SetActive(true);
-        pausePanel.SetActive(false);
-
+        StartCoroutine(ResumeButtonIsAnim(0.4f));
         Time.timeScale = 1f;
+    }
+
+    private IEnumerator ResumeButtonIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(pausePanel, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(controllerUIPanel, duration));
     }
 
     public void RestartButton()
@@ -52,22 +57,33 @@ public class ButtonManager : MonoBehaviour
     public void SettingButton()
     {
         SoundManager.Instance.PlaySound(buttonSource);
+        StartCoroutine(SettingButtonIsAnim(0.4f));
+    }
 
-        settingPanel.SetActive(true);
-        pausePanel.SetActive(false);
+    private IEnumerator SettingButtonIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(pausePanel, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(optionsPanel, duration));
     }
 
     public void BackSettingButton()
     {
         SoundManager.Instance.PlaySound(buttonSource);
+        StartCoroutine(BackSettingButtonIsAnim(0.4f));
+    }
 
-        settingPanel.SetActive(false);
-        pausePanel.SetActive(true);
+    private IEnumerator BackSettingButtonIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(optionsPanel, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(pausePanel, duration));
     }
 
     public void MainMenuButton()
     {
         SoundManager.Instance.PlaySound(buttonSource);
+        SceneManager.LoadScene(0);
     }
 
     public void AdjustButton()
@@ -78,17 +94,27 @@ public class ButtonManager : MonoBehaviour
     public void StoreButton()
     {
         SoundManager.Instance.PlaySound(buttonSource);
+        StartCoroutine(StoreButtonIsAnim(0.4f));
+    }
 
-        storePanel.SetActive(true);
-        pausePanel.SetActive(false);
+    private IEnumerator StoreButtonIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(pausePanel, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(storePanel, duration));
     }
 
     public void BackStoreButton()
     {
         SoundManager.Instance.PlaySound(buttonSource);
+        StartCoroutine(BackStoreButtonIsAnim(0.4f));
+    }
 
-        storePanel.SetActive(false);
-        pausePanel.SetActive(true);
+    private IEnumerator BackStoreButtonIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(storePanel, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(pausePanel, duration));
     }
 
     public void SoundOnButton()
@@ -135,6 +161,33 @@ public class ButtonManager : MonoBehaviour
     public void QuitButton()
     {
         SoundManager.Instance.PlaySound(buttonSource);
+        StartCoroutine(QuitButtonIsAnim(0.4f));
+    }
+
+    private IEnumerator QuitButtonIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(optionsPanel, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(QuitWarningPanel, duration));
+    }
+
+    public void NoQuitButton()
+    {
+        SoundManager.Instance.PlaySound(buttonSource);
+        StartCoroutine(NoQuitButtonIsAnim(0.4f));
+    }
+
+    private IEnumerator NoQuitButtonIsAnim(float duration)
+    {
+        StartCoroutine(DOTweenManager.FadeOut(QuitWarningPanel, duration));
+        yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(DOTweenManager.FadeIn(optionsPanel, duration));
+    }
+
+    public void YesQuitButton()
+    {
+        SoundManager.Instance.PlaySound(buttonSource);
+        Application.Quit();
     }
 
     //======= MAIN MENU =========
@@ -215,6 +268,6 @@ public class ButtonManager : MonoBehaviour
 
     public void Level1Button()
     {
-
+        SceneManager.LoadScene(1);
     }
 }

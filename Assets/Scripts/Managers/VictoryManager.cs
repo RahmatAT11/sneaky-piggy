@@ -140,7 +140,6 @@ namespace Managers
                     cameraController.GetComponent<CameraController>().enabled = false;
 
                     yield return new WaitForSecondsRealtime(time);
-
                     panelWin.SetActive(true);
 
                     break;

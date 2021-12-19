@@ -20,7 +20,7 @@ public class DotweenUIManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(duration);
         container.gameObject.SetActive(false);
     }
-
+    /*
     public IEnumerator AnimationWideIn(RectTransform container, float duration)
     {
         container.localScale = new Vector3(1, 1, 1);
@@ -54,5 +54,5 @@ public class DotweenUIManager : MonoBehaviour
         container.DOAnchorPosY(-200, duration).SetUpdate(true);
         yield return new WaitForSecondsRealtime(duration);
         container.gameObject.SetActive(false);
-    }
+    }*/
 }
