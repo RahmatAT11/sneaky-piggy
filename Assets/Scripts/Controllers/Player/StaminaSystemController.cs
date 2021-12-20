@@ -61,7 +61,7 @@ namespace Controllers.Player
 
         private IEnumerator RegenerateStamina()
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.5f);
 
             while (currentStamina < maxStamina)
             {
