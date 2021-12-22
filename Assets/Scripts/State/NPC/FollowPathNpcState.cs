@@ -12,6 +12,12 @@ namespace State.NPC
         {
             NonPlayerController.MoveNpcToPath();
             NonPlayerController.DetectPlayer();
+            CheckIfPlayerDetected();
+            CheckIfPathOnlyOne();
+        }
+
+        private void CheckIfPlayerDetected()
+        {
             if (NonPlayerController.IsPlayerDetected)
             {
                 NonPlayerController.SetState(new SearchNpcState(NonPlayerController));
@@ -22,6 +28,14 @@ namespace State.NPC
         {
             NonPlayerController.IsSprintingEx = false;
             // play animation walk
+        }
+
+        private void CheckIfPathOnlyOne()
+        {
+            if (NonPlayerController.GetDefaultPathSize() <= 1)
+            {
+                NonPlayerController.SetState(new IdleNpcState(NonPlayerController));
+            }
         }
 
         public override void OnStateExit()

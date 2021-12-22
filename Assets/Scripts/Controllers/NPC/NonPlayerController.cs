@@ -32,14 +32,15 @@ namespace Controllers.NPC
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
             _paths = FindObjectOfType<PathsController>();
-            _defaultPath = _paths.NpcPath;
             _fieldOfView = FindObjectOfType<FieldOfView>();
             _victoryManager = FindObjectOfType<VictoryManager>();
+            
+            _defaultPath = _paths.NpcPath;
         }
 
         private void Start()
         {
-            SetState(new FollowPathNpcState(this));
+            SetState(new IdleNpcState(this));
         }
 
         private void Update()
@@ -51,8 +52,8 @@ namespace Controllers.NPC
 
         public void MoveNpcToPlayer()
         {
-            _victoryManager.SetIsPlayerDetected(true);
             MovementDirection = (_player.transform.position - transform.position).normalized;
+            _victoryManager.SetIsPlayerDetected(true);
         }
 
         public void DetectPlayer()
@@ -126,9 +127,15 @@ namespace Controllers.NPC
         {
             _currentState?.OnStateExit();
 
+            Debug.Log($"Current State : {_currentState?.GetType().Name}");
             _currentState = state;
 
             _currentState?.OnStateEnter();
+        }
+
+        public int GetDefaultPathSize()
+        {
+            return _defaultPath.Count;
         }
     }
 }
