@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   startingAngle: 0
   fieldOfView: 359
   viewDistance: 3

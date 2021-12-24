@@ -127,7 +127,6 @@ namespace Controllers.NPC
         {
             _currentState?.OnStateExit();
 
-            Debug.Log($"Current State : {_currentState?.GetType().Name}");
             _currentState = state;
 
             _currentState?.OnStateEnter();

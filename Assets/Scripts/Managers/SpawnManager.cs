@@ -5,11 +5,11 @@ namespace Managers
 {
     public class SpawnManager : MonoBehaviour
     {
-        [SerializeField] private BaseCharController CharacterPrefab;
+        [SerializeField] private BaseCharController characterPrefab;
 
         private void Awake()
         {
-            Instantiate(CharacterPrefab, transform.position, CharacterPrefab.transform.rotation);
+            Instantiate(characterPrefab, transform.position, transform.rotation);
         }
     }
 }
