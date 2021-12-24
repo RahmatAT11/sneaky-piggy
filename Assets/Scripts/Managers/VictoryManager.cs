@@ -38,7 +38,7 @@ namespace Managers
             star2.SetActive(false);
             star3.SetActive(false);
 
-            Time.timeScale = 1f;
+            //Time.timeScale = 1f;
 
             detectedInfoFill.fillAmount = 1;
 
