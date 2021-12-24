@@ -10,12 +10,14 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private AudioClip buttonSource;
 
     [SerializeField] private CanvasGroup controllerUIPanel, pausePanel, storePanel, optionsPanel, QuitWarningPanel;
+    
 
     [SerializeField] private DotweenUIManager DOTweenManager;
 
     private void Start()
     {
         DOTweenManager = GetComponent<DotweenUIManager>();
+        StartCoroutine(BackChapter1ButtonIsAnim(0.4f));
     }
 
     public void PauseButton()
@@ -193,6 +195,8 @@ public class ButtonManager : MonoBehaviour
     //======= MAIN MENU =========
     [Header ("Main Menu")]
     [SerializeField] private CanvasGroup mainMenuPanel, storePanelMenu, optionsPanelMenu, chapter1PanelMenu;
+    [SerializeField] private RectTransform chapter1button, chapter2button, chapter3button, chapter4button;
+    [SerializeField] private RectTransform level1button, level2button, level3button, level4button, level5button, level6button, level7button, level8button, level9button;
 
     public void StoreButtonMenu()
     {
@@ -228,6 +232,7 @@ public class ButtonManager : MonoBehaviour
         StartCoroutine(DOTweenManager.FadeOut(mainMenuPanel, duration));
         yield return new WaitForSecondsRealtime(duration);
         StartCoroutine(DOTweenManager.FadeIn(chapter1PanelMenu, duration));
+        StartCoroutine(DOTweenManager.LevelSelectionScaleIn(level1button, level2button, level3button, level4button, level5button, level6button, level7button, level8button, level9button));
     }
 
     public void BackStoreButtonMenu()
@@ -240,6 +245,7 @@ public class ButtonManager : MonoBehaviour
         StartCoroutine(DOTweenManager.FadeOut(storePanelMenu, duration));
         yield return new WaitForSecondsRealtime(duration);
         StartCoroutine(DOTweenManager.FadeIn(mainMenuPanel, duration));
+        StartCoroutine(DOTweenManager.ChapterSelectionScaleIn(chapter1button, chapter2button, chapter3button, chapter4button));
     }
 
     public void BackOptionsButtonMenu()
@@ -252,6 +258,7 @@ public class ButtonManager : MonoBehaviour
         StartCoroutine(DOTweenManager.FadeOut(optionsPanelMenu, duration));
         yield return new WaitForSecondsRealtime(duration);
         StartCoroutine(DOTweenManager.FadeIn(mainMenuPanel, duration));
+        StartCoroutine(DOTweenManager.ChapterSelectionScaleIn(chapter1button, chapter2button, chapter3button, chapter4button));
     }
 
     public void BackChapter1Button()
@@ -264,6 +271,7 @@ public class ButtonManager : MonoBehaviour
         StartCoroutine(DOTweenManager.FadeOut(chapter1PanelMenu, duration));
         yield return new WaitForSecondsRealtime(duration);
         StartCoroutine(DOTweenManager.FadeIn(mainMenuPanel, duration));
+        StartCoroutine(DOTweenManager.ChapterSelectionScaleIn(chapter1button, chapter2button, chapter3button, chapter4button));
     }
 
     public void Level1Button()
