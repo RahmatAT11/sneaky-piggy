@@ -192,6 +192,12 @@ public class ButtonManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void NextLevel()
+    {
+        SoundManager.Instance.PlaySound(buttonSource);
+        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex)+1);
+    }
+
     //======= MAIN MENU =========
     [Header ("Main Menu")]
     [SerializeField] private CanvasGroup mainMenuPanel, storePanelMenu, optionsPanelMenu, chapter1PanelMenu;
