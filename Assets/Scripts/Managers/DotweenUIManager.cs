@@ -74,6 +74,8 @@ public class DotweenUIManager : MonoBehaviour
         level7Container.DOScale(new Vector3(1f, 1f, 1f), 1.4f).SetEase(Ease.InOutExpo);
         level8Container.DOScale(new Vector3(1f, 1f, 1f), 1.6f).SetEase(Ease.InOutExpo);
         level9Container.DOScale(new Vector3(1f, 1f, 1f), 1.8f).SetEase(Ease.InOutExpo);
+        
+        //next w rapihin :v
     }
     /*
     public IEnumerator AnimationWideIn(RectTransform container, float duration)

@@ -17,7 +17,7 @@ public class ButtonManager : MonoBehaviour
     private void Start()
     {
         DOTweenManager = GetComponent<DotweenUIManager>();
-        StartCoroutine(BackChapter1ButtonIsAnim(0.4f));
+        //StartCoroutine(BackChapter1ButtonIsAnim(0.4f));
     }
 
     public void PauseButton()
