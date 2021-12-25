@@ -284,4 +284,14 @@ public class ButtonManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
+    public void Level2Button()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void Level3Button()
+    {
+        SceneManager.LoadScene(3);
+    }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Interfaces;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Controllers.Camera;
 using Controllers.Treasure;
 
@@ -20,7 +21,9 @@ namespace Managers
         [SerializeField] private GameObject panelWin, panelLose, star1, star2, star3, controllerUI, cameraController;
         [SerializeField] private Image detectedInfoFill;
         [SerializeField] private GameObject particlePrefabs, playerObj;
+
         private Transform playerPos;
+        public int nextSceneLoad = 2;
 
         private void Start()
         {
@@ -46,6 +49,9 @@ namespace Managers
             playerPos = playerObj.transform;
 
             TreasureCollectorController.AllTreasureCollected += SetIsTreasureAllCollectedHandler;
+
+            //level
+            nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;
         }
 
         private void OnDestroy()
@@ -136,6 +142,11 @@ namespace Managers
             switch (winlose)
             {
                 case "win":
+                    if (nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
+                    {
+                        PlayerPrefs.SetInt("levelAt", nextSceneLoad);
+                    }
+
                     controllerUI.SetActive(false);
                     cameraController.GetComponent<CameraController>().enabled = false;
 
