@@ -9,7 +9,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject soundOnButton, soundOffButton, effectsOnButton, effectsOffButton, pauseButton;
     [SerializeField] private AudioClip buttonSource;
 
-    [SerializeField] private CanvasGroup controllerUIPanel, pausePanel, storePanel, optionsPanel, QuitWarningPanel;
+    [SerializeField] private CanvasGroup controllerUIPanel, pausePanel, storePanel, optionsPanel, QuitWarningPanel, pauseParentPanel;
     
 
     [SerializeField] private DotweenUIManager DOTweenManager;
@@ -32,6 +32,7 @@ public class ButtonManager : MonoBehaviour
         StartCoroutine(DOTweenManager.FadeOut(controllerUIPanel, duration));
         yield return new WaitForSecondsRealtime(duration);
         StartCoroutine(DOTweenManager.FadeIn(pausePanel, duration));
+        pauseParentPanel.gameObject.SetActive(true);
     }
 
     public void ResumeButton()
@@ -43,6 +44,7 @@ public class ButtonManager : MonoBehaviour
 
     private IEnumerator ResumeButtonIsAnim(float duration)
     {
+        pauseParentPanel.gameObject.SetActive(false);
         StartCoroutine(DOTweenManager.FadeOut(pausePanel, duration));
         yield return new WaitForSecondsRealtime(duration);
         StartCoroutine(DOTweenManager.FadeIn(controllerUIPanel, duration));
@@ -86,6 +88,7 @@ public class ButtonManager : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(buttonSource);
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
 
     public void AdjustButton()
@@ -162,7 +165,7 @@ public class ButtonManager : MonoBehaviour
 
     public void QuitButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        //SoundManager.Instance.PlaySound(buttonSource);
         StartCoroutine(QuitButtonIsAnim(0.4f));
     }
 
@@ -175,7 +178,7 @@ public class ButtonManager : MonoBehaviour
 
     public void NoQuitButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        //SoundManager.Instance.PlaySound(buttonSource);
         StartCoroutine(NoQuitButtonIsAnim(0.4f));
     }
 
@@ -188,7 +191,7 @@ public class ButtonManager : MonoBehaviour
 
     public void YesQuitButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        //SoundManager.Instance.PlaySound(buttonSource);
         Application.Quit();
     }
 
