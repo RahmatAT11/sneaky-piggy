@@ -24,6 +24,7 @@ namespace Managers
 
         private Transform playerPos;
         public int nextSceneLoad = 2;
+        public int starCount = 0;
 
         private void Start()
         {
@@ -121,18 +122,22 @@ namespace Managers
                     star1.SetActive(true);
                     star2.SetActive(true);
                     star3.SetActive(true);
+                    starCount = 3;
                     break;
                 case "2B":
                     star1.SetActive(true);
                     star2.SetActive(true);
+                    starCount = 2;
                     break;
                 case "1B":
                     star1.SetActive(true);
+                    starCount = 1;
                     break;
                 case "0B":
                     star1.SetActive(false);
                     star2.SetActive(false);
                     star3.SetActive(false);
+                    starCount = 0;
                     break;
             }
         }
@@ -142,6 +147,8 @@ namespace Managers
             switch (winlose)
             {
                 case "win":
+                    int starCountCounter = PlayerPrefs.GetInt("StarCountAtLevel");
+                    
                     if (nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
                     {
                         PlayerPrefs.SetInt("levelAt", nextSceneLoad);
