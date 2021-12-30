@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Controllers.Camera;
 using Controllers.Treasure;
+using DG.Tweening;
 
 namespace Managers
 {
@@ -18,15 +19,15 @@ namespace Managers
         private bool _isOnTime;
         private bool _isAllTreasureCollected;
 
-        [SerializeField] private GameObject panelWin, panelLose, star1, star2, star3, controllerUI, cameraController;
+        [SerializeField] private GameObject star1, star2, star3, controllerUI, cameraController;
         [SerializeField] private Image detectedInfoFill;
         [SerializeField] private GameObject particlePrefabs, playerObj;
+        [SerializeField] private DotweenUIManager DOTweenManager;
+        [SerializeField] private CanvasGroup panelWin, panelLose;
 
         private Transform playerPos;
         public int nextSceneLoad = 2;
         public int starCount;
-
-
 
         private void Start()
         {
@@ -38,8 +39,8 @@ namespace Managers
             _isPlayerDetected = false;
             _isOnTime = true;
 
-            panelWin.SetActive(false);
-            panelLose.SetActive(false);
+            panelWin.gameObject.SetActive(false);
+            panelLose.gameObject.SetActive(false);
             star1.SetActive(false);
             star2.SetActive(false);
             star3.SetActive(false);
@@ -52,7 +53,7 @@ namespace Managers
             playerPos = playerObj.transform;
 
             TreasureCollectorController.AllTreasureCollected += SetIsTreasureAllCollectedHandler;
-            //buttonManager = GetComponent<ButtonManager>();
+            DOTweenManager = GetComponent<DotweenUIManager>();
 
             //level
             nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;
@@ -145,9 +146,11 @@ namespace Managers
                     starCount = 0;
                     break;
             }
-
-            SetStarStatus(SceneManager.GetActiveScene().name, starCount);
-            print("ada di level " + SceneManager.GetActiveScene().name + "nilai starnya" + GetStarStatus(SceneManager.GetActiveScene().name));
+          
+            if (starCount > GetStarStatus(SceneManager.GetActiveScene().name))
+            {
+                SetStarStatus(SceneManager.GetActiveScene().name, starCount);
+            }
         }
 
         private IEnumerator WaitingForWinLosePanelShow(float time, string winlose)
@@ -165,7 +168,8 @@ namespace Managers
                     cameraController.GetComponent<CameraController>().enabled = false;
 
                     yield return new WaitForSecondsRealtime(time);
-                    panelWin.SetActive(true);
+
+                    panelWin.gameObject.SetActive(true);
 
                     break;
 
@@ -179,7 +183,8 @@ namespace Managers
 
                     yield return new WaitForSecondsRealtime(time);
 
-                    panelLose.SetActive(true);
+                    panelLose.gameObject.SetActive(true);
+
                     break;
             } 
         }
