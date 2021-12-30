@@ -155,8 +155,7 @@ namespace Managers
             switch (winlose)
             {
                 case "win":
-                    int starCountCounter = PlayerPrefs.GetInt("StarCountAtLevel");
-                    
+
                     if (nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
                     {
                         PlayerPrefs.SetInt("levelAt", nextSceneLoad);
