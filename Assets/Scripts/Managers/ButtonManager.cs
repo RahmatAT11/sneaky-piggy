@@ -10,7 +10,6 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private AudioClip buttonSource;
 
     [SerializeField] private CanvasGroup controllerUIPanel, pausePanel, storePanel, optionsPanel, QuitWarningPanel, pauseParentPanel;
-    
 
     [SerializeField] private DotweenUIManager DOTweenManager;
 
@@ -18,6 +17,7 @@ public class ButtonManager : MonoBehaviour
     {
         DOTweenManager = GetComponent<DotweenUIManager>();
         //StartCoroutine(BackChapter1ButtonIsAnim(0.4f));
+
     }
 
     public void PauseButton()

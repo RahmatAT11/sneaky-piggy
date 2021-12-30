@@ -5935,6 +5935,7 @@ MonoBehaviour:
   QuitWarningPanel: {fileID: 34332446}
   pauseParentPanel: {fileID: 427793361}
   DOTweenManager: {fileID: 628073560}
+  CurrentLevel: 0
   mainMenuPanel: {fileID: 0}
   storePanelMenu: {fileID: 0}
   optionsPanelMenu: {fileID: 0}
@@ -6946,6 +6947,7 @@ MonoBehaviour:
   detectedInfoFill: {fileID: 1059298562}
   particlePrefabs: {fileID: 8652548598919181283, guid: 57d84123f14802e47b46ce3569fe66e6, type: 3}
   playerObj: {fileID: 0}
+  buttonManager: {fileID: 628073558}
   nextSceneLoad: 2
   starCount: 0
 --- !u!4 &697488249

@@ -24,7 +24,9 @@ namespace Managers
 
         private Transform playerPos;
         public int nextSceneLoad = 2;
-        public int starCount = 0;
+        public int starCount;
+
+
 
         private void Start()
         {
@@ -50,9 +52,12 @@ namespace Managers
             playerPos = playerObj.transform;
 
             TreasureCollectorController.AllTreasureCollected += SetIsTreasureAllCollectedHandler;
+            //buttonManager = GetComponent<ButtonManager>();
 
             //level
             nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;
+
+            starCount = 0;
         }
 
         private void OnDestroy()
@@ -140,6 +145,9 @@ namespace Managers
                     starCount = 0;
                     break;
             }
+
+            SetStarStatus(SceneManager.GetActiveScene().name, starCount);
+            print("ada di level " + SceneManager.GetActiveScene().name + "nilai starnya" + GetStarStatus(SceneManager.GetActiveScene().name));
         }
 
         private IEnumerator WaitingForWinLosePanelShow(float time, string winlose)
@@ -215,6 +223,17 @@ namespace Managers
         public void SetIsOnTime(bool isOnTime)
         {
             _isOnTime = isOnTime;
+        }
+
+
+        public void SetStarStatus(string level, int status)
+        {
+            PlayerPrefs.SetInt("Level" + level, status);
+        }
+
+        public int GetStarStatus(string level)
+        {
+            return PlayerPrefs.GetInt("Level" + level);
         }
     }
 }

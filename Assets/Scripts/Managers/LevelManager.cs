@@ -7,6 +7,8 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private Button[] levelButton;
     [SerializeField] public GameObject[] lockedButton;
+
+    [SerializeField] public GameObject[] starUI;
     void Start()
     {
         int levelAt = PlayerPrefs.GetInt("levelAt", 1);
