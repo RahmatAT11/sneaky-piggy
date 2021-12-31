@@ -10,9 +10,9 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private AudioClip buttonSource;
 
     [SerializeField] private CanvasGroup controllerUIPanel, pausePanel, storePanel, optionsPanel, QuitWarningPanel, pauseParentPanel;
-    
 
     [SerializeField] private DotweenUIManager DOTweenManager;
+
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class ButtonManager : MonoBehaviour
 
     public void PauseButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);      
+        SoundManager.Instance.PlaySound(buttonSource);
         StartCoroutine(PauseButtonIsAnim(0.4f));
         Time.timeScale = 0f;
     }
@@ -198,11 +198,11 @@ public class ButtonManager : MonoBehaviour
     public void NextLevel()
     {
         SoundManager.Instance.PlaySound(buttonSource);
-        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex)+1);
+        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex) + 1);
     }
 
     //======= MAIN MENU =========
-    [Header ("Main Menu")]
+    [Header("Main Menu")]
     [SerializeField] private CanvasGroup mainMenuPanel, storePanelMenu, optionsPanelMenu, chapter1PanelMenu;
     [SerializeField] private RectTransform chapter1button, chapter2button, chapter3button, chapter4button;
     [SerializeField] private RectTransform level1button, level2button, level3button, level4button, level5button, level6button, level7button, level8button, level9button;
