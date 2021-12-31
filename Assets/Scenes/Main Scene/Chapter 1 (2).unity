@@ -4533,6 +4533,7 @@ GameObject:
   - component: {fileID: 451303410}
   - component: {fileID: 451303412}
   - component: {fileID: 451303411}
+  - component: {fileID: 451303413}
   m_Layer: 5
   m_Name: Win Condition
   m_TagString: Untagged
@@ -4602,6 +4603,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451303409}
   m_CullTransparentMesh: 1
+--- !u!225 &451303413
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451303409}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &458520332
 GameObject:
   m_ObjectHideFlags: 0
@@ -5935,7 +5948,6 @@ MonoBehaviour:
   QuitWarningPanel: {fileID: 34332446}
   pauseParentPanel: {fileID: 427793361}
   DOTweenManager: {fileID: 628073560}
-  CurrentLevel: 0
   mainMenuPanel: {fileID: 0}
   storePanelMenu: {fileID: 0}
   optionsPanelMenu: {fileID: 0}
@@ -6937,8 +6949,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d9c0a94fdd5de90be8475d8dc83116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelWin: {fileID: 451303409}
-  panelLose: {fileID: 1604135209}
   star1: {fileID: 827299758}
   star2: {fileID: 1902833889}
   star3: {fileID: 2117519484}
@@ -6947,7 +6957,9 @@ MonoBehaviour:
   detectedInfoFill: {fileID: 1059298562}
   particlePrefabs: {fileID: 8652548598919181283, guid: 57d84123f14802e47b46ce3569fe66e6, type: 3}
   playerObj: {fileID: 0}
-  buttonManager: {fileID: 628073558}
+  DOTweenManager: {fileID: 628073560}
+  panelWin: {fileID: 451303413}
+  panelLose: {fileID: 1604135213}
   nextSceneLoad: 2
   starCount: 0
 --- !u!4 &697488249
@@ -15604,6 +15616,7 @@ GameObject:
   - component: {fileID: 1604135210}
   - component: {fileID: 1604135212}
   - component: {fileID: 1604135211}
+  - component: {fileID: 1604135213}
   m_Layer: 5
   m_Name: Lose Condition
   m_TagString: Untagged
@@ -15672,6 +15685,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604135209}
   m_CullTransparentMesh: 1
+--- !u!225 &1604135213
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604135209}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1605256757
 GameObject:
   m_ObjectHideFlags: 0
