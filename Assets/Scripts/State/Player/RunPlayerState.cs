@@ -26,12 +26,25 @@ namespace State.Player
         
         public override void OnStateEnter()
         {
-            PlayerController.PlayerArmature.animation.Play("Run");
+            if (PlayerController.MovementDirectionEx.y > 0 && PlayerController.MovementDirectionEx.x == 0)
+            {
+                PlayerController.AnimationController.ChangeAnimationData(2);
+            }
+            else if (PlayerController.MovementDirectionEx.y < 0 && PlayerController.MovementDirectionEx.x == 0)
+            {
+                PlayerController.AnimationController.ChangeAnimationData(1);
+            }
+            else
+            {
+                PlayerController.AnimationController.ChangeAnimationData(0);
+            }
+            
+            PlayerController.AnimationController.ArmatureComponent.animation.Play("Run");
         }
 
         public override void OnStateExit()
         {
-            PlayerController.PlayerArmature.animation.Stop("Run");
+            PlayerController.AnimationController.ArmatureComponent.animation.Stop("Run");
         }
         
         private bool IsMoving()
