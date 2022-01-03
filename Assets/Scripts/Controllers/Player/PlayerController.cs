@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Controllers.Joystick;
 using Controllers.Base;
@@ -16,12 +17,13 @@ namespace Controllers.Player
         // Player Stamina
         [Header("Stamina")] 
         [SerializeField] private int staminaUseAmount = 1;
-        [SerializeField] private UnityArmatureComponent unityArmatureComponent;
+        [SerializeField] private UnityArmatureComponent activeUAC;
+        [SerializeField] private List<BaseCharAnimationController> animationControllers;
         public UnityArmatureComponent PlayerArmature
         {
             get
             {
-                return unityArmatureComponent;
+                return activeUAC;
             }
         }
         
@@ -36,11 +38,14 @@ namespace Controllers.Player
             _playerInput = GetComponent<PlayerInput>();
             
             _staminaSystem = FindObjectOfType<StaminaSystemController>();
+            
+            SetActiveUAC(0);
         }
         private void Start()
         {
             //MovementSpeed = 0.5f;
             //_sprintSpeedMultiplier = 5f;
+            
             _staminaSystem.Amount = staminaUseAmount;
             SetState(new IdlePlayerState(this));
         }
@@ -69,18 +74,18 @@ namespace Controllers.Player
 
         protected override void Turning()
         {
-            bool lastSpriteFlipStatus = unityArmatureComponent._armature.flipX;
+            bool lastSpriteFlipStatus = activeUAC._armature.flipX;
             if (MovementDirection.x < 0)
             {
-                unityArmatureComponent._armature.flipX = true;
+                activeUAC._armature.flipX = true;
             }
             else if (MovementDirection.x > 0)
             {
-                unityArmatureComponent._armature.flipX = false;
+                activeUAC._armature.flipX = false;
             }
             else
             {
-                unityArmatureComponent._armature.flipX = lastSpriteFlipStatus;
+                activeUAC._armature.flipX = lastSpriteFlipStatus;
             }
         }
 
@@ -96,6 +101,11 @@ namespace Controllers.Player
         public Vector3 GetMovementDirection()
         {
             return MovementDirection;
+        }
+
+        public void SetActiveUAC(int baseCharAnimControllerIndex)
+        {
+            activeUAC = animationControllers[baseCharAnimControllerIndex].ArmatureComponent;
         }
     }
 }

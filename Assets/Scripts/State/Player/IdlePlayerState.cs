@@ -11,16 +11,14 @@ namespace State.Player
 
         public override void Tick()
         {
-            if (IsMoving())
+            if (!IsMoving()) return;
+            if (PlayerController.IsSprintingEx)
             {
-                if (PlayerController.IsSprintingEx)
-                {
-                    PlayerController.SetState(new RunPlayerState(PlayerController));
-                }
-                else
-                {
-                    PlayerController.SetState(new WalkPlayerState(PlayerController));
-                }
+                PlayerController.SetState(new RunPlayerState(PlayerController));
+            }
+            else
+            {
+                PlayerController.SetState(new WalkPlayerState(PlayerController));
             }
         }
 
