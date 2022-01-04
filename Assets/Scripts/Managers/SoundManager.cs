@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,18 +7,22 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
     [SerializeField] private AudioSource bgmSource, effectSource;
+    //DZ
+    [SerializeField] private AudioSource[] DZ_bgmSource, DZ_effectSource;
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+        PlayerPrefs.SetInt("levelAt", 3);
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
+
     }
 
     public void PlaySound (AudioClip clip)
@@ -38,5 +43,21 @@ public class SoundManager : MonoBehaviour
     public void ToggleEffects(bool value)
     {
         effectSource.mute = value;
+    }
+
+    public void DZ_PlayBGM(string name)
+    {
+        for (int i = 0; i < DZ_bgmSource.Length; i++)
+        {
+            DZ_bgmSource[i].GetComponent<AudioSource>().Stop();
+        }
+
+        for (int i = 0; i < DZ_bgmSource.Length; i++)
+        {
+            if (DZ_bgmSource[i].name == name)
+            {
+                DZ_bgmSource[i].GetComponent<AudioSource>().Play();
+            }
+        }
     }
 }
