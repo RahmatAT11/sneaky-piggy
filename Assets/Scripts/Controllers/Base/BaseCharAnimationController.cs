@@ -19,6 +19,7 @@ namespace Controllers.Base
         private void Awake()
         {
             _armatureComponent = GetComponent<UnityArmatureComponent>();
+            _armatureComponent._sortingOrder = 3;
         }
 
         public void SetActiveAnimation(bool isActive)

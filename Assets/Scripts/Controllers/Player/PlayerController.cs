@@ -4,6 +4,7 @@ using Controllers.Joystick;
 using Controllers.Base;
 using DragonBones;
 using Interfaces.Player;
+using State.Direction;
 using State.Player;
 
 namespace Controllers.Player
@@ -26,6 +27,7 @@ namespace Controllers.Player
         // Player Component
         private IInputProcess _playerInput;
         private PlayerState _currentPlayerState;
+        private DirectionPlayerState _currentDirectionPlayerState;
 
         private void Awake()
         {
@@ -50,6 +52,7 @@ namespace Controllers.Player
             MovementDirection = _playerInput.MovementInput(_joystick);
             Debug.Log(MovementDirection);
             _currentPlayerState.Tick();
+            _currentDirectionPlayerState.Tick();
         }
 
         private void FixedUpdate()
@@ -94,6 +97,15 @@ namespace Controllers.Player
             _currentPlayerState?.OnStateEnter();
         }
 
+        public void SetState(DirectionPlayerState directionPlayerState)
+        {
+            _currentDirectionPlayerState?.OnStateExit();
+
+            _currentDirectionPlayerState = directionPlayerState;
+            
+            _currentDirectionPlayerState?.OnStateEnter();
+        }
+
         public Vector3 GetMovementDirection()
         {
             return MovementDirection;
@@ -110,6 +122,11 @@ namespace Controllers.Player
         public UnityArmatureComponent GetCurrentUac()
         {
             return _currentUac;
+        }
+
+        public List<BaseCharAnimationController> GetListOfAnimationControllers()
+        {
+            return animationControllers;
         }
     }
 }

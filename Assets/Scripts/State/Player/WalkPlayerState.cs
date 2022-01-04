@@ -1,4 +1,5 @@
 using Controllers.Player;
+using State.Direction.Player;
 using UnityEngine;
 
 namespace State.Player
@@ -26,19 +27,22 @@ namespace State.Player
 
         public override void OnStateEnter()
         {
-            if (PlayerController.GetMovementDirection().y > 0 && PlayerController.GetMovementDirection().x == 0)
+            ChangeAnimationDirection();
+        }
+
+        private void ChangeAnimationDirection()
+        {
+            if (PlayerController.GetMovementDirection().y > 0.5f)
             {
-                PlayerController.SetCurrentUac(2);
+                PlayerController.SetState(new BackPlayerState(PlayerController));
             }
-            else if (PlayerController.GetMovementDirection().y < 0 && PlayerController.GetMovementDirection().x == 0)
+            else if (PlayerController.GetMovementDirection().y < -0.5f)
             {
-                PlayerController.SetCurrentUac(1);
-                
+                PlayerController.SetState(new FrontPlayerState(PlayerController));
             }
             else
             {
-                PlayerController.SetCurrentUac(0);
-                
+                PlayerController.SetState(new SidePlayerState(PlayerController));
             }
 
             PlayerController.GetCurrentUac().animation.Play("Walk");

@@ -1,4 +1,5 @@
 using Controllers.Player;
+using State.Direction.Player;
 using UnityEngine;
 
 namespace State.Player
@@ -24,7 +25,7 @@ namespace State.Player
 
         public override void OnStateEnter()
         {
-            PlayerController.SetCurrentUac(0);
+            PlayerController.SetState(new SidePlayerState(PlayerController));
             
             PlayerController.GetCurrentUac().animation.Play("Idle");
         }
