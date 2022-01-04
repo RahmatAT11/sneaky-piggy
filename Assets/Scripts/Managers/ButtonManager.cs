@@ -86,6 +86,7 @@ public class ButtonManager : MonoBehaviour
 
     public void MainMenuButton()
     {
+        SoundManager.Instance.PlayBGM("BGM Source");
         SoundManager.Instance.PlaySound(buttonSource);
         SceneManager.LoadScene(0);
         Time.timeScale = 1f;
@@ -285,6 +286,7 @@ public class ButtonManager : MonoBehaviour
 
     public void Level1Button()
     {
+        SoundManager.Instance.PlayBGM("BGM Chpt 1");
         SceneManager.LoadScene(1);
     }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        PlayerPrefs.SetInt("levelAt", 3);
+        //PlayerPrefs.SetInt("levelAt", 3);
         if (Instance == null)
         {
             Instance = this;
@@ -23,6 +24,11 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        //print(SceneManager.GetActiveScene().name);
+        //if (SceneManager.GetActiveScene().name == "Chapter 1 (1)")
+        //{
+        //    DZ_PlayBGM("BGM Chpt 1");
+        //}
     }
 
     public void PlaySound (AudioClip clip)
@@ -45,7 +51,7 @@ public class SoundManager : MonoBehaviour
         effectSource.mute = value;
     }
 
-    public void DZ_PlayBGM(string name)
+    public void PlayBGM(string name)
     {
         for (int i = 0; i < DZ_bgmSource.Length; i++)
         {
