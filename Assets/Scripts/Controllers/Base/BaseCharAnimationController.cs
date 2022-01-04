@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DragonBones;
 using UnityEngine;
@@ -6,32 +7,23 @@ namespace Controllers.Base
 {
     public class BaseCharAnimationController : MonoBehaviour
     {
-        [SerializeField] private List<UnityDragonBonesData> animationData;
-        [SerializeField] private UnityArmatureComponent armatureComponent;
+        private UnityArmatureComponent _armatureComponent;
         public UnityArmatureComponent ArmatureComponent
         {
             get
             {
-                return armatureComponent;
+                return _armatureComponent;
             }
         }
 
-        public void ChangeAnimationData(int index)
+        private void Awake()
         {
-            if (index < animationData.Count)
-            {
-                armatureComponent.unityData = animationData[index];
-            }
+            _armatureComponent = GetComponent<UnityArmatureComponent>();
+        }
 
-            var dragonBonesData = UnityFactory.factory.LoadData(armatureComponent.unityData);
-            if (dragonBonesData != null && !string.IsNullOrEmpty(armatureComponent.armatureName))
-            {
-                UnityFactory.factory.BuildArmatureComponent(
-                    armatureComponent.armatureName, 
-                    armatureComponent.unityData.dataName, null, null, gameObject);
-            }
-            
-            armatureComponent._sortingOrder = 3;
+        public void SetActiveAnimation(bool isActive)
+        {
+            gameObject.SetActive(isActive);
         }
     }
 }

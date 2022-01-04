@@ -24,14 +24,14 @@ namespace State.Player
 
         public override void OnStateEnter()
         {
-            PlayerController.AnimationController.ChangeAnimationData(0);
+            PlayerController.SetCurrentUac(0);
             
-            PlayerController.AnimationController.ArmatureComponent.animation.Play("Idle");
+            PlayerController.GetCurrentUac().animation.Play("Idle");
         }
 
         public override void OnStateExit()
         {
-            PlayerController.AnimationController.ArmatureComponent.animation.Stop("Idle");
+            PlayerController.GetCurrentUac().animation.Stop("Idle");
         }
 
         private bool IsMoving()

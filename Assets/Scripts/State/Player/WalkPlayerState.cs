@@ -26,25 +26,27 @@ namespace State.Player
 
         public override void OnStateEnter()
         {
-            if (PlayerController.MovementDirectionEx.y > 0 && PlayerController.MovementDirectionEx.x == 0)
+            if (PlayerController.GetMovementDirection().y > 0 && PlayerController.GetMovementDirection().x == 0)
             {
-                PlayerController.AnimationController.ChangeAnimationData(2);
+                PlayerController.SetCurrentUac(2);
             }
-            else if (PlayerController.MovementDirectionEx.y < 0 && PlayerController.MovementDirectionEx.x == 0)
+            else if (PlayerController.GetMovementDirection().y < 0 && PlayerController.GetMovementDirection().x == 0)
             {
-                PlayerController.AnimationController.ChangeAnimationData(1);
+                PlayerController.SetCurrentUac(1);
+                
             }
             else
             {
-                PlayerController.AnimationController.ChangeAnimationData(0);
+                PlayerController.SetCurrentUac(0);
+                
             }
 
-            PlayerController.AnimationController.ArmatureComponent.animation.Play("Walk");
+            PlayerController.GetCurrentUac().animation.Play("Walk");
         }
 
         public override void OnStateExit()
         {
-            PlayerController.AnimationController.ArmatureComponent.animation.Stop("Walk");
+            PlayerController.GetCurrentUac().animation.Stop("Walk");
         }
         
         private bool IsMoving()

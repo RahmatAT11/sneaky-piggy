@@ -9,13 +9,6 @@ namespace Controllers.Base
         [Header("Movement")]
         [SerializeField] protected float movementSpeed = 2.0f;
         protected Vector3 MovementDirection;
-        public Vector3 MovementDirectionEx
-        {
-            get
-            {
-                return MovementDirection;
-            }
-        }
         protected bool IsSprinting;
         public bool IsSprintingEx
         {
@@ -33,7 +26,7 @@ namespace Controllers.Base
         protected virtual void Walking()
         {
             Rigidbody2D.MovePosition(Rigidbody2D.position + 
-                                     (Vector2)(MovementDirection * movementSpeed* Time.fixedDeltaTime));
+                                     (Vector2)(MovementDirection * (movementSpeed * Time.fixedDeltaTime)));
         }
     
         protected virtual void Turning()
@@ -48,8 +41,8 @@ namespace Controllers.Base
         protected virtual void Sprinting()
         {
             Rigidbody2D.MovePosition(Rigidbody2D.position + 
-                                     (Vector2)(MovementDirection * movementSpeed * sprintSpeedMultiplier
-                                     * Time.fixedDeltaTime));
+                                     (Vector2)(MovementDirection * (movementSpeed * sprintSpeedMultiplier
+                                     * Time.fixedDeltaTime)));
         }
     }
 }
