@@ -1,4 +1,5 @@
 using Controllers.Player;
+using UnityEngine;
 
 namespace State.Direction.Player
 {
@@ -17,8 +18,15 @@ namespace State.Direction.Player
         {
             PlayerController.SetCurrentUac(0);
 
-            PlayerController.GetCurrentUac().animation.Play(
-                PlayerController.GetCurrentUac().animation.lastAnimationName);
+            if (PlayerController.GetMovementDirection() == Vector3.zero)
+            {
+                PlayerController.GetCurrentUac().animation.Play("Idle");
+            }
+            else
+            {
+                PlayerController.GetCurrentUac().animation.Play(
+                    PlayerController.GetCurrentUac().animation.lastAnimationName);
+            }
         }
 
         public override void OnStateExit()

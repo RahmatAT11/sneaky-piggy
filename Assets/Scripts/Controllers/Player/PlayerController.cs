@@ -5,6 +5,7 @@ using Controllers.Base;
 using DragonBones;
 using Interfaces.Player;
 using State.Direction;
+using State.Direction.Player;
 using State.Player;
 
 namespace Controllers.Player
@@ -45,6 +46,7 @@ namespace Controllers.Player
             SetCurrentUac(0);
             _staminaSystem.Amount = staminaUseAmount;
             SetState(new IdlePlayerState(this));
+            SetState(new SidePlayerState(this));
         }
 
         private void Update()

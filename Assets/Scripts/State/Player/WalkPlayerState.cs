@@ -32,19 +32,6 @@ namespace State.Player
 
         private void ChangeAnimationDirection()
         {
-            if (PlayerController.GetMovementDirection().y > 0.5f)
-            {
-                PlayerController.SetState(new BackPlayerState(PlayerController));
-            }
-            else if (PlayerController.GetMovementDirection().y < -0.5f)
-            {
-                PlayerController.SetState(new FrontPlayerState(PlayerController));
-            }
-            else
-            {
-                PlayerController.SetState(new SidePlayerState(PlayerController));
-            }
-
             PlayerController.GetCurrentUac().animation.Play("Walk");
         }
 

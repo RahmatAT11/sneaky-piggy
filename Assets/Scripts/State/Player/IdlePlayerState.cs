@@ -25,8 +25,6 @@ namespace State.Player
 
         public override void OnStateEnter()
         {
-            PlayerController.SetState(new SidePlayerState(PlayerController));
-            
             PlayerController.GetCurrentUac().animation.Play("Idle");
         }
 
