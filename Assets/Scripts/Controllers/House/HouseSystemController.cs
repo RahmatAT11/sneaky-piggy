@@ -33,6 +33,7 @@ namespace Controllers.House
             if (other.CompareTag("Player"))
             {
                 PlayerEntered?.Invoke(true);
+                SoundManager.Instance.PlayBGM("BGM Dalam Rumah");
             }
         }
 
@@ -41,6 +42,7 @@ namespace Controllers.House
             if (other.CompareTag("Player"))
             {
                 PlayerEntered?.Invoke(false);
+                SoundManager.Instance.PlayBGM("BGM Dalem Rumah");
             }
         }
     }
