@@ -56,7 +56,10 @@ namespace Managers
                 if (timeRemaining <= timeOnTime)
                 {
                     _victoryManager.SetIsOnTime(false);
+                    SoundManager.Instance.PlayBGM("BGM Panic Time");
                     panicDisplay.SetActive(true);
+                    print("pppppppp");
+                    
                 }
 
                 DisplayOnTime();

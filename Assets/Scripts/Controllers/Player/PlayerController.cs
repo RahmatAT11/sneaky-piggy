@@ -30,6 +30,9 @@ namespace Controllers.Player
         private PlayerState _currentPlayerState;
         private DirectionPlayerState _currentDirectionPlayerState;
 
+        private bool hasSprintSoundPlayed;
+        private bool hasWalkSoundPlayed;
+
         private void Awake()
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -52,6 +55,9 @@ namespace Controllers.Player
         private void Update()
         {
             MovementDirection = _playerInput.MovementInput(_joystick);
+
+            SoundBabiJalan();
+
             Debug.Log(MovementDirection);
             _currentPlayerState.Tick();
             _currentDirectionPlayerState.Tick();
@@ -70,6 +76,19 @@ namespace Controllers.Player
             {
                 base.Sprinting();
                 _staminaSystem.UseStamina(_staminaSystem.Amount);
+
+                //SoundLari
+                if (!hasSprintSoundPlayed)
+                {
+                    hasSprintSoundPlayed = true;
+                    SoundManager.Instance.StopSFX("SFX Babi Jalan");
+                    SoundManager.Instance.PlaySFX("SFX Babi Lari");
+                }
+            }
+            if (!IsSprinting)
+            {
+                SoundManager.Instance.StopSFX("SFX Babi Lari");
+                hasSprintSoundPlayed = false;
             }
         }
 
@@ -129,6 +148,23 @@ namespace Controllers.Player
         public List<BaseCharAnimationController> GetListOfAnimationControllers()
         {
             return animationControllers;
+        }
+
+        public void SoundBabiJalan()
+        {
+            if (MovementDirection != Vector3.zero)
+            {
+                if (!hasWalkSoundPlayed)
+                {
+                    hasWalkSoundPlayed = true;
+                    SoundManager.Instance.PlaySFX("SFX Babi Jalan");
+                }
+            }
+            if (MovementDirection == Vector3.zero)
+            {
+                SoundManager.Instance.StopSFX("SFX Babi Jalan");
+                hasWalkSoundPlayed = false;
+            }
         }
     }
 }

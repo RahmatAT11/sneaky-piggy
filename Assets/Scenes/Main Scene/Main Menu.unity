@@ -19353,12 +19353,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5138269620520618431, guid: 22ce5b6f206c8d1478441aaddf43aca9, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 1d1e22a00ce07fc488eb6fcdcad7a562, type: 3}
-    - target: {fileID: 8059162149744705778, guid: 22ce5b6f206c8d1478441aaddf43aca9, type: 3}
-      propertyPath: DZ_effectSource.Array.size
+    - target: {fileID: 6700661000412215013, guid: 22ce5b6f206c8d1478441aaddf43aca9, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415852933856235094, guid: 22ce5b6f206c8d1478441aaddf43aca9, type: 3}
+      propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8059162149744705779, guid: 22ce5b6f206c8d1478441aaddf43aca9, type: 3}

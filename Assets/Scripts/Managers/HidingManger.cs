@@ -48,6 +48,7 @@ public class HidingManger : MonoBehaviour
 
     public void isButtonHide1()
     {
+        SoundManager.Instance.PlaySFX("Hide In");
         isUnhide = false;
 
         if (isUnhide == false)
@@ -61,6 +62,7 @@ public class HidingManger : MonoBehaviour
 
     public void isButtonHide2()
     {
+        SoundManager.Instance.PlaySFX("Hide Out");
         isUnhide = true;
 
         if (isUnhide == true)

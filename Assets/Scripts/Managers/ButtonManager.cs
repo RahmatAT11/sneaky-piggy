@@ -313,21 +313,21 @@ public class ButtonManager : MonoBehaviour
 
     public void Level1Button()
     {
-        SoundManager.Instance.PlayBGM("BGM Ingame");
+        SoundManager.Instance.PlayBGM("BGM Diluar Rumah");
         SoundManager.Instance.PlaySFX("SFX Button Touch");
         SceneManager.LoadScene(1);
     }
 
     public void Level2Button()
     {
-        SoundManager.Instance.PlayBGM("BGM Ingame");
+        SoundManager.Instance.PlayBGM("BGM Diluar Rumah");
         SoundManager.Instance.PlaySFX("SFX Button Touch");
         SceneManager.LoadScene(2);
     }
 
     public void Level3Button()
     {
-        SoundManager.Instance.PlayBGM("BGM Ingame");
+        SoundManager.Instance.PlayBGM("BGM Diluar Rumah");
         SoundManager.Instance.PlaySFX("SFX Button Touch");
         SceneManager.LoadScene(3);
     }

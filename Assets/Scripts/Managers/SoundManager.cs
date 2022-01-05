@@ -83,6 +83,17 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void StopSFX(string name)
+    {
+        for (int i = 0; i < SFXSource.Length; i++)
+        {
+            if (SFXSource[i].name == name)
+            {
+                SFXSource[i].GetComponent<AudioSource>().Stop();
+            }
+        }
+    }
+
     public void PlayBGM(string name)
     {
         for (int i = 0; i < BackgroundMusicSource.Length; i++)
