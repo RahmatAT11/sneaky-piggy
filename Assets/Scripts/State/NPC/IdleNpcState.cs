@@ -34,12 +34,17 @@ namespace State.NPC
         public override void OnStateEnter()
         {
             CheckIfPathsAvailable();
-            // Play animation idle
+            NonPlayerController.GetCurrentUac().animation.Play("Idle");
         }
 
         public override void OnStateExit()
         {
-            // stop animation idle
+            NonPlayerController.GetCurrentUac().animation.Stop("Idle");
+        }
+
+        private bool IsMoving()
+        {
+            return NonPlayerController.GetMovementDirection() != Vector3.zero;
         }
     }
 }

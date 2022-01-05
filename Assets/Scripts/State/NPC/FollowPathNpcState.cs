@@ -27,7 +27,7 @@ namespace State.NPC
         public override void OnStateEnter()
         {
             NonPlayerController.IsSprintingEx = false;
-            // play animation walk
+            NonPlayerController.GetCurrentUac().animation.Play("Walk");
         }
 
         private void CheckIfPathOnlyOne()
@@ -40,7 +40,7 @@ namespace State.NPC
 
         public override void OnStateExit()
         {
-            // stop animation walk
+            NonPlayerController.GetCurrentUac().animation.Stop("Walk");
         }
     }
 }
