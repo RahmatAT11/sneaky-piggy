@@ -17,12 +17,30 @@ public class ButtonManager : MonoBehaviour
     private void Start()
     {
         DOTweenManager = GetComponent<DotweenUIManager>();
-        //StartCoroutine(BackChapter1ButtonIsAnim(0.4f));
+        print(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name == "Main Menu")
+        {
+            if (PlayerPrefs.GetInt("isMusicMute") == 0)
+            {
+                soundOnButton.SetActive(false);
+                soundOffButton.SetActive(true);
+            }
+            else if (PlayerPrefs.GetInt("isMusicMute") == 1)
+            {
+                soundOnButton.SetActive(true);
+                soundOffButton.SetActive(false);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void PauseButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(PauseButtonIsAnim(0.4f));
         Time.timeScale = 0f;
     }
@@ -37,7 +55,7 @@ public class ButtonManager : MonoBehaviour
 
     public void ResumeButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(ResumeButtonIsAnim(0.4f));
         Time.timeScale = 1f;
     }
@@ -52,7 +70,7 @@ public class ButtonManager : MonoBehaviour
 
     public void RestartButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
 
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -60,7 +78,7 @@ public class ButtonManager : MonoBehaviour
 
     public void SettingButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(SettingButtonIsAnim(0.4f));
     }
 
@@ -73,7 +91,7 @@ public class ButtonManager : MonoBehaviour
 
     public void BackSettingButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(BackSettingButtonIsAnim(0.4f));
     }
 
@@ -86,20 +104,21 @@ public class ButtonManager : MonoBehaviour
 
     public void MainMenuButton()
     {
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         SoundManager.Instance.PlayBGM("BGM Source");
-        SoundManager.Instance.PlaySound(buttonSource);
+        
         SceneManager.LoadScene(0);
         Time.timeScale = 1f;
     }
 
     public void AdjustButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
     }
 
     public void StoreButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(StoreButtonIsAnim(0.4f));
     }
 
@@ -112,7 +131,7 @@ public class ButtonManager : MonoBehaviour
 
     public void BackStoreButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(BackStoreButtonIsAnim(0.4f));
     }
 
@@ -125,8 +144,10 @@ public class ButtonManager : MonoBehaviour
 
     public void SoundOnButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         SoundManager.Instance.ToggleMusic(true);
+        PlayerPrefs.SetInt("isMusicMute", 0);
+        print(PlayerPrefs.GetInt("isMusicMute"));
 
         soundOnButton.SetActive(false);
         soundOffButton.SetActive(true);
@@ -134,8 +155,10 @@ public class ButtonManager : MonoBehaviour
 
     public void SoundOffButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         SoundManager.Instance.ToggleMusic(false);
+        PlayerPrefs.SetInt("isMusicMute", 1);
+        print(PlayerPrefs.GetInt("isMusicMute"));
 
         soundOnButton.SetActive(true);
         soundOffButton.SetActive(false);
@@ -143,7 +166,7 @@ public class ButtonManager : MonoBehaviour
 
     public void EffectsOnButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         SoundManager.Instance.ToggleEffects(true);
 
         effectsOnButton.SetActive(false);
@@ -152,7 +175,7 @@ public class ButtonManager : MonoBehaviour
 
     public void EffectsOffButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         SoundManager.Instance.ToggleEffects(false);
 
         effectsOnButton.SetActive(true);
@@ -161,12 +184,12 @@ public class ButtonManager : MonoBehaviour
 
     public void AboutButton()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
     }
 
     public void QuitButton()
     {
-        //SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(QuitButtonIsAnim(0.4f));
     }
 
@@ -179,7 +202,7 @@ public class ButtonManager : MonoBehaviour
 
     public void NoQuitButton()
     {
-        //SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(NoQuitButtonIsAnim(0.4f));
     }
 
@@ -192,13 +215,13 @@ public class ButtonManager : MonoBehaviour
 
     public void YesQuitButton()
     {
-        //SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         Application.Quit();
     }
 
     public void NextLevel()
     {
-        SoundManager.Instance.PlaySound(buttonSource);
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex) + 1);
     }
 
@@ -210,6 +233,7 @@ public class ButtonManager : MonoBehaviour
 
     public void StoreButtonMenu()
     {
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(StoreButtomMenuIsAnim(0.4f));
     }
 
@@ -222,6 +246,7 @@ public class ButtonManager : MonoBehaviour
 
     public void OptionsButtonMenu()
     {
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(OptionsButtonMenuIsAnim(0.4f));
     }
 
@@ -234,6 +259,7 @@ public class ButtonManager : MonoBehaviour
 
     public void Chapter1Button()
     {
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(Chapter1ButtonIsAnim(0.4f));
     }
 
@@ -247,6 +273,7 @@ public class ButtonManager : MonoBehaviour
 
     public void BackStoreButtonMenu()
     {
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(BackStoreButtonMenuIsAnim(0.4f));
     }
 
@@ -260,6 +287,8 @@ public class ButtonManager : MonoBehaviour
 
     public void BackOptionsButtonMenu()
     {
+        
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(BackOptionsButtonMenuIsAnim(0.4f));
     }
 
@@ -273,6 +302,7 @@ public class ButtonManager : MonoBehaviour
 
     public void BackChapter1Button()
     {
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(BackChapter1ButtonIsAnim(0.4f));
     }
 
@@ -286,17 +316,22 @@ public class ButtonManager : MonoBehaviour
 
     public void Level1Button()
     {
-        SoundManager.Instance.PlayBGM("BGM Chpt 1");
+        SoundManager.Instance.PlayBGM("BGM Ingame");
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         SceneManager.LoadScene(1);
     }
 
     public void Level2Button()
     {
+        SoundManager.Instance.PlayBGM("BGM Ingame");
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         SceneManager.LoadScene(2);
     }
 
     public void Level3Button()
     {
+        SoundManager.Instance.PlayBGM("BGM Ingame");
+        SoundManager.Instance.PlaySFX("SFX Button Touch");
         SceneManager.LoadScene(3);
     }
 }

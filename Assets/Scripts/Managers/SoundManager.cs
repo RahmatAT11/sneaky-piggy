@@ -7,14 +7,24 @@ using UnityEngine.SceneManagement;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
-    [SerializeField] private AudioSource bgmSource, effectSource;
+    //[SerializeField] private AudioSource bgmSource, effectSource;
     //DZ
-    [SerializeField] private AudioSource[] DZ_bgmSource, DZ_effectSource;
+    [SerializeField] private AudioSource[] BackgroundMusicSource, SFXSource;
 
     private void Awake()
     {
+        //initialization
+        Setting.SfxVolume = 1f;
+        Setting.BgmVolume = 1f;
+        
+        if (PlayerPrefs.GetInt("Initialization") == 0)
+        {
+            PlayerPrefs.SetInt("Initialization", 1);
+            PlayerPrefs.SetFloat("SliderVolumeValue", 1);
+        }
+        
+        //PlayerPrefs.SetFloat("SliderVolumeValue", 1f);
         DontDestroyOnLoad(gameObject);
-        //PlayerPrefs.SetInt("levelAt", 3);
         if (Instance == null)
         {
             Instance = this;
@@ -23,17 +33,27 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //print(SceneManager.GetActiveScene().name);
-        //if (SceneManager.GetActiveScene().name == "Chapter 1 (1)")
-        //{
-        //    DZ_PlayBGM("BGM Chpt 1");
-        //}
     }
 
-    public void PlaySound (AudioClip clip)
+    private void Start()
     {
-        effectSource.PlayOneShot(clip);
+        //Initialization
+        ChangeMasterVolume(PlayerPrefs.GetFloat("SliderVolumeValue"));
+    }
+
+    private void Update()
+    {
+        float BGMVolume = Setting.BgmVolume;
+        float SFXVolume = Setting.SfxVolume;
+        for (int i = 0; i < SFXSource.Length; i++)
+        {
+            SFXSource[i].GetComponent<AudioSource>().volume = BGMVolume;
+        }
+
+        for (int i = 0; i < BackgroundMusicSource.Length; i++)
+        {
+            BackgroundMusicSource[i].GetComponent<AudioSource>().volume = SFXVolume;
+        }
     }
 
     public void ChangeMasterVolume(float value)
@@ -43,27 +63,61 @@ public class SoundManager : MonoBehaviour
 
     public void ToggleMusic(bool value)
     {
-        bgmSource.mute = value;
+        //bgmSource.mute = value;
+        for (int i = 0; i < BackgroundMusicSource.Length; i++)
+        {
+            BackgroundMusicSource[i].mute = value;
+        }
     }
 
     public void ToggleEffects(bool value)
     {
-        effectSource.mute = value;
+        //effectSource.mute = value;
+        for (int i = 0; i < SFXSource.Length; i++)
+        {
+            SFXSource[i].mute = value;
+        }
+    }
+
+    public void PlaySFX(string name)
+    {
+        for (int i = 0; i < SFXSource.Length; i++)
+        {
+            if (SFXSource[i].name == name)
+            {
+                SFXSource[i].GetComponent<AudioSource>().Play();
+            }
+        }
     }
 
     public void PlayBGM(string name)
     {
-        for (int i = 0; i < DZ_bgmSource.Length; i++)
+        for (int i = 0; i < BackgroundMusicSource.Length; i++)
         {
-            DZ_bgmSource[i].GetComponent<AudioSource>().Stop();
+            BackgroundMusicSource[i].GetComponent<AudioSource>().Stop();
         }
 
-        for (int i = 0; i < DZ_bgmSource.Length; i++)
+        for (int i = 0; i < BackgroundMusicSource.Length; i++)
         {
-            if (DZ_bgmSource[i].name == name)
+            if (BackgroundMusicSource[i].name == name)
             {
-                DZ_bgmSource[i].GetComponent<AudioSource>().Play();
+                BackgroundMusicSource[i].GetComponent<AudioSource>().Play();
             }
+        }
+    }
+
+    public class Setting
+    {
+        public static float SfxVolume
+        {
+            get { return PlayerPrefs.GetFloat("sfxVolume"); }
+            set { PlayerPrefs.SetFloat("sfxVolume", value); }
+        }
+
+        public static float BgmVolume
+        {
+            get { return PlayerPrefs.GetFloat("bgmVolume"); }
+            set { PlayerPrefs.SetFloat("bgmVolume", value); }
         }
     }
 }

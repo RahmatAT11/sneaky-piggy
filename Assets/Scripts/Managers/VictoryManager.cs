@@ -173,8 +173,6 @@ namespace Managers
 
                     panelWin.gameObject.SetActive(true);
 
-                    //DZ
-                    
                     if (!hasSoundPlayed)
                     {
                         hasSoundPlayed = true;
@@ -195,7 +193,6 @@ namespace Managers
 
                     panelLose.gameObject.SetActive(true);
 
-                    //DZ
                     if (!hasSoundPlayed)
                     {
                         hasSoundPlayed = true;
