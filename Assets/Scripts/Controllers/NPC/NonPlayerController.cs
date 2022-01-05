@@ -48,8 +48,9 @@ namespace Controllers.NPC
         private void Update()
         {
             _currentState.Tick();
+            _currentDirectionState.Tick();
             _fieldOfView.SetOrigin(transform.position);
-            _fieldOfView.SetAimDirection(MovementDirection);
+            _fieldOfView.SetAimDirection(transform.up);
         }
 
         public void MoveNpcToPlayer()
