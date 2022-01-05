@@ -116,6 +116,14 @@ namespace Controllers.NPC
             }
         }
 
+        protected override void Sprinting()
+        {
+            if (IsSprinting)
+            {
+                base.Sprinting();
+            }
+        }
+
         private void CheckIndexPath()
         {
             if (_currentPathIndex > _defaultPath.Count - 1)
@@ -176,6 +184,7 @@ namespace Controllers.NPC
 
         public Vector3 GetMovementDirection()
         {
+            Debug.Log($"Y : {MovementDirection.y}");
             return MovementDirection;
         }
 

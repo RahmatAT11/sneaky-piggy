@@ -28,7 +28,7 @@ namespace State.Direction.NonPlayer
         
         private void ChangeAnimationDirection()
         {
-            if (NonPlayerController.GetMovementDirection().y <= 0.0f)
+            if (NonPlayerController.GetMovementDirection().y <= 0.1f)
             {
                 NonPlayerController.SetState(new SideNonPlayerState(NonPlayerController));
             }

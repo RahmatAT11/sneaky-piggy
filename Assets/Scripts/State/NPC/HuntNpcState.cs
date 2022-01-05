@@ -22,12 +22,13 @@ namespace State.NPC
         {
             NonPlayerController.IsSprintingEx = true;
             // play animation sprint
+            NonPlayerController.GetCurrentUac().animation.Play("Run");
             // take away stamina
         }
 
         public override void OnStateExit()
         {
-            
+            NonPlayerController.GetCurrentUac().animation.Play("Run");
             // Stop animation sprint
         }
     }

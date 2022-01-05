@@ -21,12 +21,10 @@ namespace State.Direction.NonPlayer
             if (NonPlayerController.GetMovementDirection() == Vector3.zero)
             {
                 NonPlayerController.GetCurrentUac().animation.Play("Idle");
+                return;
             }
-            else
-            {
-                NonPlayerController.GetCurrentUac().animation.Play(
-                    NonPlayerController.GetCurrentUac().animation.lastAnimationName);
-            }
+            
+            NonPlayerController.GetCurrentUac().animation.Play("Walk");
         }
 
         public override void OnStateExit()
@@ -36,7 +34,7 @@ namespace State.Direction.NonPlayer
         
         private void ChangeAnimationDirection()
         {
-            if (NonPlayerController.GetMovementDirection().y > 0.0f)
+            if (NonPlayerController.GetMovementDirection().y > 0.1f)
             {
                 NonPlayerController.SetState(new BackNonPlayerState(NonPlayerController));
             }
