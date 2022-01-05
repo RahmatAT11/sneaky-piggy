@@ -26,6 +26,7 @@ namespace Managers
         [SerializeField] private CanvasGroup panelWin, panelLose;
 
         private Transform playerPos;
+        private bool hasSoundPlayed = false;
         public int nextSceneLoad = 2;
         public int starCount;
 
@@ -155,6 +156,7 @@ namespace Managers
 
         private IEnumerator WaitingForWinLosePanelShow(float time, string winlose)
         {
+            
             switch (winlose)
             {
                 case "win":
@@ -171,6 +173,12 @@ namespace Managers
 
                     panelWin.gameObject.SetActive(true);
 
+                    if (!hasSoundPlayed)
+                    {
+                        hasSoundPlayed = true;
+                        SoundManager.Instance.PlayBGM("BGM Win");
+                    }            
+
                     break;
 
                 case "lose":
@@ -184,6 +192,12 @@ namespace Managers
                     yield return new WaitForSecondsRealtime(time);
 
                     panelLose.gameObject.SetActive(true);
+
+                    if (!hasSoundPlayed)
+                    {
+                        hasSoundPlayed = true;
+                        SoundManager.Instance.PlayBGM("BGM Lose");
+                    }
 
                     break;
             } 
