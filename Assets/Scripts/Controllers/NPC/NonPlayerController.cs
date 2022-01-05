@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Controllers.Player;
 using Controllers.Base;
+using DragonBones;
 using Interfaces;
 using Managers;
 using State.Direction;
 using State.NPC;
 using UnityEngine;
+using Transform = UnityEngine.Transform;
 
 namespace Controllers.NPC
 {
@@ -27,10 +29,11 @@ namespace Controllers.NPC
 
         private IWinnable _victoryManager;
 
-        [SerializeField] private List<BaseCharAnimationController> AnimationControllers;
+        [SerializeField] private List<BaseCharAnimationController> animationControllers;
 
         private NpcState _currentState;
         private DirectionNonPlayerState _currentDirectionState;
+        private UnityArmatureComponent _currentUac;
 
         private void Awake()
         {
@@ -44,7 +47,9 @@ namespace Controllers.NPC
 
         private void Start()
         {
+            SetCurrentUac(0);
             SetState(new IdleNpcState(this));
+            SetState(new SideNonPlayerState(this));
         }
 
         private void Update()
@@ -91,6 +96,23 @@ namespace Controllers.NPC
             Walking();
             Sprinting();
             Turning();
+        }
+
+        protected override void Turning()
+        {
+            bool lastSpriteFlipStatus = _currentUac._armature.flipX;
+            if (MovementDirection.x < 0)
+            {
+                _currentUac._armature.flipX = true;
+            }
+            else if (MovementDirection.x > 0)
+            {
+                _currentUac._armature.flipX = false;
+            }
+            else
+            {
+                _currentUac._armature.flipX = lastSpriteFlipStatus;
+            }
         }
 
         private void CheckIndexPath()
@@ -151,9 +173,27 @@ namespace Controllers.NPC
             return _defaultPath.Count;
         }
 
-        public List<BaseCharAnimationController> GetAnimationControllers()
+        public Vector3 GetMovementDirection()
         {
-            return AnimationControllers;
+            return MovementDirection;
+        }
+
+        public void SetCurrentUac(int index)
+        {
+            if (index >= animationControllers.Count) return;
+
+            animationControllers[index].SetActiveAnimation(true);
+            _currentUac = animationControllers[index].ArmatureComponent;
+        }
+
+        public UnityArmatureComponent GetCurrentUac()
+        {
+            return _currentUac;
+        }
+
+        public List<BaseCharAnimationController> GetListOfAnimationControllers()
+        {
+            return animationControllers;
         }
     }
 }
