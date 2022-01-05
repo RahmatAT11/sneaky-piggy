@@ -75,6 +75,7 @@ namespace Controllers.Treasure
             if (Vector3.Distance(transform.position, _player.position) < 0.5f)
             {
                 DestroyTreasure();
+                SoundManager.Instance.PlaySFX("SFX Ambil Barang");
             }
         }
 

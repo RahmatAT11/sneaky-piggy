@@ -42,7 +42,7 @@ namespace Controllers.House
             if (other.CompareTag("Player"))
             {
                 PlayerEntered?.Invoke(false);
-                SoundManager.Instance.PlayBGM("BGM Dalem Rumah");
+                SoundManager.Instance.PlayBGM("BGM Diluar Rumah");
             }
         }
     }
