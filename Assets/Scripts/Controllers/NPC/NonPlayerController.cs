@@ -27,6 +27,8 @@ namespace Controllers.NPC
 
         private IWinnable _victoryManager;
 
+        [SerializeField] private List<BaseCharAnimationController> AnimationControllers;
+
         private NpcState _currentState;
         private DirectionNonPlayerState _currentDirectionState;
 
@@ -147,6 +149,11 @@ namespace Controllers.NPC
         public int GetDefaultPathSize()
         {
             return _defaultPath.Count;
+        }
+
+        public List<BaseCharAnimationController> GetAnimationControllers()
+        {
+            return AnimationControllers;
         }
     }
 }
