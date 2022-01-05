@@ -16,6 +16,8 @@ namespace Managers
         [SerializeField] private Image onTimeFill;
         private float timeCounter;
         private bool _timeIsRunning, _onTimeIsRunning;
+        private bool hasSoundPlayed = false;
+
         private IWinnable _victoryManager;
 
         private void Start()
@@ -56,7 +58,14 @@ namespace Managers
                 if (timeRemaining <= timeOnTime)
                 {
                     _victoryManager.SetIsOnTime(false);
-                    SoundManager.Instance.PlayBGM("BGM Panic Time");
+
+                    if (!hasSoundPlayed)
+                    {
+                        hasSoundPlayed = true;
+                        SoundManager.Instance.PlayBGM("BGM Panic Time");
+                    }
+
+                    
                     panicDisplay.SetActive(true);
                     print("pppppppp");
                     
