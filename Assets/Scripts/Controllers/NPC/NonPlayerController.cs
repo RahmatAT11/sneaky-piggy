@@ -4,6 +4,7 @@ using Controllers.Player;
 using Controllers.Base;
 using Interfaces;
 using Managers;
+using State.Direction;
 using State.NPC;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ namespace Controllers.NPC
         private IWinnable _victoryManager;
 
         private NpcState _currentState;
+        private DirectionNonPlayerState _currentDirectionState;
 
         private void Awake()
         {
@@ -130,6 +132,15 @@ namespace Controllers.NPC
             _currentState = state;
 
             _currentState?.OnStateEnter();
+        }
+        
+        public void SetState(DirectionNonPlayerState state)
+        {
+            _currentDirectionState?.OnStateExit();
+
+            _currentDirectionState = state;
+
+            _currentDirectionState?.OnStateEnter();
         }
 
         public int GetDefaultPathSize()
