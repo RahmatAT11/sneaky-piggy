@@ -1,6 +1,6 @@
 using Controllers.NPC;
 
-namespace State.Direction
+namespace State.Direction.NonPlayer
 {
     public class BackNonPlayerState : DirectionNonPlayerState
     {
@@ -10,7 +10,28 @@ namespace State.Direction
 
         public override void Tick()
         {
-            throw new System.NotImplementedException();
+            ChangeAnimationDirection();
+        }
+        
+        public override void OnStateEnter()
+        {
+            NonPlayerController.SetCurrentUac(1);
+            
+            NonPlayerController.GetCurrentUac().animation.Play(
+                NonPlayerController.GetCurrentUac().animation.lastAnimationName);
+        }
+        
+        public override void OnStateExit()
+        {
+            NonPlayerController.GetListOfAnimationControllers()[1].SetActiveAnimation(false);
+        }
+        
+        private void ChangeAnimationDirection()
+        {
+            if (NonPlayerController.GetMovementDirection().y <= 0.0f)
+            {
+                NonPlayerController.SetState(new SideNonPlayerState(NonPlayerController));
+            }
         }
     }
 }

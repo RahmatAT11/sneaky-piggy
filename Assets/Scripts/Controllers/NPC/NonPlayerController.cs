@@ -6,6 +6,7 @@ using DragonBones;
 using Interfaces;
 using Managers;
 using State.Direction;
+using State.Direction.NonPlayer;
 using State.NPC;
 using UnityEngine;
 using Transform = UnityEngine.Transform;
