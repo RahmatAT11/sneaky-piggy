@@ -18,18 +18,15 @@ public class ButtonManager : MonoBehaviour
     {
         DOTweenManager = GetComponent<DotweenUIManager>();
         print(SceneManager.GetActiveScene().name);
-        if (SceneManager.GetActiveScene().name == "Main Menu")
+        if (PlayerPrefs.GetInt("isMusicMute") == 1)
         {
-            if (PlayerPrefs.GetInt("isMusicMute") == 0)
-            {
-                soundOnButton.SetActive(false);
-                soundOffButton.SetActive(true);
-            }
-            else if (PlayerPrefs.GetInt("isMusicMute") == 1)
-            {
-                soundOnButton.SetActive(true);
-                soundOffButton.SetActive(false);
-            }
+            soundOnButton.SetActive(false);
+            soundOffButton.SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("isMusicMute") == 0)
+        {
+            soundOnButton.SetActive(true);
+            soundOffButton.SetActive(false);
         }
     }
 

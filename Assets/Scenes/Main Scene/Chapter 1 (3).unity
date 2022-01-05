@@ -12463,6 +12463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slider: {fileID: 1391447109}
+  _optionPanel: {fileID: 690258891}
 --- !u!114 &1391447109
 MonoBehaviour:
   m_ObjectHideFlags: 0

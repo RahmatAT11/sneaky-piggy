@@ -556,8 +556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b411d6aa7317cc4186f6f1edf99db8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmSource: {fileID: 8059162150215005845}
-  effectSource: {fileID: 0}
   BackgroundMusicSource:
   - {fileID: 8059162150215005845}
   - {fileID: 7029894710185718845}

@@ -7,13 +7,10 @@ using UnityEngine.SceneManagement;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
-    //[SerializeField] private AudioSource bgmSource, effectSource;
-    //DZ
     [SerializeField] private AudioSource[] BackgroundMusicSource, SFXSource;
 
     private void Awake()
     {
-        //initialization
         Setting.SfxVolume = 1f;
         Setting.BgmVolume = 1f;
         
@@ -23,7 +20,6 @@ public class SoundManager : MonoBehaviour
             PlayerPrefs.SetFloat("SliderVolumeValue", 1);
         }
         
-        //PlayerPrefs.SetFloat("SliderVolumeValue", 1f);
         DontDestroyOnLoad(gameObject);
         if (Instance == null)
         {
@@ -37,7 +33,6 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        //Initialization
         ChangeMasterVolume(PlayerPrefs.GetFloat("SliderVolumeValue"));
     }
 
@@ -63,7 +58,6 @@ public class SoundManager : MonoBehaviour
 
     public void ToggleMusic(bool value)
     {
-        //bgmSource.mute = value;
         for (int i = 0; i < BackgroundMusicSource.Length; i++)
         {
             BackgroundMusicSource[i].mute = value;
@@ -72,7 +66,6 @@ public class SoundManager : MonoBehaviour
 
     public void ToggleEffects(bool value)
     {
-        //effectSource.mute = value;
         for (int i = 0; i < SFXSource.Length; i++)
         {
             SFXSource[i].mute = value;
