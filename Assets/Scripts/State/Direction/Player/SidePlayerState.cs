@@ -18,15 +18,9 @@ namespace State.Direction.Player
         {
             PlayerController.SetCurrentUac(0);
 
-            if (PlayerController.GetMovementDirection() == Vector3.zero)
-            {
-                PlayerController.GetCurrentUac().animation.Play("Idle");
-            }
-            else
-            {
-                PlayerController.GetCurrentUac().animation.Play(
-                    PlayerController.GetCurrentUac().animation.lastAnimationName);
-            }
+            PlayerController.GetCurrentUac().animation.Play(PlayerController.GetMovementDirection() == Vector3.zero
+                ? "Idle"
+                : PlayerController.GetCurrentUac().animation.lastAnimationName);
         }
 
         public override void OnStateExit()

@@ -58,7 +58,7 @@ namespace Controllers.NPC
             _currentState.Tick();
             _currentDirectionState.Tick();
             _fieldOfView.SetOrigin(transform.position);
-            _fieldOfView.SetAimDirection(transform.up);
+            _fieldOfView.SetAimDirection(MovementDirection);
         }
 
         public void MoveNpcToPlayer()
@@ -184,7 +184,6 @@ namespace Controllers.NPC
 
         public Vector3 GetMovementDirection()
         {
-            Debug.Log($"Y : {MovementDirection.y}");
             return MovementDirection;
         }
 
