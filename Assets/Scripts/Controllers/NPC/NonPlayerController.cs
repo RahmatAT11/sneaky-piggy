@@ -26,6 +26,7 @@ namespace Controllers.NPC
 
         private bool _isMoveToNewPath;
         private bool _isPlayerDetected;
+        public bool IsStandingStill { get; set; }
         public bool IsPlayerDetected => _isPlayerDetected;
 
         private IWinnable _victoryManager;
@@ -36,14 +37,20 @@ namespace Controllers.NPC
         private DirectionNonPlayerState _currentDirectionState;
         private UnityArmatureComponent _currentUac;
 
+        private Transform _lookDirection;
+
         private void Awake()
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
             _paths = FindObjectOfType<PathsController>();
             _fieldOfView = FindObjectOfType<FieldOfView>();
             _victoryManager = FindObjectOfType<VictoryManager>();
+
+            _lookDirection = GameObject.Find("Look Direction").transform;
             
             _defaultPath = _paths.NpcPath;
+
+            IsStandingStill = true;
         }
 
         private void Start()
@@ -57,8 +64,17 @@ namespace Controllers.NPC
         {
             _currentState.Tick();
             _currentDirectionState.Tick();
-            _fieldOfView.SetOrigin(transform.position);
-            _fieldOfView.SetAimDirection(MovementDirection);
+            _fieldOfView.SetOrigin(transform.localPosition);
+            _fieldOfView.SetAimDirection(_lookDirection.position);
+        }
+
+        public void LookDirection()
+        {
+            if (IsStandingStill)
+            {
+                Vector3 lookAt = _defaultPath[0].position;
+                _lookDirection.position = (lookAt - transform.position).normalized;
+            }
         }
 
         public void MoveNpcToPlayer()
@@ -87,6 +103,7 @@ namespace Controllers.NPC
                 if (_isMoveToNewPath)
                 {
                     MovementDirection = (_defaultPath[_currentPathIndex].position - transform.position).normalized;
+                    _lookDirection.position = MovementDirection;
                     StartCoroutine(WaitForNextPathAvailable());
                 }
             }
@@ -102,11 +119,11 @@ namespace Controllers.NPC
         protected override void Turning()
         {
             bool lastSpriteFlipStatus = _currentUac._armature.flipX;
-            if (MovementDirection.x < 0)
+            if (_lookDirection.position.x < 0)
             {
                 _currentUac._armature.flipX = true;
             }
-            else if (MovementDirection.x > 0)
+            else if (_lookDirection.position.x > 0)
             {
                 _currentUac._armature.flipX = false;
             }

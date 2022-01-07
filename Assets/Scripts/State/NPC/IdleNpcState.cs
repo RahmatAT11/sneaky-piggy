@@ -1,5 +1,4 @@
 using Controllers.NPC;
-using UnityEngine;
 
 namespace State.NPC
 {
@@ -33,18 +32,16 @@ namespace State.NPC
 
         public override void OnStateEnter()
         {
+            NonPlayerController.IsStandingStill = true;
+            NonPlayerController.LookDirection();
             CheckIfPathsAvailable();
             NonPlayerController.GetCurrentUac().animation.Play("Idle");
         }
 
         public override void OnStateExit()
         {
+            NonPlayerController.IsStandingStill = false;
             NonPlayerController.GetCurrentUac().animation.Stop("Idle");
-        }
-
-        private bool IsMoving()
-        {
-            return NonPlayerController.GetMovementDirection() != Vector3.zero;
         }
     }
 }
