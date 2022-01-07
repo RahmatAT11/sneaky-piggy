@@ -26,6 +26,7 @@ namespace Controllers.NPC
 
         private bool _isMoveToNewPath;
         private bool _isPlayerDetected;
+        public bool IsStandingStill { get; set; }
         public bool IsPlayerDetected => _isPlayerDetected;
 
         private IWinnable _victoryManager;
@@ -48,6 +49,8 @@ namespace Controllers.NPC
             _lookDirection = GameObject.Find("Look Direction").transform;
             
             _defaultPath = _paths.NpcPath;
+
+            IsStandingStill = true;
         }
 
         private void Start()
@@ -67,8 +70,11 @@ namespace Controllers.NPC
 
         public void LookDirection()
         {
-            Vector3 lookAt = _defaultPath[0].position;
-            _lookDirection.position = (lookAt - transform.position).normalized;
+            if (IsStandingStill)
+            {
+                Vector3 lookAt = _defaultPath[0].position;
+                _lookDirection.position = (lookAt - transform.position).normalized;
+            }
         }
 
         public void MoveNpcToPlayer()
@@ -97,6 +103,7 @@ namespace Controllers.NPC
                 if (_isMoveToNewPath)
                 {
                     MovementDirection = (_defaultPath[_currentPathIndex].position - transform.position).normalized;
+                    _lookDirection.position = MovementDirection;
                     StartCoroutine(WaitForNextPathAvailable());
                 }
             }
