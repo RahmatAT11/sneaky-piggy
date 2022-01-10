@@ -4,6 +4,7 @@ using Controllers.Joystick;
 using Controllers.Base;
 using DragonBones;
 using Interfaces.Player;
+using ScriptableData.Ability;
 using State.Direction;
 using State.Direction.Player;
 using State.Player;
@@ -32,6 +33,8 @@ namespace Controllers.Player
 
         private bool hasSprintSoundPlayed;
         private bool hasWalkSoundPlayed;
+        
+        public PlayerAbility PlayerAbility { get; set; }
 
         private void Awake()
         {
