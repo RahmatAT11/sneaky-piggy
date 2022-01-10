@@ -73,5 +73,11 @@ namespace Controllers.Player
 
             _regen = null;
         }
+
+        public void SetUpStaminaAbility(int maxStamina, float regenerateTick)
+        {
+            this.maxStamina = maxStamina;
+            this.regenerateTick = regenerateTick;
+        }
     }
 }

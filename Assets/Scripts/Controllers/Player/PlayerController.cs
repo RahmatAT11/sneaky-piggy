@@ -33,8 +33,11 @@ namespace Controllers.Player
 
         private bool hasSprintSoundPlayed;
         private bool hasWalkSoundPlayed;
+
+        public delegate PlayerAbility LevelLoad();
+        public static event LevelLoad OnLevelLoaded;
         
-        public PlayerAbility PlayerAbility { get; set; }
+        public PlayerAbility PlayerAbility { get; private set; }
 
         private void Awake()
         {
@@ -48,11 +51,23 @@ namespace Controllers.Player
         {
             //MovementSpeed = 0.5f;
             //_sprintSpeedMultiplier = 5f;
-            
+
+            PlayerAbility = OnLevelLoaded?.Invoke();
+            SetUpPlayerAbility();
+
             SetCurrentUac(0);
             _staminaSystem.Amount = staminaUseAmount;
             SetState(new IdlePlayerState(this));
             SetState(new SidePlayerState(this));
+        }
+
+        private void SetUpPlayerAbility()
+        {
+            staminaUseAmount = PlayerAbility.staminaUseAmount;
+            movementSpeed = PlayerAbility.movementSpeed;
+            sprintSpeedMultiplier = PlayerAbility.sprintSpeedMultiplier;
+
+            _staminaSystem.SetUpStaminaAbility(PlayerAbility.maxStamina, PlayerAbility.regenerateTick);
         }
 
         private void Update()

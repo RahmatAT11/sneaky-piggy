@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using Controllers.Player;
+using ScriptableData.Ability;
 using UnityEngine;
 
-public class AbilityLoaderManager : MonoBehaviour
+namespace Managers
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AbilityLoaderManager : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private PlayerAbility levelPlayerAbility;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Start()
+        {
+            PlayerController.OnLevelLoaded += LoadPlayerAbility;
+        }
+
+        private void OnDestroy()
+        {
+            PlayerController.OnLevelLoaded -= LoadPlayerAbility;
+        }
+
+        private PlayerAbility LoadPlayerAbility()
+        {
+            return levelPlayerAbility;
+        }
     }
 }
