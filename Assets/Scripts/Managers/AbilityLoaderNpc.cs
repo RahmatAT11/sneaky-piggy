@@ -13,11 +13,12 @@ namespace Managers
         private void Awake()
         {
             _spawnManager = GetComponent<SpawnManager>();
+        }
 
-            if (_spawnManager.GetCharacterSpawned().gameObject.layer != LayerMask.GetMask("Enemy")) return;
-            NonPlayerController npc = _spawnManager.GetCharacterSpawned() as NonPlayerController;
+        private void Start()
+        {
+            var npc = _spawnManager.GetSpawnedNpc();
             
-            if (npc == null) return;
             npc.SetFieldOfDetection(npcAbility.fieldOfView, npcAbility.viewDistance);
             npc.SetMovement(npcAbility.movementSpeed, npcAbility.sprintSpeedMultiplier);
         }

@@ -48,13 +48,13 @@ namespace Controllers.Player
         {
             //MovementSpeed = 0.5f;
             //_sprintSpeedMultiplier = 5f;
-
-            SetUpPlayerAbility();
-
+            
             SetCurrentUac(0);
-            _staminaSystem.Amount = staminaUseAmount;
             SetState(new IdlePlayerState(this));
             SetState(new SidePlayerState(this));
+            
+            SetUpPlayerAbility();
+            _staminaSystem.Amount = staminaUseAmount;
         }
 
         private void SetUpPlayerAbility()
