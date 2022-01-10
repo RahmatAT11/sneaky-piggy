@@ -33,8 +33,6 @@ namespace Controllers.Player
 
         private bool hasSprintSoundPlayed;
         private bool hasWalkSoundPlayed;
-        
-        public PlayerAbility PlayerAbility { get; set; }
 
         private void Awake()
         {
@@ -53,17 +51,16 @@ namespace Controllers.Player
             SetState(new IdlePlayerState(this));
             SetState(new SidePlayerState(this));
             
-            SetUpPlayerAbility();
             _staminaSystem.Amount = staminaUseAmount;
         }
 
-        private void SetUpPlayerAbility()
+        public void SetUpPlayerAbility(PlayerAbility playerAbility)
         {
-            staminaUseAmount = PlayerAbility.staminaUseAmount;
-            movementSpeed = PlayerAbility.movementSpeed;
-            sprintSpeedMultiplier = PlayerAbility.sprintSpeedMultiplier;
+            staminaUseAmount = playerAbility.staminaUseAmount;
+            MovementSpeed = playerAbility.movementSpeed;
+            SprintSpeedMultiplier = playerAbility.sprintSpeedMultiplier;
 
-            _staminaSystem.SetUpStaminaAbility(PlayerAbility.maxStamina, PlayerAbility.regenerateTick);
+            _staminaSystem.SetUpStaminaAbility(playerAbility.maxStamina, playerAbility.regenerateTick);
         }
 
         private void Update()

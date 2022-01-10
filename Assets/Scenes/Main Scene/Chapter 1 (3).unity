@@ -8697,8 +8697,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 989753305}
-  - component: {fileID: 989753304}
   - component: {fileID: 989753306}
+  - component: {fileID: 989753304}
   m_Layer: 0
   m_Name: Spawn Point Player
   m_TagString: Untagged
@@ -8715,10 +8715,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 989753303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6723ff7a7407e350ab380951754917a5, type: 3}
+  m_Script: {fileID: 11500000, guid: a95d97a9ae104d319172436441276758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 7344144453426615436, guid: 0ad13ef9fd180adaeb555ce4df241a56, type: 3}
+  player: {fileID: 7344144453426615436, guid: 0ad13ef9fd180adaeb555ce4df241a56, type: 3}
 --- !u!4 &989753305
 Transform:
   m_ObjectHideFlags: 0

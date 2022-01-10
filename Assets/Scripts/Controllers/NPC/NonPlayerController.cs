@@ -5,6 +5,7 @@ using Controllers.Base;
 using DragonBones;
 using Interfaces;
 using Managers;
+using ScriptableData.Ability;
 using State.Direction;
 using State.Direction.NonPlayer;
 using State.NPC;
@@ -230,8 +231,8 @@ namespace Controllers.NPC
 
         public void SetMovement(float movementSpeed, float sprintSpeedMultiplier)
         {
-            this.movementSpeed = movementSpeed;
-            this.sprintSpeedMultiplier = sprintSpeedMultiplier;
+            this.MovementSpeed = movementSpeed;
+            this.SprintSpeedMultiplier = sprintSpeedMultiplier;
         }
     }
 }
