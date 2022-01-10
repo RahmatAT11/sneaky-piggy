@@ -11,5 +11,10 @@ namespace Managers
         {
             Instantiate(characterPrefab, transform.position, transform.rotation);
         }
+
+        public BaseCharController GetCharacterSpawned()
+        {
+            return characterPrefab;
+        }
     }
 }

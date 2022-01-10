@@ -6,21 +6,18 @@ namespace Managers
 {
     public class AbilityLoaderManager : MonoBehaviour
     {
-        [SerializeField] private PlayerAbility levelPlayerAbility;
+        private SpawnManager _spawnManager;
+        [SerializeField] private PlayerAbility playerAbility;
 
-        private void Start()
+        private void Awake()
         {
-            PlayerController.OnLevelLoaded += LoadPlayerAbility;
-        }
+            _spawnManager = GetComponent<SpawnManager>();
 
-        private void OnDestroy()
-        {
-            PlayerController.OnLevelLoaded -= LoadPlayerAbility;
-        }
-
-        private PlayerAbility LoadPlayerAbility()
-        {
-            return levelPlayerAbility;
+            if (_spawnManager.GetCharacterSpawned().gameObject.CompareTag("Player")) return;
+            PlayerController playerController = _spawnManager.GetCharacterSpawned() as PlayerController;
+            
+            if (playerController == null) return;
+            playerController.PlayerAbility = playerAbility;
         }
     }
 }

@@ -33,11 +33,8 @@ namespace Controllers.Player
 
         private bool hasSprintSoundPlayed;
         private bool hasWalkSoundPlayed;
-
-        public delegate PlayerAbility LevelLoad();
-        public static event LevelLoad OnLevelLoaded;
         
-        public PlayerAbility PlayerAbility { get; private set; }
+        public PlayerAbility PlayerAbility { get; set; }
 
         private void Awake()
         {
@@ -52,7 +49,6 @@ namespace Controllers.Player
             //MovementSpeed = 0.5f;
             //_sprintSpeedMultiplier = 5f;
 
-            PlayerAbility = OnLevelLoaded?.Invoke();
             SetUpPlayerAbility();
 
             SetCurrentUac(0);

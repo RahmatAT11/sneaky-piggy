@@ -221,5 +221,17 @@ namespace Controllers.NPC
         {
             return animationControllers;
         }
+
+        public void SetFieldOfDetection(float fieldOfView, float viewDistance)
+        {
+            _fieldOfView.SetFov(fieldOfView);
+            _fieldOfView.SetViewDistance(viewDistance);
+        }
+
+        public void SetMovement(float movementSpeed, float sprintSpeedMultiplier)
+        {
+            this.movementSpeed = movementSpeed;
+            this.sprintSpeedMultiplier = sprintSpeedMultiplier;
+        }
     }
 }
