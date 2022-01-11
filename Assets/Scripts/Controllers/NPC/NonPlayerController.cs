@@ -5,7 +5,6 @@ using Controllers.Base;
 using DragonBones;
 using Interfaces;
 using Managers;
-using ScriptableData.Ability;
 using State.Direction;
 using State.Direction.NonPlayer;
 using State.NPC;
@@ -43,13 +42,7 @@ namespace Controllers.NPC
         private void Awake()
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
-            _paths = FindObjectOfType<PathsController>();
-            _fieldOfView = FindObjectOfType<FieldOfView>();
             _victoryManager = FindObjectOfType<VictoryManager>();
-
-            _lookDirection = GameObject.Find("Look Direction").transform;
-            
-            _defaultPath = _paths.NpcPath;
 
             IsStandingStill = true;
         }
@@ -233,6 +226,22 @@ namespace Controllers.NPC
         {
             this.MovementSpeed = movementSpeed;
             this.SprintSpeedMultiplier = sprintSpeedMultiplier;
+        }
+
+        public void SetLookDirection(Transform dir)
+        {
+            _lookDirection = dir;
+        }
+
+        public void SetFovObject(FieldOfView fov)
+        {
+            _fieldOfView = fov;
+        }
+
+        public void SetPaths(PathsController paths)
+        {
+            _paths = paths;
+            _defaultPath = _paths.NpcPath;
         }
     }
 }
