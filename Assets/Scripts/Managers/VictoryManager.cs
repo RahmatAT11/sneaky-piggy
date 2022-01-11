@@ -130,15 +130,27 @@ namespace Managers
                     star2.SetActive(true);
                     star3.SetActive(true);
                     starCount = 3;
+
+                    //CoinManager.Instance.coinValue = 30;
+                    //PlayerPrefs.SetInt("Coin", CoinManager.Instance.coinValue);
+
                     break;
                 case "2B":
                     star1.SetActive(true);
                     star2.SetActive(true);
                     starCount = 2;
+
+                    //CoinManager.Instance.coinValue = 20;
+                    //PlayerPrefs.SetInt("Coin", CoinManager.Instance.coinValue);
+
                     break;
                 case "1B":
                     star1.SetActive(true);
                     starCount = 1;
+
+                    //CoinManager.Instance.coinValue = 10;
+                    //PlayerPrefs.SetInt("Coin", CoinManager.Instance.coinValue);
+
                     break;
                 case "0B":
                     star1.SetActive(false);
