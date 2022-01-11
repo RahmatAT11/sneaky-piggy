@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb3e2744c5bea6f2aa266ab2c218e72, type: 3}
   m_Name: Level 3
   m_EditorClassIdentifier: 
-  movementSpeed: 0
-  sprintSpeedMultiplier: 0
-  staminaUseAmount: 0
-  maxStamina: 0
-  regenerateTick: 0
+  movementSpeed: 2.45
+  sprintSpeedMultiplier: 5
+  staminaUseAmount: 1
+  maxStamina: 7
+  regenerateTick: 0.09

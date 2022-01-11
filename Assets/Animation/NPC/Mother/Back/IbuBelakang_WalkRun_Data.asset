@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a64e5b0e436d4bed9780211ae245f7b, type: 3}
+  m_Name: IbuBelakang_WalkRun_Data
+  m_EditorClassIdentifier: 
+  dataName: IbuBelakang_WalkRun
+  dragonBonesJSON: {fileID: 4900000, guid: 1ef71a3f731b699f0bea62738df03295, type: 3}
+  textureAtlas:
+  - textureAtlasJSON: {fileID: 4900000, guid: a6d2581a46f26dde089418fe766cd9ea, type: 3}
+    texture: {fileID: 2800000, guid: 3a04bf62716ea0a7f9d622f92ee2ccfd, type: 3}
+    material: {fileID: 2100000, guid: b38f7630c3bfb2a4895bb667f9a3cd9c, type: 2}
+    uiMaterial: {fileID: 0}
