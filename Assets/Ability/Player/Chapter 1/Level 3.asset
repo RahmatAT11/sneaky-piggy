@@ -16,4 +16,4 @@ MonoBehaviour:
   sprintSpeedMultiplier: 5
   staminaUseAmount: 1
   maxStamina: 7
-  regenerateTick: 1
+  regenerateTick: 0.09
