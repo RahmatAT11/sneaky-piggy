@@ -1,4 +1,4 @@
-﻿using PixelPlay.OffScreenIndicator;
+﻿using IndicatorFeature.OffScreenIndicator;
 using System;
 using System.Collections.Generic;
 using System.Linq;

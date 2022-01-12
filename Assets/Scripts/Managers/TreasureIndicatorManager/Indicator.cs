@@ -25,7 +25,7 @@ public class Indicator : MonoBehaviour
 
     void Awake()
     {
-        indicatorImage = transform.GetComponent<Image>();
+        indicatorImage = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         distanceText = transform.GetComponentInChildren<Text>();
     }
 
