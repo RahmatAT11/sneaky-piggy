@@ -31,11 +31,17 @@ namespace Managers
             panicDisplay.SetActive(false);
 
             onTimeFill.fillAmount = 1;
+            timeText.gameObject.SetActive(false);
         }
 
         private void Update()
         {
             CheckCurrentTime();
+
+            if (timeRemaining < 14)
+            {
+                timeText.gameObject.SetActive(true);
+            }
         }
 
         private void CheckCurrentTime()
@@ -66,8 +72,7 @@ namespace Managers
                     }
 
                     
-                    panicDisplay.SetActive(true);
-                    print("pppppppp");
+                    //panicDisplay.SetActive(true);
                     
                 }
 
@@ -78,11 +83,12 @@ namespace Managers
         private void DisplayTime(float timeToDisplay)
         {
             timeToDisplay += 1;
-            
-            float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-            float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
-            timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            //float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+            //float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+            //timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            timeText.text = timeToDisplay.ToString("0");
         }
 
         private void DisplayOnTime()

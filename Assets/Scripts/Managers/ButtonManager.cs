@@ -13,6 +13,8 @@ public class ButtonManager : MonoBehaviour
 
     [SerializeField] private DotweenUIManager DOTweenManager;
 
+    private bool isPressChapter1, isPressOptionsMenu;
+
 
     private void Start()
     {
@@ -28,11 +30,30 @@ public class ButtonManager : MonoBehaviour
             soundOnButton.SetActive(true);
             soundOffButton.SetActive(false);
         }
+
+        isPressChapter1 = false;
+        isPressOptionsMenu = false;
     }
 
     private void Update()
     {
-        
+        if (isPressChapter1 == true)
+        {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                BackChapter1Button();
+                isPressChapter1 = false;
+            }
+        }
+
+        if (isPressOptionsMenu == true)
+        {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                BackOptionsButtonMenu();
+                isPressOptionsMenu = false;
+            }
+        }
     }
 
     public void PauseButton()
@@ -284,7 +305,7 @@ public class ButtonManager : MonoBehaviour
 
     public void BackOptionsButtonMenu()
     {
-        
+        isPressOptionsMenu = true;
         SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(BackOptionsButtonMenuIsAnim(0.4f));
     }
@@ -299,6 +320,7 @@ public class ButtonManager : MonoBehaviour
 
     public void BackChapter1Button()
     {
+        isPressChapter1 = true;
         SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(BackChapter1ButtonIsAnim(0.4f));
     }
