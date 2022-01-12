@@ -76,16 +76,17 @@ public class HidingManger : MonoBehaviour
 
     private void HidePlayer(bool isHide)
     {
-        _player.GetComponent<PlayerController>().enabled = !isHide;
+        PlayerController player = _player.GetComponent<PlayerController>();
+        player.enabled = !isHide;
         if (isHide)
         {
             _player.layer = LayerMask.NameToLayer("Player");
-            _player.GetComponentInChildren<UnityArmatureComponent>().sortingOrder = -1;
+            player.GetCurrentUac().sortingOrder = -5;
         }
         else
         {
             _player.layer = LayerMask.NameToLayer("Objects");
-            _player.GetComponentInChildren<UnityArmatureComponent>().sortingOrder = 2;
+            player.GetCurrentUac().sortingOrder = 3;
         }
     }
 
