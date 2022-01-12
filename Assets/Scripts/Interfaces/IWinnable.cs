@@ -10,5 +10,6 @@ namespace Interfaces
         public void SetIsTreasureAllCollected(bool isAllTreasureCollected);
         public void SetIsPlayerDetected(bool isPlayerDetected);
         public void SetIsOnTime(bool isOnTime);
+        public void IndicatorCondition();
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Managers;
+using Interfaces;
 
 namespace Controllers.House
 {
@@ -9,10 +11,29 @@ namespace Controllers.House
 
         public delegate void PlayerEnter(bool isEnter);
         public static event PlayerEnter PlayerEntered;
+        private bool isInOutdoor;
+        [SerializeField] GameObject IndicatorMainTresuare, IndicatorExit;
+        private IWinnable _victoryManager;
 
         private void Start()
         {
             PlayerEntered += ShowInsideHouse;
+            _victoryManager = FindObjectOfType<VictoryManager>();
+            isInOutdoor = true;
+        }
+
+        private void Update()
+        {
+            if (isInOutdoor == true)
+            {
+                IndicatorMainTresuare.GetComponent<Target>().enabled = false;
+                IndicatorExit.GetComponent<Target>().enabled = false;
+            }
+
+            if (isInOutdoor == false)
+            {
+                _victoryManager.IndicatorCondition();
+            }
         }
 
         private void OnDestroy()
@@ -34,6 +55,7 @@ namespace Controllers.House
             {
                 PlayerEntered?.Invoke(true);
                 SoundManager.Instance.PlayBGM("BGM Dalam Rumah");
+                isInOutdoor = false;
             }
         }
 
@@ -43,6 +65,7 @@ namespace Controllers.House
             {
                 PlayerEntered?.Invoke(false);
                 SoundManager.Instance.PlayBGM("BGM Diluar Rumah");
+                isInOutdoor = true;
             }
         }
     }

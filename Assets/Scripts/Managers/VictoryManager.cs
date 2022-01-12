@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Controllers.Camera;
 using Controllers.Treasure;
+using Controllers.House;
 using DG.Tweening;
 
 namespace Managers
@@ -19,7 +20,7 @@ namespace Managers
         private bool _isOnTime;
         private bool _isAllTreasureCollected;
 
-        [SerializeField] private GameObject star1, star2, star3, controllerUI, cameraController;
+        [SerializeField] private GameObject star1, star2, star3, controllerUI, cameraController, IndicatorMainTresuare, IndicatorExit;
         [SerializeField] private Image detectedInfoFill;
         [SerializeField] private GameObject particlePrefabs, playerObj;
         [SerializeField] private DotweenUIManager DOTweenManager;
@@ -252,6 +253,20 @@ namespace Managers
         public int GetStarStatus(string level)
         {
             return PlayerPrefs.GetInt("Level" + level);
+        }
+
+        public void IndicatorCondition()
+        {
+            if (_isMainTreasureGet == true)
+            {
+                IndicatorMainTresuare.GetComponent<Target>().enabled = false;
+                IndicatorExit.GetComponent<Target>().enabled = true;
+            }
+            if (_isMainTreasureGet == false)
+            {
+                IndicatorMainTresuare.GetComponent<Target>().enabled = true;
+                IndicatorExit.GetComponent<Target>().enabled = false;
+            }
         }
     }
 }

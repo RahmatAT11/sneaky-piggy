@@ -23,11 +23,6 @@ public class Target : MonoBehaviour
 
     [HideInInspector] public Indicator indicator;
 
-    private void Start()
-    {
-        GetComponent<Image>().sprite = indicatorIcon;
-    }
-
     public Sprite TargetIcon
     {
         get
