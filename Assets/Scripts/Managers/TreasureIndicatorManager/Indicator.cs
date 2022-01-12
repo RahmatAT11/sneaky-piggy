@@ -29,6 +29,11 @@ public class Indicator : MonoBehaviour
         distanceText = transform.GetComponentInChildren<Text>();
     }
 
+    public void SetImageIcon(Sprite icon)
+    {
+        indicatorImage.GetComponent<Image>().sprite = icon;
+    }
+    
     public void SetImageColor(Color color)
     {
         indicatorImage.color = color;
