@@ -20,16 +20,19 @@ namespace Managers
         private bool _isOnTime;
         private bool _isAllTreasureCollected;
 
-        [SerializeField] private GameObject star1, star2, star3, controllerUI, cameraController, IndicatorMainTresuare, IndicatorExit;
+        [SerializeField] private GameObject star1, star2, star3, controllerUI, cameraController, IndicatorMainTresuare, IndicatorExit, Roof;
         [SerializeField] private Image detectedInfoFill;
         [SerializeField] private GameObject particlePrefabs, playerObj;
         [SerializeField] private DotweenUIManager DOTweenManager;
-        [SerializeField] private CanvasGroup panelWin, panelLose;
+        [SerializeField] private CanvasGroup panelWin, panelLose, kilau;
+        [SerializeField] private RectTransform borderWin, borderLose;
 
         private Transform playerPos;
         private bool hasSoundPlayed = false;
         public int nextSceneLoad = 2;
         public int starCount;
+
+        [SerializeField] private Vector3 finalPos, originalPos, currentPos;
 
         private void Start()
         {
@@ -43,6 +46,7 @@ namespace Managers
 
             panelWin.gameObject.SetActive(false);
             panelLose.gameObject.SetActive(false);
+            kilau.gameObject.SetActive(false);
             star1.SetActive(false);
             star2.SetActive(false);
             star3.SetActive(false);
@@ -82,19 +86,19 @@ namespace Managers
         {
             if (_isCatchByNpc)
             {
-                StartCoroutine(WaitingForWinLosePanelShow(2, "lose"));
+                StartCoroutine(WaitingForWinLosePanelShow(1f, "lose"));
                 return;
             }
 
             if (_isTimeRunningOut)
             {
-                StartCoroutine(WaitingForWinLosePanelShow(2, "lose"));
+                StartCoroutine(WaitingForWinLosePanelShow(1f, "lose"));
                 return;
             }
 
             if (_isMainTreasureGet && _isPlayerEscape)
             {
-                StartCoroutine(WaitingForWinLosePanelShow(2, "win"));
+                StartCoroutine(WaitingForWinLosePanelShow(1.5f, "win"));
 
                 if(_isOnTime && _isAllTreasureCollected && !_isPlayerDetected)
                 {
@@ -184,18 +188,28 @@ namespace Managers
 
                     yield return new WaitForSecondsRealtime(time);
 
-                    panelWin.gameObject.SetActive(true);
-
                     if (!hasSoundPlayed)
                     {
                         hasSoundPlayed = true;
                         SoundManager.Instance.PlayBGM("BGM Win");
-                    }            
 
+                        borderWin.DOAnchorPos(new Vector2(0, 9.5f), 0.8f);
+
+                        panelWin.gameObject.SetActive(true);
+                        panelWin.alpha = 0f;
+                        panelWin.DOFade(1f, 0.5f).SetUpdate(true);
+
+                        yield return new WaitForSecondsRealtime(0.45f);
+
+                        kilau.gameObject.SetActive(true);
+                        kilau.alpha = 0f;
+                        kilau.DOFade(1f, 0.2f).SetUpdate(true);
+                    }
                     break;
 
                 case "lose":
                     controllerUI.SetActive(false);
+                    Roof.SetActive(false);
                     GameObject.Instantiate(particlePrefabs, playerPos.position, Quaternion.identity);
                     playerObj.SetActive(false);
 
@@ -204,12 +218,18 @@ namespace Managers
 
                     yield return new WaitForSecondsRealtime(time);
 
-                    panelLose.gameObject.SetActive(true);
+                    //panelLose.gameObject.SetActive(true);
 
                     if (!hasSoundPlayed)
                     {
                         hasSoundPlayed = true;
                         SoundManager.Instance.PlayBGM("BGM Lose");
+
+                        borderLose.DOAnchorPos(new Vector2(0, 9.5f), 0.8f);
+
+                        panelLose.gameObject.SetActive(true);
+                        panelLose.alpha = 0f;
+                        panelLose.DOFade(1f, 0.5f).SetUpdate(true);
                     }
 
                     break;
