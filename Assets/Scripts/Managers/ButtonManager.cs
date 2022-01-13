@@ -13,8 +13,7 @@ public class ButtonManager : MonoBehaviour
 
     [SerializeField] private DotweenUIManager DOTweenManager;
 
-    private bool isPressChapter1, isPressOptionsMenu;
-
+    private bool isInChapterScene;
 
     private void Start()
     {
@@ -30,28 +29,16 @@ public class ButtonManager : MonoBehaviour
             soundOnButton.SetActive(true);
             soundOffButton.SetActive(false);
         }
-
-        isPressChapter1 = false;
-        isPressOptionsMenu = false;
+        isInChapterScene = true;
     }
 
     private void Update()
     {
-        if (isPressChapter1 == true)
+        if (isInChapterScene == true)
         {
             if (Input.GetKey(KeyCode.Escape))
             {
-                BackChapter1Button();
-                isPressChapter1 = false;
-            }
-        }
-
-        if (isPressOptionsMenu == true)
-        {
-            if (Input.GetKey(KeyCode.Escape))
-            {
-                BackOptionsButtonMenu();
-                isPressOptionsMenu = false;
+                QuitButton();
             }
         }
     }
@@ -216,6 +203,8 @@ public class ButtonManager : MonoBehaviour
         StartCoroutine(DOTweenManager.FadeOut(optionsPanel, duration));
         yield return new WaitForSecondsRealtime(duration);
         StartCoroutine(DOTweenManager.FadeIn(QuitWarningPanel, duration));
+
+        isInChapterScene = false;
     }
 
     public void NoQuitButton()
@@ -228,7 +217,9 @@ public class ButtonManager : MonoBehaviour
     {
         StartCoroutine(DOTweenManager.FadeOut(QuitWarningPanel, duration));
         yield return new WaitForSecondsRealtime(duration);
-        StartCoroutine(DOTweenManager.FadeIn(optionsPanel, duration));
+        //StartCoroutine(DOTweenManager.FadeIn(optionsPanel, duration));
+
+        isInChapterScene = true;
     }
 
     public void YesQuitButton()
@@ -264,6 +255,7 @@ public class ButtonManager : MonoBehaviour
 
     public void OptionsButtonMenu()
     {
+        isInChapterScene = false;
         SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(OptionsButtonMenuIsAnim(0.4f));
     }
@@ -277,6 +269,7 @@ public class ButtonManager : MonoBehaviour
 
     public void Chapter1Button()
     {
+        isInChapterScene = false;
         SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(Chapter1ButtonIsAnim(0.4f));
     }
@@ -305,7 +298,7 @@ public class ButtonManager : MonoBehaviour
 
     public void BackOptionsButtonMenu()
     {
-        isPressOptionsMenu = true;
+        isInChapterScene = true;
         SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(BackOptionsButtonMenuIsAnim(0.4f));
     }
@@ -320,7 +313,7 @@ public class ButtonManager : MonoBehaviour
 
     public void BackChapter1Button()
     {
-        isPressChapter1 = true;
+        isInChapterScene = true;
         SoundManager.Instance.PlaySFX("SFX Button Touch");
         StartCoroutine(BackChapter1ButtonIsAnim(0.4f));
     }
