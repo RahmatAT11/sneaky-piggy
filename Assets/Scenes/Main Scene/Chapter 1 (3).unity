@@ -1324,6 +1324,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3765058115198349388, guid: dc8a798a872657d8fabb6c7de974c9af, type: 3}
   m_PrefabInstance: {fileID: 78733424}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &78733426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8995376639164499321, guid: dc8a798a872657d8fabb6c7de974c9af, type: 3}
+  m_PrefabInstance: {fileID: 78733424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &89993638
 GameObject:
   m_ObjectHideFlags: 0
@@ -11638,8 +11643,9 @@ MonoBehaviour:
   IndicatorExit: {fileID: 129013033}
   Roof: {fileID: 1508142320}
   detectedInfoFill: {fileID: 910567325}
-  particlePrefabs: {fileID: 8652548598919181283, guid: 57d84123f14802e47b46ce3569fe66e6, type: 3}
+  particlePrefabs: {fileID: 5507930333706622517, guid: 20b9b973731b8154c8686b76738afd6d, type: 3}
   playerObj: {fileID: 0}
+  worldBorders: {fileID: 78733426}
   DOTweenManager: {fileID: 1007028028}
   panelWin: {fileID: 1616446698}
   panelLose: {fileID: 799050367}

@@ -22,13 +22,14 @@ namespace Managers
 
         [SerializeField] private GameObject star1, star2, star3, controllerUI, cameraController, IndicatorMainTresuare, IndicatorExit, Roof;
         [SerializeField] private Image detectedInfoFill;
-        [SerializeField] private GameObject particlePrefabs, playerObj;
+        [SerializeField] private GameObject particlePrefabs, playerObj, worldBorders;
         [SerializeField] private DotweenUIManager DOTweenManager;
         [SerializeField] private CanvasGroup panelWin, panelLose, kilau;
         [SerializeField] private RectTransform borderWin, borderLose;
 
         private Transform playerPos;
         private bool hasSoundPlayed = false;
+        private bool isHasNotLose = false;
         public int nextSceneLoad = 2;
         public int starCount;
 
@@ -50,6 +51,8 @@ namespace Managers
             star1.SetActive(false);
             star2.SetActive(false);
             star3.SetActive(false);
+
+            worldBorders.SetActive(true);
 
             //Time.timeScale = 1f;
 
@@ -86,6 +89,7 @@ namespace Managers
         {
             if (_isCatchByNpc)
             {
+                
                 StartCoroutine(WaitingForWinLosePanelShow(1f, "lose"));
                 return;
             }
@@ -178,6 +182,7 @@ namespace Managers
             {
                 case "win":
 
+                    worldBorders.SetActive(false);
                     if (nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
                     {
                         PlayerPrefs.SetInt("levelAt", nextSceneLoad);
@@ -210,11 +215,16 @@ namespace Managers
                 case "lose":
                     controllerUI.SetActive(false);
                     Roof.SetActive(false);
-                    GameObject.Instantiate(particlePrefabs, playerPos.position, Quaternion.identity);
-                    playerObj.SetActive(false);
+                    if(!isHasNotLose)
+                    {
+                        isHasNotLose = true;
+                        GameObject.Instantiate(particlePrefabs, playerPos.position, Quaternion.identity);
+                        playerObj.SetActive(false);
+                    }
+                    
 
                     yield return new WaitForSecondsRealtime(1);
-                    particlePrefabs.SetActive(false);
+                    //particlePrefabs.SetActive(false);
 
                     yield return new WaitForSecondsRealtime(time);
 
