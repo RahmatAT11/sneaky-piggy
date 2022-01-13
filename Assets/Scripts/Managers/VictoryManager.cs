@@ -218,6 +218,7 @@ namespace Managers
                     if(!isHasNotLose)
                     {
                         isHasNotLose = true;
+                        SoundManager.Instance.PlaySFX("SFX Random");
                         GameObject.Instantiate(particlePrefabs, playerPos.position, Quaternion.identity);
                         playerObj.SetActive(false);
                     }

@@ -24,6 +24,7 @@ namespace Controllers.House
             {
                 _isDoorOpened = true;
                 door.SetTrigger("IsPlayerEnter");
+                SoundManager.Instance.PlaySFX("SFX Random");
             }
         }
 

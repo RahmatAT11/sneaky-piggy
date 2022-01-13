@@ -73,6 +73,7 @@ namespace Controllers.NPC
 
         public void MoveNpcToPlayer()
         {
+            SoundManager.Instance.PlaySFX("SFX Random");
             MovementDirection = (_player.transform.position - transform.position).normalized;
             _victoryManager.SetIsPlayerDetected(true);
         }
