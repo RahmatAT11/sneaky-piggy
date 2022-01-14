@@ -81,12 +81,12 @@ public class HidingManger : MonoBehaviour
         player.enabled = !isHide;
         if (isHide)
         {
-            _player.layer = LayerMask.NameToLayer("Player");
+            _player.layer = 8;
             player.GetCurrentUac().sortingOrder = -5;
         }
         else
         {
-            _player.layer = LayerMask.NameToLayer("Objects");
+            _player.layer = 3;
             player.GetCurrentUac().sortingOrder = 3;
         }
     }

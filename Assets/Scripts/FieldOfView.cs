@@ -50,6 +50,7 @@ public class FieldOfView : MonoBehaviour
             {
                 // No hit
                 vertex = _origin + GetVectorFromAngle(angle) * viewDistance;
+                _detectedPlayer = null;
             }
             else
             {
