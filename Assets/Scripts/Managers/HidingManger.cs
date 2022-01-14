@@ -87,13 +87,15 @@ public class HidingManger : MonoBehaviour
         {
             _player.layer = 8;
             player.GetCurrentUac().sortingOrder = -5;
-            player.GetComponent<CapsuleCollider2D>().enabled = false;
+            player.GetComponent<CapsuleCollider2D>().isTrigger = true;
+            player.gameObject.tag = "Enemy";
         }
         else
         {
             _player.layer = 3;
             player.GetCurrentUac().sortingOrder = 3;
-            player.GetComponent<CapsuleCollider2D>().enabled = true;
+            player.GetComponent<CapsuleCollider2D>().isTrigger = false;
+            player.gameObject.tag = "Player";
         }
     }
 

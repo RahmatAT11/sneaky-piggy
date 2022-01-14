@@ -50,16 +50,14 @@ public class FieldOfView : MonoBehaviour
             {
                 // No hit
                 vertex = _origin + GetVectorFromAngle(angle) * viewDistance;
-                _detectedPlayer = null;
             }
             else
             {
                 // hit
                 vertex = raycastHit2D.point;
-                if (hitCollider.gameObject.CompareTag("Player"))
-                {
-                    _detectedPlayer = hitCollider.GetComponent<PlayerController>();
-                }
+                _detectedPlayer = 
+                    hitCollider.gameObject.CompareTag("Player") ? hitCollider.GetComponent<PlayerController>() : null;
+                Debug.Log($"Is player null? {_detectedPlayer == null}");
             }
             
             vertices[vertexIndex] = vertex;

@@ -159,7 +159,12 @@ namespace Controllers.NPC
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            PlayerController player = other.gameObject.GetComponent<PlayerController>();
+            PlayerController player = null;
+            if (other.gameObject.CompareTag("Player"))
+            {
+                player = other.gameObject.GetComponent<PlayerController>();
+            }
+            
             if (player == null)
                 return;
 

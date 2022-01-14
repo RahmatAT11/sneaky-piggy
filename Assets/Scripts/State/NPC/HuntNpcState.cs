@@ -11,6 +11,7 @@ namespace State.NPC
         public override void Tick()
         {
             NonPlayerController.MoveNpcToPlayer();
+            NonPlayerController.DetectPlayer();
             if (!NonPlayerController.IsPlayerDetected)
             {
                 NonPlayerController.SetState(new FollowPathNpcState(NonPlayerController));
@@ -28,7 +29,7 @@ namespace State.NPC
 
         public override void OnStateExit()
         {
-            NonPlayerController.GetCurrentUac().animation.Play("Run");
+            NonPlayerController.GetCurrentUac().animation.Stop("Run");
             // Stop animation sprint
         }
     }
