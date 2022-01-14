@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class HidingManger : MonoBehaviour
 {
-    [SerializeField] private GameObject _buttonHide1, _buttonHide2;
+    [SerializeField] private GameObject _buttonHide1, _buttonHide2, roof;
     private GameObject _player;
     [SerializeField] private bool isMove, isUnhide;
     private int _playerLastOrderInLayer;
@@ -51,6 +51,7 @@ public class HidingManger : MonoBehaviour
     {
         SoundManager.Instance.PlaySFX("SFX Hide In");
         isUnhide = false;
+        roof.SetActive(false);
 
         if (isUnhide == false)
         {
@@ -65,6 +66,7 @@ public class HidingManger : MonoBehaviour
     {
         SoundManager.Instance.PlaySFX("SFX Hide Out");
         isUnhide = true;
+        roof.SetActive(false);
 
         if (isUnhide == true)
         {
@@ -83,11 +85,13 @@ public class HidingManger : MonoBehaviour
         {
             _player.layer = 8;
             player.GetCurrentUac().sortingOrder = -5;
+            player.GetComponent<CapsuleCollider2D>().enabled = false;
         }
         else
         {
             _player.layer = 3;
             player.GetCurrentUac().sortingOrder = 3;
+            player.GetComponent<CapsuleCollider2D>().enabled = true;
         }
     }
 
