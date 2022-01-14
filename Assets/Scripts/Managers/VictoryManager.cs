@@ -197,6 +197,8 @@ namespace Managers
                     {
                         hasSoundPlayed = true;
                         SoundManager.Instance.PlayBGM("BGM Win");
+                        SoundManager.Instance.StopSFX("SFX Babi Jalan");
+                        SoundManager.Instance.StopSFX("SFX Babi Lari");
 
                         borderWin.DOAnchorPos(new Vector2(0, 9.5f), 0.8f);
 
@@ -236,6 +238,8 @@ namespace Managers
                     {
                         hasSoundPlayed = true;
                         SoundManager.Instance.PlayBGM("BGM Lose");
+                        SoundManager.Instance.StopSFX("SFX Babi Jalan");
+                        SoundManager.Instance.StopSFX("SFX Babi Lari");
 
                         borderLose.DOAnchorPos(new Vector2(0, 9.5f), 0.8f);
 

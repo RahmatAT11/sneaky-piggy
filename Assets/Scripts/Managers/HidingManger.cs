@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Controllers.Player;
 using DragonBones;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HidingManger : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class HidingManger : MonoBehaviour
 
     public void isButtonHide1()
     {
-        SoundManager.Instance.PlaySFX("Hide In");
+        SoundManager.Instance.PlaySFX("SFX Hide In");
         isUnhide = false;
 
         if (isUnhide == false)
@@ -62,7 +63,7 @@ public class HidingManger : MonoBehaviour
 
     public void isButtonHide2()
     {
-        SoundManager.Instance.PlaySFX("Hide Out");
+        SoundManager.Instance.PlaySFX("SFX Hide Out");
         isUnhide = true;
 
         if (isUnhide == true)
