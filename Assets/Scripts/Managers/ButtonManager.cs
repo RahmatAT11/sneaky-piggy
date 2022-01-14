@@ -21,7 +21,7 @@ public class ButtonManager : MonoBehaviour
         print(SceneManager.GetActiveScene().name);
         if (PlayerPrefs.GetInt("isMusicMute") == 0)
         {
-            soundOnButton.SetActive(false);
+            //soundOnButton.SetActive(false);
             soundOffButton.SetActive(true);
         }
         else if (PlayerPrefs.GetInt("isMusicMute") == 1)
