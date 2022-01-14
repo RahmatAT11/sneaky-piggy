@@ -51,11 +51,12 @@ public class HidingManger : MonoBehaviour
     {
         SoundManager.Instance.PlaySFX("SFX Hide In");
         isUnhide = false;
-        roof.SetActive(false);
+        
 
         if (isUnhide == false)
         {
             HidePlayer(true);
+            roof.SetActive(false);
 
             _buttonHide1.SetActive(false);
             _buttonHide2.SetActive(true);
@@ -66,11 +67,12 @@ public class HidingManger : MonoBehaviour
     {
         SoundManager.Instance.PlaySFX("SFX Hide Out");
         isUnhide = true;
-        roof.SetActive(false);
+        
 
         if (isUnhide == true)
         {
             HidePlayer(false);
+            roof.SetActive(false);
 
             _buttonHide1.SetActive(true);
             _buttonHide2.SetActive(false);
