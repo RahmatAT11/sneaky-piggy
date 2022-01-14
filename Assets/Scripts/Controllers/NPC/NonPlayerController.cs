@@ -26,6 +26,7 @@ namespace Controllers.NPC
 
         private bool _isMoveToNewPath;
         private bool _isPlayerDetected;
+        private bool _isNotDetected = false;
         public bool IsStandingStill { get; set; }
         public bool IsPlayerDetected => _isPlayerDetected;
 
@@ -73,7 +74,12 @@ namespace Controllers.NPC
 
         public void MoveNpcToPlayer()
         {
-            SoundManager.Instance.PlaySFX("SFX Random");
+            if (!_isNotDetected)
+            {
+                SoundManager.Instance.PlaySFX("SFX Man Angry");
+                _isNotDetected = true;
+            }
+            
             MovementDirection = (_player.transform.position - transform.position).normalized;
             _victoryManager.SetIsPlayerDetected(true);
         }
@@ -168,6 +174,7 @@ namespace Controllers.NPC
             if (other.gameObject.CompareTag("Player"))
             {
                 _victoryManager.SetIsCatchByNpc(true);
+                gameObject.SetActive(false);
             }
         }
 
